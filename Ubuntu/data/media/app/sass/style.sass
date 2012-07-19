@@ -1,0 +1,1254 @@
+@import "compass/css3"
+
+// Vars
+
+$feeds_bg: url(../images/feeds_bg.png)
+$articles_bg: url(../images/articles_bg.png)
+$post_bg: url(../images/articles_bg.png)
+$bar_bg: -webkit-linear-gradient(top, rgba(0,0,0,0.08) 0%, rgba(255,255,255,0.08) 100%)
+
+
+$dark_border: #e1e1df // 30% black
+$light_border: #fff
+$feeds_border: #afaeac // 10% black
+$bar_border: rgba(0,0,0,0.2)
+
+$feeds_text: #4c4c4c
+$count_text: #737373
+
+$article_feed_text: #777
+$article_time_text: #777
+$article_title_unread: #3b3b3b
+$article_title_read: #777
+
+$post_details_text: #666
+$post_text: #555
+$post_heading_text: #4c4c4c
+$post_title: #4c4c4c
+$post_title_hover: #f7f7f7
+$post_title_active: #f0f0f0
+$post_border: rgba(0,0,0,0.1)
+
+$orange: #f07746
+$purple: #4D1F41
+$blue: #08A8C5
+
+$smoothfix: 0 0 1px rgba(0, 0, 0, 0.01)
+
+$font: 'Ubuntu', 'Helvetica', 'Arial', sans-serif
+$font_thin: "Ubuntu Light", "Ubuntu", "Helvetica", "Arial", sans-serif
+$font_bold: "Ubuntu Medium", "Ubuntu", "Helvetica", "Arial", sans-serif
+
+// Ubuntu bugs
+
+button:focus
+	outline: none
+a:focus
+	outline: none
+
+// Mixins
+
+@mixin absolute($top, $right, $bottom, $left)
+	position: absolute
+	display: block
+	top: $top
+	bottom: $bottom
+	left: $left
+	right: $right
+
+
+// Scrollbars
+
+::-webkit-scrollbar
+	width: 5px
+
+::-webkit-scrollbar-thumb
+	background: $orange
+	
+#articles::-webkit-scroller-thumb
+	border-left: 1px solid #E1E1DF
+
+#articles::-webkit-scrollbar-track
+	border-left: 1px solid #E1E1DF
+
+#post-column::-webkit-scrollbar
+	width: 4px
+
+// Splitter
+
+body, html, .splitter
+	height: 100%
+	font-family: $font
+
+input, textarea
+	font-family: $font
+
+#app
+	overflow: hidden
+	width: 100%
+
+	& > .vsplitbar
+		width: 1px
+		cursor:	col-resize
+		background: $feeds_border
+
+#right-side
+	& > .vsplitbar
+		width: 1px
+		cursor:	col-resize
+		background: $light_border
+		border-left: 1px solid $dark_border
+		border-right: 3px solid #faf9f7
+		position: relative
+
+		&:after
+			content: ''
+			@include absolute(auto, auto, 0, 0)
+			width: 4px
+			height: 35px
+			background: $bar_bg
+			border-top: 1px solid $bar_border
+
+
+// Columns
+
+#feeds-column
+	height: 100%
+	width: 200px
+	min-width: 20px
+	background: $feeds_bg
+
+	*
+		-webkit-user-select: none
+
+	ul
+		margin: 0
+		padding: 0
+
+	#filters
+		@include absolute(0,0,auto,0)
+		height: 99px
+		border-bottom: 1px dashed rgba(0,0,0,0.1)
+
+	#feeds
+		@include absolute(100px,0,36px,0)
+		overflow-y: auto
+		overflow-x: hidden
+		border-top: 1px dashed rgba(255,255,255,0.6)
+		padding-top: 8px
+
+	.empty-message
+		display: none
+		font-size: 13px
+		font-family: $font_thin
+		text-shadow: $smoothfix, 0 1px 0 #fff
+		margin-top: 140px
+		padding: 0 20px
+		line-height: 20px
+		color: #555
+
+#articles-column
+	min-width: 250px
+	height: 100%
+	width: 300px
+	background: $articles_bg
+
+	*
+		-webkit-user-select: none
+
+	#articles
+		@include absolute(0,0,23px,0)
+		overflow: scroll
+		margin: 0
+		padding: 0
+
+	.bar
+		display: -webkit-box
+
+	&.scope
+		&:before
+			border-bottom-color: #c7c6c4
+		&:after
+			border-bottom-color: #e6e5e3
+
+#post-column
+	min-width: 20px
+	height: 100%
+	background: $post_bg
+
+	.bar
+		&.disabled
+			#read-button,
+			#star-button,
+			#close-post-button
+				opacity: 0.4
+
+	#post-window
+		@include absolute(0,0,36px,0)
+		overflow-y: auto
+
+	&.scope
+		&:before
+			border-bottom-color: #c7c6c4
+		&:after
+			border-bottom-color: #e6e5e3
+
+.scope:after, .scope:before
+	content: ""
+	@include absolute(auto,auto, 35px, 50%)
+	border: solid transparent
+	height: 0
+	width: 0
+	position: absolute
+	pointer-events: none
+	z-index: 10
+
+.scope:after
+	border-bottom-color: #d6d4d4
+	border-width: 10px
+	left: 50%
+	margin-left: -10px
+
+.scope:before
+	border-bottom-color: #b9b8b8
+	border-width: 11px
+	left: 50%
+	margin-left: -11px
+
+#hidden
+	display: none
+
+// Control bar
+
+.bar
+	@include absolute(auto, 0, 0, 0)
+	height: 35px
+	background: $bar_bg
+	border-top: 1px solid $bar_border
+
+	div
+		display: inline-block
+
+	button
+		width: 35px
+		height: 35px
+		border: 0
+		line-height: 35px
+		vertical-align: top
+		background: transparent
+		padding: 0
+
+
+// Buttons
+#refresh-button
+	margin: 0 2px
+	background-image: url(../images/sync.png)
+	background-repeat: no-repeat
+	background-position: 5px -211px
+
+#mark-all-as-read-trigger
+	background: url(../images/btn_mark_all_read.png)
+	margin: 0 2px
+	width: 36px
+
+#mark-all-as-read-popup
+	width: 150px
+	height: 32px
+	@include absolute(auto, auto, 35px, 4px)
+	border-radius: 5px
+	background: rgba(0,0,0,0.7)
+	box-shadow: 0 1px 3px rgba(0,0,0,0.1), inset 0 1px rgba(255,255,255,0.3)
+	border: 1px solid #000
+	display: none
+	z-index: 11
+
+	&:after, &:before
+		top: 100%
+		border: solid transparent
+		content: " "
+		height: 0
+		width: 0
+		position: absolute
+		pointer-events: none
+
+
+	&:after
+		border-top-color: rgba(0,0,0,0.8)
+		border-width: 8px
+		left: 10%
+		margin-left: -8px
+
+	#mark-all-as-read-button
+		@include background(linear-gradient(top, #3a3a3a 0%, #232323 100%))
+		width: 138px
+		height: 22px
+		margin: 4px 5px
+		border-radius: 3px
+		box-shadow: inset 0 1px rgba(255,255,255,0.2), 0 1px rgba(255,255,255,0.2)
+		color: #ddd
+		font-family: $font_bold
+		font-size: 13px
+		font-weight: 600
+		line-height: 22px
+		text-align: center
+		border: 1px solid #1a1a1a
+		cursor: default
+		text-shadow: 0 1px 2px rgba(0,0,0,0.4)
+
+		&:active
+			@include background(linear-gradient(bottom, #3a3a3a 0%, #232323 100%))
+
+
+	// &:before
+	// 	border-top-color: rgba(255,255,255,0.4)
+	// 	border-width: 11px
+	// 	left: 50%
+	// 	margin-left: -11px
+
+
+
+#add-button
+	background: url(../images/btn_add.png) no-repeat 8px 8px
+	float: right
+
+#search-button
+	background: url(../images/btn_search.png)
+	margin: 0 2px
+
+#close-post-button
+	background: url(../images/btn_close.png) no-repeat 8px 8px
+	margin: 0 2px
+
+#star-button
+	background: url(../images/btn_star.png) no-repeat 8px -18px
+	margin: 8px 2px 0
+	height: 18px
+
+	&.starred
+		background-position-y: 0
+
+#read-button
+	background: url(../images/btn_read.png) no-repeat 8px -17px
+	margin: 8px 2px 0
+	height: 17px
+
+	&.read
+		background-position-y: 0
+
+#settings-button
+	background: url(../images/btn_settings.png) no-repeat 0 0
+	width: 16px
+	height: 18px
+	margin: 8px 10px 0
+	float: right
+
+
+#item-count
+	display: block
+	-webkit-box-flex: 1
+	text-align: center
+	font-size: 13px
+	color: #666
+	text-shadow: 0 1px 0 white
+	line-height: 33px
+
+#search-input
+	display: block
+	-webkit-box-flex: 1
+	-webkit-user-select: text
+	height: 25px
+	margin-top: 5px
+	padding: 5px 10px
+	font-size: 13px
+	box-sizing: border-box
+	box-shadow: inset 0 1px 3px rgba(0,0,0,0.1), 0 1px 0 #fff
+	border-radius: 3px
+	border: 0
+	border: 1px solid #CCC
+	color: #4c4c4c
+	outline: 0
+	line-height: 15px
+
+	&.active
+		background: lightblue
+
+#link-url
+	@include absolute(0,35px,0,110px)
+	line-height: 35px
+	font-size: 13px
+	color: #4c4c4c
+	text-shadow: 0 1px 0 #fff
+	overflow: hidden
+	white-space: nowrap
+	text-overflow: ellipsis
+	text-align: right
+
+// Feeds
+
+#feeds, #filters
+	font-size: 13px
+
+	li
+		cursor: default
+		text-align: left
+		text-shadow: 0 1px 0 #fff
+
+		&.label
+			-webkit-transition: background 0.3s
+			height: auto
+
+			header
+
+				.icon .bit
+					display: block
+					background: url(../images/icon_label.png)
+					width: 16px
+					height: 16px
+					-webkit-transition: all 0.3s
+
+					&:active
+						-webkit-transform: rotate(45deg)
+
+			&.expanded
+
+				background: rgba(0,0,0,0.03)
+
+				header
+					.icon .bit
+						-webkit-transform: rotate(90deg)
+
+						&:active
+							-webkit-transform: rotate(45deg)
+
+				ul
+					display: block
+
+			ul
+				// display: none
+
+				li
+					padding-left: 10px
+
+		&.feed, &.filter, &.label header
+			height: 30px
+			line-height: 30px
+			display: -webkit-box
+			border-top: 1px solid transparent
+			border-bottom: 1px solid transparent
+			-webkit-transition: background 0.15s
+
+			&.selected
+				color: #222
+				border-top: 1px solid #ccc
+				border-bottom: 1px solid #ccc
+				background: #f5f5f5
+				box-shadow: 0 1px 0 #fff inset
+
+			&.hover
+				background: rgba(0,0,0,0.05)
+				border-top: 1px solid #ccc
+				border-bottom: 1px solid #ccc
+
+		.icon
+			-webkit-box-flex: 0
+			display: block
+			height: 16px
+			width: 16px
+			padding: 2px
+			border: 1px solid #c9c9c9
+			border-radius: 3px
+			margin: 3px 5px 3px 11px
+			background: #fff
+			box-shadow: 0 1px 1px rgba(0,0,0,0.1)
+
+		.title
+			display: block
+			-webkit-box-flex: 1
+			overflow: hidden
+			white-space: nowrap
+			text-overflow: ellipsis
+			color: $feeds_text
+			font-weight: 500
+			line-height: 29px
+
+		.count
+			display: block
+			-webkit-box-flex: 0
+			margin: 6px 5px 6px 5px
+			background: #f1f1f1
+			box-shadow: 0 1px 0 #fff inset
+			border: 1px solid #d0cfce
+			border-radius: 3px
+			color: $count_text
+			font-weight: bold
+			font-size: 12px
+			height: 16px
+			line-height: 16px
+			padding: 0 3px
+
+
+// Articles
+
+#articles
+	li
+		padding: 0 5px
+		border-top: 1px solid $light_border
+		border-bottom: 1px solid $dark_border
+		font-size: 12px
+		overflow: hidden
+		cursor: default
+		-webkit-transition: height 150
+		position: relative
+
+		&:last-child
+			margin-bottom: 10px
+
+		&.read
+			.title
+				color: $article_title_read
+
+		&.starred
+			.title
+				color: $article_title_unread
+				position: relative
+				&:after
+					@include absolute(5px, auto, auto, 3px)
+					content: ''
+					display: inline-block
+					width: 13px
+					height: 14px
+					background: url(../images/icon_starred_alt.png) no-repeat
+					opacity: 0.3
+
+		&.selected
+			border-top: 1px solid #cccbc7
+			border-bottom: 1px solid #fff
+			background: darken(#f3f2f0, 3%)
+			// border-right: 1px solid rgba(0,0,0,0.05)
+			// border-left: 1px solid rgba(0,0,0,0.05)
+			box-shadow: inset 0 0 4px rgba(0,0,0,0.1), 0 -1px 0 #fff, inset 0 -1px 0 #cccbc7
+
+			&:first-child
+				border-top: 0
+
+			& + li
+				border-top: 1px solid transparent
+
+			&.no-border
+				box-shadow: inset 0 1px 4px rgba(0,0,0,0.1), 0 -1px 0 #fff
+				border-bottom: 1px solid transparent
+
+		&.hover:after
+			content: ''
+			@include absolute(1px, 1px, 2px, 1px)
+			background: rgba(0,0,0,0.05)
+			border: 1px solid rgba(0,0,0,0.2)
+
+		header
+			display: -webkit-box
+
+			.icon
+				padding: 5px 4px 0 2px
+
+			.feed
+				font-size: 12px
+				color: $article_feed_text
+				line-height: 25px
+				-webkit-box-flex: 1
+				display: block
+				overflow: hidden
+				white-space: nowrap
+				text-overflow: ellipsis
+
+			.time
+				display: block
+				line-height: 25px
+				font-size: 12px
+				margin-right: 2px
+				color: $orange
+
+		.title
+			font-size: 13px
+			display: block
+			margin-top: -2px
+			padding: 0 0 2px 22px
+			font-weight: bold
+			color: $article_title_unread
+			text-shadow: $smoothfix
+		
+		.snippet
+			display: block
+			padding: 0 0 0 22px
+			line-height: 16px
+			color: #888
+			height: 34px
+			overflow: hidden
+
+	.splitter
+		height: 20px
+		padding-left: 10px
+		font-size: 13px
+		font-weight: bold
+		color: #666
+		line-height: 20px
+		background: -webkit-linear-gradient(#fefefe, #fafafa)
+		text-shadow: 0 1px 0 #fff
+		border: 1px solid $dark_border
+		border-left: 0
+		border-right: 0
+		text-shadow: 0 1px 0 #fff
+
+		&:first-child
+			border-top: 0
+			margin-top: 5px
+
+	.splitter:first-child
+		border-top: 1px solid $dark_border
+
+	.splitter + li
+		border-top: 1px solid transparent
+
+	.splitter + li.selected
+		border-top: 1px solid $dark_border
+		padding-top: 0
+
+	li.no-border
+		border-bottom: 1px solid transparent
+
+		&.selected
+			border-bottom: 1px solid $dark_border
+
+
+
+
+
+// Post
+
+#post
+	max-width: 600px
+	overflow: hidden
+	margin: 0 auto
+	padding: 0 25px
+
+	font-size: 16px
+	color: $post_text
+	line-height: 28px
+
+	.post-link
+
+		// border-radius: 3px
+		display: block
+		position: relative
+		margin-top: 30px
+		margin-bottom: 30px
+		border: 1px solid transparent
+		border-bottom: 1px solid $post_border
+		box-shadow: 0 1px 0 #fff
+
+		.details
+			font-weight: 400
+			display: block
+			font-size: 12px
+			color: $post_details_text
+
+		h1.title
+			color: $purple
+			font-size: 33px
+			font-weight: 300
+			font-family: $font_thin
+			padding-bottom: 10px
+			margin: 0
+			line-height: 1
+			text-shadow: $smoothfix
+			max-width: 600px
+
+		&:hover
+			h1.title
+				text-decoration: underline
+
+		// &:active
+		// 	background: $post_title_active
+
+	strong
+		font-weight: bold
+
+	em
+		font-style: italic
+
+	img
+		max-width: 100% !important
+		box-sizing: border-box
+		height: auto !important
+
+	img:not(.no-border), iframe
+		/* images resize with window */
+		padding: 4px
+		margin: 15px auto
+		display: table
+		background-color: #fff
+		border: none
+		border-radius: 2px
+		box-shadow: 0 1px 3px rgba(0,0,0,0.3)
+
+	h2
+		text-shadow: $smoothfix
+		font-family: $font_thin
+		color: $purple
+
+	h3
+		font-size: 18px
+		color: $purple
+		font-family: $font_bold
+		text-shadow: $smoothfix
+		font-weight: 600
+
+		a
+			font-weight: 600
+			font-family: $font_bold
+
+	a
+		font-family: $font_thin
+		font-weight: 500
+		color: $blue
+		text-decoration: none
+
+		&:not(.post-link):hover
+			text-decoration: underline
+
+		&.youtube
+			display: block
+			position: relative
+
+			&:after
+				content: ''
+				@include absolute(50%, auto, auto, 50%)
+				width: 77px
+				height: 77px
+				margin: -37px 0 0 -37px
+				z-index: 5
+				background: url(../images/youtube.png)
+
+
+	p, div, img
+		max-width: 600px
+
+	a.hasImage
+		border-bottom: 0
+
+	hr
+		height: 2px
+		border: 0
+		background: url(../images/hr.png)
+
+	// pre
+	// 	font-family: 'Ubuntu Mono'
+	// 	font-size: 15px
+	// 	line-height: 20px
+	// 	overflow: scroll
+	// 	display: block
+
+
+// Modal
+
+#modal
+	// display: none
+
+	*
+		-webkit-user-select: none
+
+	& > div
+		// display: none
+		position: fixed
+		border-radius: 5px
+		background: $articles_bg
+		box-shadow: 0 0 5px rgba(0,0,0,0.3)
+		z-index: 300
+
+		.close
+			@include absolute(0, auto, auto, 7px)
+			background: url(../images/btn_exit.png) no-repeat
+			width: 17px
+			height: 28px
+			cursor: pointer
+
+			&:hover
+				background-position-y: -28px
+
+		h3
+			// font-family: $font_thin
+			// font-size: 14px
+			// font-weight: 600
+			// text-shadow: 0 0 2px rgba(0,0,0,0.2)
+			text-indent: -9999px
+			cursor: default
+			height: 28px
+			margin-top: 0
+			margin-bottom: 20px
+			// color: #dfdbd2
+			// line-height: 28px
+			// padding-left: 30px
+			border-radius: 5px 5px 0 0
+			background: url(../images/modal_header.png) repeat-x
+
+			&:after
+				content: ''
+				height: 28px
+				@include absolute(0,auto,auto,30px)
+
+		p
+			font-size: 13px
+			color: #4c4c4c
+			margin: 0 25px 15px
+			line-height: 18px
+
+		input
+			width: 250px
+			vertical-align: top
+			font-size: 13px
+			line-height: 20px
+			border-radius: 2px 0 0 2px
+			height: 20px
+			outline: none
+			border: 1px solid rgba(0,0,0,0.2)
+			border-right: 0
+			padding: 5px 10px
+			background: url(../images/input_bg.png)
+			box-shadow: inset 0 1px 3px rgba(0,0,0,0.05), 0 1px 0 #fff
+			color: #444
+			margin-left: 25px
+			-webkit-user-select: text
+
+		button
+			text-decoration: none
+			line-height: 27px
+			padding: 0 10px
+			height: 32px
+			border-radius: 2px
+			font-size: 13px
+			font-weight: bold
+			border: 1px solid #959595
+			color: #242424
+			font-family: $font_bold
+			margin: 0 6px 25px
+			@include background(linear-gradient(top, #ffffff 0%, #f5f5f5 100%))
+
+			&:focus
+				outline: 0
+				@include background(linear-gradient(top, #ffffff 0%, #f9f9f9 100%))
+				box-shadow: 0 1px 4px rgba(0,0,0,0.2)
+
+			&:hover
+				@include background(linear-gradient(top, #ffffff 0%, #f9f9f9 100%))
+				box-shadow: 0 1px 1px rgba(0,0,0,0.1)
+
+			&:active
+				box-shadow: 0 1px 1px rgba(0,0,0,0.1), inset 0 1px 3px rgba(0,0,0,0.1)
+				@include background(linear-gradient(bottom, #ffffff 0%, #f5f5f5 100%))
+
+	.add
+		top: 40%
+		left: 50%
+		margin-top: -52px
+		margin-left: -190px
+		width: 381px
+		display: none
+
+		h3:after
+			width: 146px
+			background: url(../images/modal_header_text.png)
+
+		button
+			border-radius: 0 2px 2px 0
+			width: 60px
+			padding: 0
+			margin: 0 25px 25px 0
+
+		.error
+			display: none
+			margin-top: -15px
+
+	.confirm
+		top: 40%
+		left: 50%
+		margin-top: -52px
+		margin-left: -190px
+		width: 340px
+		text-align: center
+		display: none
+
+		h3:after
+			background: url(../images/text_are_you_sure.png)
+			width: 100px
+
+		.title
+			font-weight: bold
+
+		button
+			width: 90px
+			padding: 0
+
+	.rename
+		top: 40%
+		left: 50%
+		margin-top: -52px
+		margin-left: -190px
+		width: 381px
+		display: none
+
+		h3:after
+			background: url(../images/text_rename_feed.png)
+			width: 98px
+
+		button
+			border-radius: 0 2px 2px 0
+			width: 60px
+			padding: 0
+			margin: 0 25px 25px 0
+
+
+
+// Overlay
+
+#overlay
+	position: fixed
+	width: 100%
+	height: 100%
+	z-index: 200
+	display: none
+	background: rgba(0,0,0,0.3)
+	top: 0
+	left: 0
+
+#loading
+	@include absolute(0,0,0,0)
+	background: $post_bg
+	z-index: 100
+
+	*
+		-webkit-user-select: none
+
+	.login
+		@include absolute(50%, auto, auto, 50%)
+		width: 300px
+		margin-top: -200px
+		margin-left: -150px
+		height: 200px
+		text-align: center
+		display: none
+
+		h3
+			text-align: center
+			color: $purple
+			text-shadow: 0 1px 0 #fff
+			font-weight: 300
+			font-family: $font_thin
+			font-size: 22px
+
+		.password-wrapper,
+		.username-wrapper
+			font-size: 13px
+			line-height: 20px
+			border-radius: 2px
+			height: 20px
+			outline: none
+			border: 1px solid rgba(0,0,0,0.2)
+			padding: 5px 0 5px 10px
+			width: 290px
+			background: url(../images/input_bg.png)
+			box-shadow: inset 0 1px 3px rgba(0,0,0,0.05), 0 1px 0 #fff
+			margin: 10px 0
+
+			label
+				text-align: left
+				display: inline-block
+				width: 80px
+				color: #333
+				font-weight: 500
+
+			input
+				color: #444
+				outline: none
+				border: none
+				background: transparent
+				width: 200px
+				padding: 0
+				margin: 0
+				-webkit-user-select: text
+
+				&[type=password]
+					font: small-caption
+					font-size: 16px
+
+		a
+			display: inline-block
+			text-decoration: none
+			line-height: 27px
+			padding: 0
+			margin: 0 5px
+			width: 100px
+			height: 30px
+			box-sizing: border-box
+			border-radius: 3px
+			font-size: 13px
+			font-weight: bold
+			font-family: $font_bold
+			border: 1px solid #959595
+			color: #242424
+			cursor: pointer
+			@include background(linear-gradient(top, #ffffff 0%, #f5f5f5 100%))
+
+			&:focus
+				outline: 0
+				@include background(linear-gradient(top, #ffffff 0%, #f9f9f9 100%))
+				box-shadow: 0 1px 4px rgba(0,0,0,0.2)
+
+			&:hover
+				@include background(linear-gradient(top, #ffffff 0%, #f9f9f9 100%))
+				box-shadow: 0 1px 1px rgba(0,0,0,0.1)
+
+			&:active
+				box-shadow: 0 1px 1px rgba(0,0,0,0.1), inset 0 1px 3px rgba(0,0,0,0.1)
+				@include background(linear-gradient(bottom, #ffffff 0%, #f5f5f5 100%))
+
+		.error
+			display: none
+			font-size: 13px
+			font-weight: 500
+			color: darken($orange, 10%)
+			text-shadow: 0 1px 0 #fff, 0 1px 2px rgba(0,0,0,0.1)
+
+	.progress
+
+		@include absolute(50%, 25%, auto, 25%)
+		margin-top: -40px
+
+		display: none
+
+		p
+			text-align: center
+			font-size: 13px
+			color: #444
+
+		progress
+
+			width: 100%
+
+			-webkit-appearance: none
+			background-size: auto
+
+			// height: 20px
+			// border-radius: 3px
+			// border: 1px solid #928980
+			// box-shadow: 0 1px 0 #fff, inset 0 1px 5px rgba(0,0,0,0.1)
+
+			height: 18px
+			border-radius: 3px
+			// border: 1px solid #928980
+			box-shadow: 0 1px 0 #fff, inset 0 1px 5px rgba(0,0,0,0.2)
+
+			// display: none
+
+			&::-webkit-progress-bar
+				background: #ffeeee
+				border-radius: 3px
+
+			// &::-webkit-progress-value
+			// 	background: url(../images/progress_bar.png) 0 -21px
+			// 	border-top-right-radius: 2px
+			// 	border-bottom-right-radius: 2px
+			// 	// border-right: 1px solid #ce832f
+			// 	box-shadow: 1px 0 3px rgba(0,0,0,0.1)
+			// 	-webkit-animation: move 0.8s linear infinite
+
+			&::-webkit-progress-value
+				background: url(../images/ugly_native_progress_bar.png) 0 0
+				border-radius: 3px
+				box-shadow: 1px 0 3px rgba(0,0,0,0.1)
+				border-left: 1px solid #bf5527
+				border-right: 1px solid #bf5527
+
+@-webkit-keyframes move
+	0%
+		background-position: 0 -21px
+	100%
+		background-position: 30px -21px
+
+
+#context-menu
+	-webkit-user-select: none
+	min-width: 150px
+	background: #f2f1f0
+	@include absolute(10px, auto, auto, 10px)
+	z-index: 100
+	box-shadow: 0 1px 3px rgba(0,0,0,0.2)
+	border: 1px solid #fff
+	outline: 1px solid #ada9a5
+	color: #4c4c4c
+	padding: 3px 0
+	display: none
+
+	.section
+		display: block
+		background: #fff
+		border-top: 1px solid #e1e1df
+		height: 1px
+		margin: 3px 0
+
+	div
+		height: 23px
+		line-height: 23px
+		// border: 1px solid transparent
+		font-size: 14px
+		padding: 0 0 0 24px
+		font-weight: 400
+		cursor: default
+		position: relative
+
+		&:hover
+			background: url(../images/menu_hover.png)
+
+			// I tried using a css gradient, but it left 2 pixels in the corner
+			// due to the border merging with the outline.
+
+			// @include background(linear-gradient(top, #f78455 0%, #ea703f 100%))
+			// border-top: 1px solid #fe9c71
+			// border-bottom: 1px solid #fe9c71
+			// outline: 1px solid #ac512a
+
+			color: #fff
+
+			&:before
+				content: ''
+				@include absolute(0, auto, 0, -2px)
+				width: 1px
+				background: #fe9c71
+				border: 1px solid #ac512a
+				border-right: none
+
+			&:after
+				content: ''
+				@include absolute(0, -2px, 0, auto)
+				width: 1px
+				background: #fe9c71
+				border: 1px solid #ac512a
+				border-left: none
+
+#settings
+	@include absolute(50%, auto, auto, 50%)
+	margin: -175px 0 0 -250px
+	width: 500px
+	height: 350px
+	background: #ececec
+	border: 1px solid #888
+	border-top: 0
+	border-radius: 5px
+	box-shadow: 0 2px 6px rgba(0,0,0,0.2)
+	z-index: 300
+	display: none
+
+	.close
+		@include absolute(0, auto, auto, 7px)
+		background: url(../images/btn_exit.png)
+		width: 17px
+		height: 28px
+		cursor: pointer
+
+		&:hover
+			background-position-y: -28px
+
+	h2
+		margin-top: 0
+		text-align: center
+		font-size: 15px
+		height: 40px
+		line-height: 40px
+		border-bottom: 1px solid rgba(0,0,0,0.2)
+		box-shadow: 0 1px 0 #fff
+		border-radius: 5px 5px 0 0
+		@include background(linear-gradient(top, #fafafa 0%, #f6f6f6 100%))
+		color: #3b3b3b
+		text-shadow: 0 1px 0 #fcfcfc
+
+	h3
+		text-indent: -9999px
+		cursor: default
+		height: 28px
+		margin-top: 0
+		margin-bottom: 15px
+		border-radius: 4px 4px 0 0
+		background: url(../images/modal_header.png) repeat-x
+
+		&:after
+			content: ''
+			@include absolute(0,auto,auto,30px)
+			width: 63px
+			height: 28px
+			background: url(../images/settings_header.png)
+
+	& > div	
+		padding: 10px 25px
+
+		&:first-of-type
+			padding-top: 0
+
+		&:not(:last-child)
+			border-bottom: 1px solid #ccc
+			box-shadow: 0 1px 0 #fff
+
+	select
+		font-size: 13px
+		margin-bottom: 10px
+		padding: 5px
+		font-family: $font_thin
+
+		option
+			font-size: 13px
+
+	label
+		font-size: 13px
+		color: #4c4c4c
+		display: inline-block
+
+		&.mini
+			width: 150px
+			text-align: right
+			margin-right: 10px
+
+			&.right
+				width: 120px
+
+		.email
+			font-weight: bold
+
+	input[type=checkbox]
+		margin-left: 165px
+		margin-right: 10px
+
+	button
+		display: inline-block
+		text-decoration: none
+		line-height: 27px
+		padding: 0 10px
+		margin: 0 5px 0 79px
+		height: 30px
+		box-sizing: border-box
+		border-radius: 3px
+		font-size: 13px
+		font-weight: bold
+		border: 1px solid #959595
+		color: #4c4c4c
+		font-family: $font_bold
+		@include background(linear-gradient(top, #ffffff 0%, #f5f5f5 100%))
+
+		&:focus
+			outline: 0
+			@include background(linear-gradient(top, #ffffff 0%, #f9f9f9 100%))
+			box-shadow: 0 1px 4px rgba(0,0,0,0.2)
+
+		&:hover
+			@include background(linear-gradient(top, #ffffff 0%, #f9f9f9 100%))
+			box-shadow: 0 1px 1px rgba(0,0,0,0.1)
+
+		&:active
+			box-shadow: 0 1px 1px rgba(0,0,0,0.1), inset 0 1px 3px rgba(0,0,0,0.1)
+			@include background(linear-gradient(bottom, #ffffff 0%, #f5f5f5 100%))

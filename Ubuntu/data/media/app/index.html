@@ -1,5 +1,268 @@
-testy lightread thing.<br>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>RSS Reader</title>
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/style.css">
+	
+	<script src="scripts/lib.js"></script>
+	<script src="scripts/app.js"></script>
+	<script src="scripts/app/storage.js"></script>
+	<script src="scripts/app/ui.js"></script>
+	<script src="scripts/app/core.js"></script>
+	<script src="scripts/app/keys.js"></script>
+</head>
+<body>
 
-<button onclick="document.title='notify|Testy|A test notification'">Send Notification</button>
-<button onclick="document.title='count|25'">Set Count</button>
-<button onclick="document.title='share|25'">Share</button>
+	<section id="app" class="splitter">
+
+		<div id="feeds-column">
+			<ul id="filters">
+				<li class="all filter selected">
+					<img class="icon" width="16" height="16" src="images/icon_all.png">
+					<span class="title">All items</span>
+				</li>
+				<li class="unread filter">
+					<img class="icon" width="16" height="16" src="images/icon_unread.png">
+					<span class="title">Unread</span>
+				</li>
+				<li class="starred filter">
+					<img class="icon" width="16" height="16" src="images/icon_starred.png">
+					<span class="title">Starred</span>
+				</li>
+			</ul>
+			<ul id="feeds"></ul>
+			<p class="empty-message">You have no feeds. Click on the + button below to add some.</p>
+			<div class="bar">
+				<button id="refresh-button" title="Refresh"></button><button id="add-button" title="Add Feed"></button>
+			</div>
+		</div>
+
+		<div id="right-side" class="splitter">
+
+			<div id="articles-column">
+				<ul id="articles"></ul>
+				<div class="bar">
+					<button id="mark-all-as-read-trigger" title="Mark All As Read"></button>
+					<div id="mark-all-as-read-popup">
+						<div id="mark-all-as-read-button">Mark All As Read</div>
+					</div>
+					<div id="item-count"></div>
+					<input id="search-input" placeholder="Search 10 items">
+					<button id="search-button" title="Search"></button>
+				</div>
+			</div>
+
+			<div id="post-column">
+				<div id="post-window">
+					<div id="post"></div>
+				</div>
+				<div class="bar" class="disabled">
+					<button id="close-post-button" title="Close Post"></button><button id="star-button" title="Toggle Star Status"></button><button id="read-button" title="Toggle Read Status"></button><div id="link-url"></div><button id="settings-button" title="Settings"></button>
+				</div>
+			</div>
+
+		</div>
+
+	</section>
+
+	<div id="hidden"></div>
+
+	<div id="modal">
+		<div class="add">
+			<span class="close"></span><h3>Subscribe to a Feed</h3>
+			<input placeholder="Feed URL or Search Term" type="url"><button>Add</button>
+			<p class="error">Could not add feed...</p>
+		</div>
+		<!-- <div class="logout">
+			This will log you out of Lightread
+			<button id="reset-button">Logout</button>
+		</div> -->
+		<div class="confirm">
+			<span class="close"></span><h3>Are you sure?</h3>
+			<p>Are you sure you want to unsubscribe from: <br><span class="title"></span>?</p><button class="yes">Yes</button><button class="no">No</button>
+		</div>
+		<div class="rename">
+			<span class="close"></span><h3>Rename Feed</h3>
+			<input type="text" placeholder="Feed name..."><button>Save</button>
+		</div>
+	</div>
+	<div id="settings">
+		<span class="close"></span><h3>Settings</h3>
+		<div>
+			<label for="">Signed in as: <span class="email"></span></label><button id="reset-button">Sign out</button>
+		</div>
+		<div>
+			<label class="mini" for="sync-interval">Refresh:</label>
+			<select id="sync-interval">
+				<option value="0">Manual</option>
+				<option value="5">5 Minutes</option>
+				<option value="15">15 Minutes</option>
+				<option value="30">30 Minutes</option>
+				<option value="60">1 Hour</option>
+			</select>
+			<br>
+			<input type="checkbox" checked id="sync-on-start"><label for="sync-on-start">Sync on start</label>
+		</div>
+		<div>
+			<label class="mini" for="keep-unread-items">Keep unread items:</label>
+			<select id="keep-unread-items">
+				<option value="-1" selected>Always</option>
+				<option value="0">Never</option>
+				<option value="1">1 day</option>
+				<option value="2">2 days</option>
+				<option value="3">3 days</option>
+				<option value="7">1 week</option>
+				<option value="14">2 weeks</option>
+				<option value="31">1 month</option>
+			</select>
+			<label class="mini right" for="max-special">Max special items:</label>
+			<select id="max-special">
+				<option value="10">10</option>
+				<option value="20">20</option>
+				<option value="30">30</option>
+				<option value="50" selected>50</option>
+				<option value="70">70</option>
+				<option value="100">100</option>
+				<option value="150">150</option>
+				<option value="200">200</option>
+				<option value="300">300</option>
+				<option value="400">400</option>
+				<option value="500">500</option>
+			</select>
+			<br>
+			<label class="mini" for="keep-starred-items">Keep starred items:</label>
+			<select id="keep-starred-items">
+				<option value="-1" selected>Always</option>
+				<option value="0">Never</option>
+				<option value="1">1 day</option>
+				<option value="2">2 days</option>
+				<option value="3">3 days</option>
+				<option value="7">1 week</option>
+				<option value="14">2 weeks</option>
+				<option value="31">1 month</option>
+			</select>
+			<label class="mini right" for="max-read">Max read items:</label>
+			<select id="max-read">
+				<option value="0">None</option>
+				<option value="10">10</option>
+				<option value="20" selected>20</option>
+				<option value="30">30</option>
+				<option value="50">50</option>
+				<option value="70">70</option>
+				<option value="100">100</option>
+			</select>
+			<br>
+			<label class="mini" for="keep-read-items">Keep read items:</label>
+			<select id="keep-read-items">
+				<option value="-1">Always</option>
+				<option value="0">Never</option>
+				<option value="1">1 day</option>
+				<option value="2">2 days</option>
+				<option value="3">3 days</option>
+				<option value="7">1 week</option>
+				<option value="14" selected>2 weeks</option>
+				<option value="31">1 month</option>
+			</select>
+		</div>
+		<div>
+			<input type="checkbox" id="show-notifications" checked><label for="show-notifications">Show notifications</label>
+		</div>
+	</div>
+
+	<div id="overlay"></div>
+
+	<div id="loading">
+		<div class="login">
+			<h3>Sign in to Google Reader</h3>
+			<div class="username-wrapper">
+				<label for="username">Email</label><input tabindex="1" id="username" type="text" placeholder="johnsmith@gmail.com">
+			</div>
+			<div class="password-wrapper">
+				<label for="password">Password</label><input tabindex="2" id="password" type="password" placeholder="">
+			</div>
+			<a class="login-button">Sign in</a>
+			<a href="https://accounts.google.com/NewAccount?service=reader">Register</a>
+			<p class="error">Could not Sign in...</p>	
+		</div>
+		<div class="progress">
+			<p>Downloading items...</p>
+			<progress min="0" value="0" max="100"></progress>
+		</div>
+	</div>
+
+	<div id="context-menu"></div>
+
+	<!--
+		Templates
+	-->
+
+	<!-- Labels -->
+	<script type="text/template" id="label-template">
+		<li class="label">
+			<header data-id="<%= id %>">
+				<span class="icon"><span class="bit"></span></span>
+				<span class="title"><%= title %></span>
+				<% if (count && count > 0) { %>
+					<span class="count"><%= count %></span>
+				<% } %>
+			</header>
+			<ul class="feeds">
+
+				<% _.each(feeds, function(feed) { %><%= feed %><% }) %>
+
+			</ul>
+		</li>
+	</script>
+
+	<!-- Feeds -->
+	<script type="text/template" id="feed-template">
+		<li class="feed" data-id="<%= id %>">
+			<img class="icon" width="16" height="16" src="<%= icon %>">
+			<span class="title"><%= title %></span>
+			<% if (count && count > 0) { %>
+				<span class="count"><%= count %></span>
+			<% } %>
+		</li>
+	</script>
+
+	<!-- Articles -->
+	<script type="text/template" id="article-template">
+		<li class="article <% if (read) { %>read<% } %> <% if (starred) { %>starred<% } %>" data-id="<%= id %>">
+			<header>
+				<img class="icon" width="16" height="16" src="<%= icon %>">
+				<span class="feed"><%= feed %></span>
+				<span class="time"><%= time %></span>
+			</header>
+			<span class="title"><%= title %></span>
+			<span class="snippet"><%= snippet %></span>
+		</li>
+	</script>
+
+	<script type="text/template" id="article-splitter-template">
+		<div class="splitter"><%= date %></div>
+	</script>
+
+	<!-- Post -->
+	<script type="text/template" id="post-template">
+		<a href="<%= link %>" class="post-link">
+			<span class="details">
+				<%= feed %> | 
+				<% if (author !== undefined) {%><%= author %> | <% } %>
+				<%= time %>
+			</span>
+			<h1 class="title"><%= title %></h1>
+		</a>
+		<%= content %>
+	</script>
+
+	<!-- Context Menu Item -->
+	<script type="text/template" id="context-menu-item">
+		<div class="<%= className %>"><%= text %></div>
+		<% if (section) { %>
+			<span class="section"></span>
+		<% } %>
+	</script>
+
+</body>
+</html>
