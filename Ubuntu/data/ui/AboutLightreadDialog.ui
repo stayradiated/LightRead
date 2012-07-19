@@ -1,0 +1,74 @@
+<interface>
+  <!-- interface-requires about_lightread_dialog 1.0 -->
+  <!-- interface-requires gtk+ 3.0 -->
+  <object class="AboutLightreadDialog" id="about_lightread_dialog">
+    <property translatable="yes" name="license"># Copyright (C) 2012 Caffeinated Code &lt;caffeinatedco.de&gt;
+# Copyright (C) 2012 George Czabania
+# Copyright (C) 2012 Jono Cooper
+# Copyright (c) The Regents of the University of California.
+# All rights reserved.
+# 
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+# 1. Redistributions of source code must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the above copyright
+#    notice, this list of conditions and the following disclaimer in the
+#    documentation and/or other materials provided with the distribution.
+# 3. Neither the name of the University nor the names of its contributors
+#    may be used to endorse or promote products derived from this software
+#    without specific prior written permission.
+# 
+# THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+# OR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+# OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+# HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+# OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+# SUCH DAMAGE.
+</property><property name="can_focus">False</property>
+    <property name="border_width">5</property>
+    <property name="icon">../media/lightread.svg</property>
+    <property name="type_hint">normal</property>
+    <property name="program_name">Lightread</property>
+    <property name="version">1.0</property>
+    <property name="copyright" translatable="yes">Copyright (C) 2012 Caffeinated Code &lt;caffeinatedco.de&gt;
+Copyright (C) 2012 George Czabania
+Copyright (C) 2012 Jono Cooper</property>
+    <property name="website">https://launchpad.net/lightread</property>
+    <property name="website_label" translatable="yes">caffeinatedco.de</property>
+    <property name="authors">Copyright (C) 2012 Caffeinated Code &lt;caffeinatedco.de&gt;
+Copyright (C) 2012 George Czabania
+Copyright (C) 2012 Jono Cooper</property>
+    <property name="logo">../media/lightread.svg</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="dialog-vbox1">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="dialog-action_area1">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

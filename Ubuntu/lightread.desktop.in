@@ -1,0 +1,8 @@
+[Desktop Entry]
+_Name=Lightread
+_Comment=Lightread application
+Categories=GNOME;Utility;
+Exec=lightread
+Icon=lightread
+Terminal=false
+Type=Application
