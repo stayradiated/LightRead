@@ -135,7 +135,7 @@ core = {
 
 	// Get the content of a post
 	content: function(item) {
-		var content = item.content || item.summary
+		var content = item.content || item.summary || {content: "No feed content"}
 		return content.content
 	},
 
