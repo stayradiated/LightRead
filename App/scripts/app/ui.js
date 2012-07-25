@@ -516,6 +516,7 @@ ui = {
 			link: post.alternate[0].href
 		}
 
+		$$.postWrapper.removeClass('instapaper')
 		$$.post.html(template.post(model).replace(/<iframe /g, '<xframe ', 'ig').replace(/<\/iframe>/g,'</xframe', 'ig')).find('a:has(img)').addClass('hasImage')
 
 		// Scroll to top

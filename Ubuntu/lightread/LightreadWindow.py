@@ -122,9 +122,11 @@ class LightreadWindow(Window):
 
         def _navigation_requested_cb(view, frame, networkRequest):
             uri = networkRequest.get_uri()
-            webbrowser.open(uri)  
-            return 1
-        
+
+            if uri[:26] != 'http://www.instapaper.com/':
+                webbrowser.open(uri)
+                return 1
+            return
 
         def title_changed(widget, frame, title):
             if title != 'null':

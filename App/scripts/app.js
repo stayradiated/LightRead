@@ -134,7 +134,8 @@ $(function() {
 			read: $('#read-button'),
 			closePost: $('#close-post-button'),
 			markAllAsRead: $('#mark-all-as-read-trigger'),
-			search: $('#search-button')
+			search: $('#search-button'),
+			instapaper: $('#instapaper-button')
 		},
 		bar: {
 			itemCount: $('#item-count'),
@@ -389,6 +390,11 @@ $(function() {
 	// Toggle Unread
 	$$.button.read.click(function() {
 		cmd('read')
+	})
+
+	$$.button.instapaper.click(function() {
+		$$.postWrapper.addClass('instapaper')
+		$$.post.html('<iframe id="instapaper" src="http://www.instapaper.com/m?u=' + core.urlencode(selected.item.alternate[0].href) + '"></iframe>')
 	})
 
 	// Close Post
