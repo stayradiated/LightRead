@@ -1,0 +1,25 @@
+Source: lightread
+Section: python
+Priority: extra
+Build-Depends: cdbs (>= 0.4.43),
+ debhelper (>= 6), libglib2.0-bin, python (>= 2.6.6-3~),
+ python-distutils-extra (>= 2.10)
+Maintainer: George Czabania <george@czabania.com>
+Standards-Version: 3.8.3
+XS-Python-Version: current
+
+Package: lightread
+Architecture: all
+XB-Python-Version: ${python:Versions}
+Depends: ${misc:Depends},
+ ${python:Depends},
+ gir1.2-notify-0.7,
+ gir1.2-gtk-3.0,
+ gir1.2-glib-2.0,
+ gir1.2-dbusmenu-glib-0.4,
+ gir1.2-unity-5.0,
+ gir1.2-webkit-3.0,
+ gir1.2-launchpad-integration-3.0,
+ yelp
+Description: A lightweight news reader.
+ UNKNOWN

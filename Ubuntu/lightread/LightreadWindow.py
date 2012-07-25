@@ -35,8 +35,13 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('lightread')
 
-from gi.repository import Gtk, Gdk, WebKit, Unity, Notify, Dbusmenu# pylint: disable=E0611
-import logging, webbrowser
+import webbrowser
+from gi.repository import Gtk, Gdk, WebKit, Notify # pylint: disable=E0611
+try:
+    from gi.repository import Unity, Dbusmenu
+except ImportError:
+    pass
+import logging
 logger = logging.getLogger('lightread')
 
 from lightread_lib import Window
@@ -68,6 +73,14 @@ class LightreadWindow(Window):
         self.webviewsettings.set_property("javascript-can-open-windows-automatically", True)
         self.webviewsettings.set_property("enable-universal-access-from-file-uris", True)
         self.webview.load_uri(get_media_file('app/index.html'))
+
+        #Sets Quota - This doesn't work with file:/// urls
+        #self.webframe = self.webview.get_main_frame()
+        #print self.webview.get_uri()
+        #print self.webframe.get_uri()
+        #security = self.webframe.get_security_origin()
+        #print security.get_all_web_databases()
+        #print security.web-database-quota()
         
         self.webview.show()
 
@@ -76,7 +89,6 @@ class LightreadWindow(Window):
         self.refresh = self.builder.get_object("refresh")
         self.star = self.builder.get_object("star")
         self.read = self.builder.get_object("read")
-        self.share = self.builder.get_object("share")
         self.logout = self.builder.get_object("logout")
         self.next_article = self.builder.get_object("next-article")
         self.prev_article = self.builder.get_object("prev-article")
@@ -87,16 +99,22 @@ class LightreadWindow(Window):
 
         # Unity Support
         Notify.init('Lightread')
-        launcher = Unity.LauncherEntry.get_for_desktop_id ("lightread.desktop")
-
-        ql = Dbusmenu.Menuitem.new ()
-        updatenews = Dbusmenu.Menuitem.new ()
-        updatenews.property_set (Dbusmenu.MENUITEM_PROP_LABEL, "Update News")
-        updatenews.property_set_bool (Dbusmenu.MENUITEM_PROP_VISIBLE, True)
-        ql.child_append (updatenews)
-        launcher.set_property("quicklist", ql)
+        try:
+            launcher = Unity.LauncherEntry.get_for_desktop_id ("extras-lightread.desktop")
+ 
+            ql = Dbusmenu.Menuitem.new ()
+            updatenews = Dbusmenu.Menuitem.new ()
+            updatenews.property_set (Dbusmenu.MENUITEM_PROP_LABEL, "Update News")
+            updatenews.property_set_bool (Dbusmenu.MENUITEM_PROP_VISIBLE, True)
+            ql.child_append (updatenews)
+            launcher.set_property("quicklist", ql)
+        except NameError:
+            pass
 
         # Message Passing Stuff
+        def reload_feeds(this, widget, data = None):
+            self.webview.execute_script('cmd("refresh")')
+
         def menuexternal(this, widget, data = None):
             print this
             print this.get_name()
@@ -104,8 +122,7 @@ class LightreadWindow(Window):
 
         def _navigation_requested_cb(view, frame, networkRequest):
             uri = networkRequest.get_uri()
-            if uri[:7] != 'file://':
-                webbrowser.open(uri)
+            webbrowser.open(uri)  
             return 1
         
 
@@ -116,14 +133,24 @@ class LightreadWindow(Window):
 
                 #Gets Data from Disk
                 if title[0] == 'count':
-                    launcher.set_property("count", int(title[1]))
-                    launcher.set_property("count_visible", True)
+                    try:
+                        if int(title[1]) == 0:
+                            launcher.set_property("count_visible", False)
+                            self.set_title("Lightread")
+                        else:
+                            launcher.set_property("count_visible", True)
+                            self.set_title(title[1] + " - Lightread")
+                            
+                        launcher.set_property("count", int(title[1]))
+                    except UnboundLocalError:
+                        pass
+                    
 
                 elif title[0] == 'notify':
                     notification = Notify.Notification.new(
                         title[1],
                         title[2],
-                        get_media_file('lightread.svg')
+                        get_media_file('lightread.png')
                     )
                     notification.show()
 
@@ -131,11 +158,6 @@ class LightreadWindow(Window):
                     clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
                     clipboard.set_text(title[1], -1)
                     clipboard.store()
-
-                elif title[0] == 'reload':
-                    print "Reloading"
-                    self.webview.reload()
-                    self.webview.load_uri(get_media_file('app/index.html'))
 
                 """elif title[0] == 'share':
                     if sharingsupport == 'true':
@@ -156,10 +178,13 @@ class LightreadWindow(Window):
         self.refresh.connect ("activate", menuexternal, None)
         self.star.connect ("activate", menuexternal, None)
         self.read.connect ("activate", menuexternal, None)
-        self.share.connect ("activate", menuexternal, None)
         self.logout.connect ("activate", menuexternal, None)
         self.next_article.connect ("activate", menuexternal, None)
         self.prev_article.connect ("activate", menuexternal, None)
         self.filter_all.connect ("activate", menuexternal, None)
         self.filter_unread.connect ("activate", menuexternal, None)
         self.filter_starred.connect ("activate", menuexternal, None)
+        try:
+            updatenews.connect ("item-activated", reload_feeds, None)
+        except UnboundLocalError:
+            pass

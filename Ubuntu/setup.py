@@ -76,7 +76,7 @@ def update_desktop_file(datadir):
 
         for line in fin:            
             if 'Icon=' in line:
-                line = "Icon=%s\n" % (datadir + 'media/lightread.svg')
+                line = "Icon=%s\n" % (datadir + 'media/lightread.png')
             fout.write(line)
         fout.flush()
         fout.close()
@@ -104,11 +104,11 @@ class InstallAndUpdateDataDirectory(DistUtilsExtra.auto.install_auto):
 
 DistUtilsExtra.auto.setup(
     name='lightread',
-    version='0.1',
+    version='1.0.20',
     license='BSD',
-    author='consindo',
-    author_email='jono@caffeinatedco.de',
-    #description='UI for managing …',
+    author='George Czabania',
+    author_email='george@czabania.com',
+    description='A lightweight news reader.',
     #long_description='Here a longer description',
     url='https://launchpad.net/lightread',
     cmdclass={'install': InstallAndUpdateDataDirectory}

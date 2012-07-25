@@ -1,0 +1,132 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-07-08 22:01+1200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../data/ui/AboutLightreadDialog.ui.h:1
+msgid ""
+"# Copyright (C) 2012 Caffeinated Code <caffeinatedco.de>\n"
+"# Copyright (C) 2012 George Czabania\n"
+"# Copyright (C) 2012 Jono Cooper\n"
+"# Copyright (c) The Regents of the University of California.\n"
+"# All rights reserved.\n"
+"# \n"
+"# Redistribution and use in source and binary forms, with or without\n"
+"# modification, are permitted provided that the following conditions\n"
+"# are met:\n"
+"# 1. Redistributions of source code must retain the above copyright\n"
+"#    notice, this list of conditions and the following disclaimer.\n"
+"# 2. Redistributions in binary form must reproduce the above copyright\n"
+"#    notice, this list of conditions and the following disclaimer in the\n"
+"#    documentation and/or other materials provided with the distribution.\n"
+"# 3. Neither the name of the University nor the names of its contributors\n"
+"#    may be used to endorse or promote products derived from this software\n"
+"#    without specific prior written permission.\n"
+"# \n"
+"# THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND\n"
+"# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\n"
+"# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR "
+"PURPOSE\n"
+"# ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE\n"
+"# OR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\n"
+"# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS\n"
+"# OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n"
+"# HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, "
+"STRICT\n"
+"# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY\n"
+"# OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF\n"
+"# SUCH DAMAGE.\n"
+msgstr ""
+
+#: ../data/ui/AboutLightreadDialog.ui.h:31
+msgid ""
+"Copyright (C) 2012 Caffeinated Code <caffeinatedco.de>\n"
+"Copyright (C) 2012 George Czabania\n"
+"Copyright (C) 2012 Jono Cooper"
+msgstr ""
+
+#: ../data/ui/AboutLightreadDialog.ui.h:34
+msgid "caffeinatedco.de"
+msgstr ""
+
+#: ../lightread.desktop.in.h:1 ../data/ui/LightreadWindow.ui.h:1
+msgid "Lightread"
+msgstr ""
+
+#: ../lightread.desktop.in.h:2
+msgid "Lightread application"
+msgstr ""
+
+#: ../data/ui/LightreadWindow.ui.h:2
+msgid "_File"
+msgstr ""
+
+#: ../data/ui/LightreadWindow.ui.h:3
+msgid "Add Feed"
+msgstr ""
+
+#: ../data/ui/LightreadWindow.ui.h:4
+msgid "_Edit"
+msgstr ""
+
+#: ../data/ui/LightreadWindow.ui.h:5
+msgid "Add Star"
+msgstr ""
+
+#: ../data/ui/LightreadWindow.ui.h:6
+msgid "Keep Unread"
+msgstr ""
+
+#: ../data/ui/LightreadWindow.ui.h:7
+msgid "Share"
+msgstr ""
+
+#: ../data/ui/LightreadWindow.ui.h:8
+msgid "_View"
+msgstr ""
+
+#: ../data/ui/LightreadWindow.ui.h:9
+msgid "Next Article"
+msgstr ""
+
+#: ../data/ui/LightreadWindow.ui.h:10
+msgid "Previous Article"
+msgstr ""
+
+#: ../data/ui/LightreadWindow.ui.h:11
+msgid "All Items"
+msgstr ""
+
+#: ../data/ui/LightreadWindow.ui.h:12
+msgid "Unread"
+msgstr ""
+
+#: ../data/ui/LightreadWindow.ui.h:13
+msgid "Starred"
+msgstr ""
+
+#: ../data/ui/LightreadWindow.ui.h:14
+msgid "_Help"
+msgstr ""
+
+#: ../data/ui/LightreadWindow.ui.h:15
+msgid "Contents"
+msgstr ""
+
+#: ../lightread/__init__.py:51
+msgid "Show debug messages (-vv debugs lightread_lib also)"
+msgstr ""

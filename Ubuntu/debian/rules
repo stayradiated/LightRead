@@ -1,0 +1,32 @@
+#!/usr/bin/make -f
+%:
+ifneq ($(shell dh -l | grep -xF translations),)
+	dh $@ --with python2,translations
+else
+	dh $@ --with python2
+endif
+
+override_dh_auto_install:
+	dh_auto_install -- --install-scripts=/opt/extras.ubuntu.com/lightread                 --install-data=/opt/extras.ubuntu.com/lightread                 --install-lib=/opt/extras.ubuntu.com/lightread
+
+override_dh_python2:
+	dh_python2 /opt/extras.ubuntu.com/lightread
+
+
+override_dh_install:
+	dh_install
+	mkdir -p debian/lightread/opt/extras.ubuntu.com/lightread/bin
+	if [ -x debian/lightread/opt/extras.ubuntu.com/lightread/lightread/lightread ]; then mv debian/lightread/opt/extras.ubuntu.com/lightread/lightread/lightread debian/lightread/opt/extras.ubuntu.com/lightread/bin; fi
+	if [ -f debian/lightread/opt/extras.ubuntu.com/lightread/share/applications/lightread.desktop ]; then \
+		mkdir -p debian/lightread/usr/share/applications; \
+		mv debian/lightread/opt/extras.ubuntu.com/lightread/share/applications/lightread.desktop debian/lightread/usr/share/applications/extras-lightread.desktop; \
+		rmdir --ignore-fail-on-non-empty debian/lightread/opt/extras.ubuntu.com/lightread/share/applications; \
+		sed -i 's|Exec=.*|Exec=/opt/extras.ubuntu.com/lightread/bin/lightread|' debian/lightread/usr/share/applications/extras-lightread.desktop; \
+		sed -i 's|Icon=/usr/|Icon=/opt/extras.ubuntu.com/lightread/|' debian/lightread/usr/share/applications/extras-lightread.desktop; \
+	fi
+	grep -RlZ 'import gettext' debian/lightread/* | xargs -0 -r sed -i 's|\(import\) gettext$$|\1 locale|'
+	grep -RlZ 'from gettext import gettext as _' debian/lightread/* | xargs -0 -r sed -i 's|from gettext \(import gettext as _\)|from locale \1|'
+	grep -RlZ "gettext.textdomain('lightread')" debian/lightread/* | xargs -0 -r sed -i "s|gettext\(\.textdomain('lightread')\)|locale\.bindtextdomain('lightread', '/opt/extras.ubuntu.com/lightread/share/locale')\nlocale\1|" 
+	sed -i "s|__lightread_data_directory__ =.*|__lightread_data_directory__ = '/opt/extras.ubuntu.com/lightread/share/lightread/'|" debian/lightread/opt/extras.ubuntu.com/lightread/lightread*/lightreadconfig.py
+	sed -i 's|        sys.path.insert(0, opt_path)|\0\n    os.putenv("XDG_DATA_DIRS", "%s:%s" % ("/opt/extras.ubuntu.com/lightread/share/", os.getenv("XDG_DATA_DIRS", "")))|' debian/lightread/opt/extras.ubuntu.com/lightread/bin/lightread
+	if [ -d debian/lightread/opt/extras.ubuntu.com/lightread/share/glib-2.0/schemas ]; then glib-compile-schemas debian/lightread/opt/extras.ubuntu.com/lightread/share/glib-2.0/schemas; fi
