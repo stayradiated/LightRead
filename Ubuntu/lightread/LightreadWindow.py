@@ -35,7 +35,7 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('lightread')
 
-import webbrowser
+import subprocess
 from gi.repository import Gtk, Gdk, WebKit, Notify # pylint: disable=E0611
 try:
     from gi.repository import Unity, Dbusmenu
@@ -124,7 +124,7 @@ class LightreadWindow(Window):
             uri = networkRequest.get_uri()
 
             if uri[:26] != 'http://www.instapaper.com/':
-                webbrowser.open(uri)
+                subprocess.Popen(['xdg-open', uri])
                 return 1
             return
 
