@@ -42,6 +42,7 @@ input, textarea { font-family: "Ubuntu", "Helvetica", "Arial", sans-serif; }
 #post-column .bar.disabled #read-button, #post-column .bar.disabled #star-button, #post-column .bar.disabled #close-post-button, #post-column .bar.disabled #instapaper-button { opacity: 0.4; }
 #post-column #post-window { position: absolute; display: block; top: 0; bottom: 36px; left: 0; right: 0; overflow-y: auto; }
 #post-column #post-window.instapaper { background: #f4f4f4; }
+#post-column #post-window.instapaper #post { margin: 0; padding: 0; max-width: 100%; }
 #post-column.scope:before { border-bottom-color: #c7c6c4; }
 #post-column.scope:after { border-bottom-color: #e6e5e3; }
 
