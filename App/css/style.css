@@ -162,6 +162,7 @@ input, textarea { font-family: "Ubuntu", "Helvetica", "Arial", sans-serif; }
 #modal > div h3:after { content: ""; height: 28px; position: absolute; display: block; top: 0; bottom: auto; left: 30px; right: auto; }
 #modal > div p { font-size: 13px; color: #4c4c4c; margin: 0 25px 15px; line-height: 18px; }
 #modal > div input { width: 250px; vertical-align: top; font-size: 13px; line-height: 20px; border-radius: 2px 0 0 2px; height: 20px; outline: none; border: 1px solid rgba(0, 0, 0, 0.2); border-right: 0; padding: 5px 10px; background: url(../images/input_bg.png); box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 0 white; color: #444444; margin-left: 25px; -webkit-user-select: text; }
+#modal > div input.isolated { border-radius: 2px; border: 1px solid rgba(0, 0, 0, 0.2); margin-top: 3px; margin-bottom: 3px; }
 #modal > div button { text-decoration: none; line-height: 27px; padding: 0 10px; height: 32px; border-radius: 2px; font-size: 13px; font-weight: bold; border: 1px solid #959595; color: #242424; font-family: "Ubuntu Medium", "Ubuntu", "Helvetica", "Arial", sans-serif; margin: 0 6px 25px; background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #f5f5f5)); background: -webkit-linear-gradient(top, #ffffff 0%, #f5f5f5 100%); background: -moz-linear-gradient(top, #ffffff 0%, #f5f5f5 100%); background: -o-linear-gradient(top, #ffffff 0%, #f5f5f5 100%); background: -ms-linear-gradient(top, #ffffff 0%, #f5f5f5 100%); background: linear-gradient(top, #ffffff 0%, #f5f5f5 100%); }
 #modal > div button:focus { outline: 0; background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #f9f9f9)); background: -webkit-linear-gradient(top, #ffffff 0%, #f9f9f9 100%); background: -moz-linear-gradient(top, #ffffff 0%, #f9f9f9 100%); background: -o-linear-gradient(top, #ffffff 0%, #f9f9f9 100%); background: -ms-linear-gradient(top, #ffffff 0%, #f9f9f9 100%); background: linear-gradient(top, #ffffff 0%, #f9f9f9 100%); box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2); }
 #modal > div button:hover { background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #f9f9f9)); background: -webkit-linear-gradient(top, #ffffff 0%, #f9f9f9 100%); background: -moz-linear-gradient(top, #ffffff 0%, #f9f9f9 100%); background: -o-linear-gradient(top, #ffffff 0%, #f9f9f9 100%); background: -ms-linear-gradient(top, #ffffff 0%, #f9f9f9 100%); background: linear-gradient(top, #ffffff 0%, #f9f9f9 100%); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); }
@@ -177,6 +178,8 @@ input, textarea { font-family: "Ubuntu", "Helvetica", "Arial", sans-serif; }
 #modal .rename { top: 40%; left: 50%; margin-top: -52px; margin-left: -190px; width: 381px; display: none; }
 #modal .rename h3:after { background: url(../images/text_rename_feed.png); width: 98px; }
 #modal .rename button { border-radius: 0 2px 2px 0; width: 60px; padding: 0; margin: 0 25px 25px 0; }
+#modal .instapaper-login { top: 40%; left: 50%; margin-top: -52px; margin-left: -190px; width: 330px; display: none; }
+#modal .instapaper-login button { margin-left: 25px; margin-top: 3px; width: 272px; }
 
 #overlay { position: fixed; width: 100%; height: 100%; z-index: 200; display: none; background: rgba(0, 0, 0, 0.3); top: 0; left: 0; }
 

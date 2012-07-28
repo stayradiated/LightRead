@@ -126,6 +126,9 @@ $(function() {
 			markAllAsRead: {
 				el: $('#mark-all-as-read-popup'),
 				button: $('#mark-all-as-read-button')
+			},
+			instapaper: {
+				el: $('#modal .instapaper-login')
 			}
 		},
 		button: {
@@ -213,6 +216,11 @@ $(function() {
 				$$.modal.add.el.show()
 				$$.overlay.show()
 				$$.modal.add.input.focus()
+				break
+
+			case "instapaper":
+				$$.overlay.show()
+				$$.modal.instapaper.el.show()
 				break
 
 			case "logout":
@@ -392,9 +400,11 @@ $(function() {
 		cmd('read')
 	})
 
+	// Instapaper
 	$$.button.instapaper.click(function() {
-		$$.postWrapper.addClass('instapaper')
-		$$.post.html('<iframe id="instapaper" src="http://www.instapaper.com/m?u=' + core.urlencode(selected.item.alternate[0].href) + '"></iframe>')
+		cmd('instapaper')
+		// $$.postWrapper.addClass('instapaper')
+		// $$.post.html('<iframe id="instapaper" src="http://www.instapaper.com/m?u=' + core.urlencode(selected.item.alternate[0].href) + '"></iframe>')
 	})
 
 	// Close Post
