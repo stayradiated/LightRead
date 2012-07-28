@@ -127,8 +127,11 @@ $(function() {
 				el: $('#mark-all-as-read-popup'),
 				button: $('#mark-all-as-read-button')
 			},
-			instapaper: {
-				el: $('#modal .instapaper-login')
+			pocket: {
+				el: $('#modal .pocket-login'),
+				username: $('#modal .pocket-login input[type=text]'),
+				password: $('#modal .pocket-login input[type=password]'),
+				button: $('#modal .pocket-login button')
 			}
 		},
 		button: {
@@ -218,9 +221,15 @@ $(function() {
 				$$.modal.add.input.focus()
 				break
 
-			case "instapaper":
-				$$.overlay.show()
-				$$.modal.instapaper.el.show()
+			case "pocket":
+				if (!core.pocket.user.loggedIn) {
+					$$.overlay.show()
+					$$.modal.pocket.el.show()
+				} else {
+					if (selected.item) {
+						core.pocket.add(selected.item)
+					}
+				}
 				break
 
 			case "logout":
@@ -400,11 +409,28 @@ $(function() {
 		cmd('read')
 	})
 
-	// Instapaper
+	// Pocket
 	$$.button.instapaper.click(function() {
-		cmd('instapaper')
+		cmd('pocket')
 		// $$.postWrapper.addClass('instapaper')
 		// $$.post.html('<iframe id="instapaper" src="http://www.instapaper.com/m?u=' + core.urlencode(selected.item.alternate[0].href) + '"></iframe>')
+	})
+
+	// Pocket login
+	$$.modal.pocket.button.click(function() {
+
+		var username = $$.modal.pocket.username.val(),
+			password = $$.modal.pocket.password.val()
+
+		core.pocket.login(username, password, function(loggedIn) {
+			if (loggedIn) {
+				$$.modal.pocket.el.hide()
+				$$.overlay.hide()
+			} else {
+				$$.modal.pocket.password.val('')
+			}
+		})
+
 	})
 
 	// Close Post

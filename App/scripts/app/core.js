@@ -248,7 +248,7 @@ core = {
 	// A very useful function
 	// Can get items in a feed, label or even a filter
 	getItemsInFeed: function(feed) {
-		var results = [], i, j, subfeed
+		var results = [], i, j, subfeed, item
 
 		switch(feed) {
 		case 'all':
@@ -1223,6 +1223,71 @@ core = {
 				console.log("Not online...")
 			}
 		})
+	},
+
+
+	// *************************************
+	// *
+	// * Pocket
+	// *
+	// *************************************
+
+	pocket: {
+
+		apikey: '52dAvce7d6282Kd70gpp34cp59T0w58c',
+
+		user: {
+			loggedIn: false,
+			username: '',
+			password: ''
+		},
+
+		login: function(username, password, callback) {
+
+			var url = "https://readitlaterlist.com/v2/stats?"
+				url += "username=" + username
+				url += "&password=" + password
+				url += "&apikey=" + core.pocket.apikey
+
+			$.ajax({
+				url: url,
+				success: function() {
+					core.pocket.user.username = username
+					core.pocket.user.password = password
+					core.pocket.user.loggedIn = true
+					callback(true)
+					storage.savePrefs()
+				},
+				error: function(e) {
+					callback(false)
+				}
+			})
+
+		},
+
+		logout: function() {
+			core.pocket.user.username = ''
+			core.pocket.user.password = ''
+			core.pocket.user.loggedIn = false
+		},
+
+		add: function(item) {
+
+			if (core.pocket.user.loggedIn) {
+				var url = "https://readitlaterlist.com/v2/add?"
+				url += "username=" + core.pocket.user.username
+				url += "&password=" + core.pocket.user.password
+				url += "&apikey=52dAvce7d6282Kd70gpp34cp59T0w58c"
+				url += "&url=" + item.alternate[0].href
+				url += "&title=" + item.title
+				$.get(url, function(data) {
+					console.log(data)
+				})
+			} else {
+				cmd('pocket')
+			}
+		}
 
 	}
+
 }

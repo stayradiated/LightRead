@@ -56,6 +56,10 @@ window.storage = {
 							}
 
 							break
+						case 'pocket':
+							var user = JSON.parse(row.value)
+							core.pocket.user = user
+							core.pocket.user.loggedIn = true
 					}
 				}
 				if (callback) callback()
@@ -114,6 +118,7 @@ window.storage = {
 		db.transaction(function(tx) {
 			tx.executeSql('INSERT INTO user (key, value) VALUES (?, ?)', ['sync', JSON.stringify(sync)])
 			tx.executeSql('INSERT INTO user (key, value) VALUES (?, ?)', ['settings', JSON.stringify(settings)])
+			tx.executeSql('INSERT INTO user (key, value) VALUES (?, ?)', ['pocket', JSON.stringify(core.pocket.user)])
 		})
 	},
 	saveIcons: function() {
