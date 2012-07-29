@@ -147,7 +147,8 @@ $(function() {
 			closePost: $('#close-post-button'),
 			markAllAsRead: $('#mark-all-as-read-trigger'),
 			search: $('#search-button'),
-			instapaper: $('#instapaper-button')
+			instapaper: $('#instapaper-button'),
+			share: $('#share-button')
 		},
 		bar: {
 			itemCount: $('#item-count'),
@@ -247,6 +248,11 @@ $(function() {
 						core.instapaper.add(selected.item)
 					}
 				}
+				break
+
+			case "mobilizer":
+				$$.postWrapper.addClass('instapaper')
+				$$.post.html('<iframe id="instapaper" src="http://www.instapaper.com/m?u=' + core.urlencode(selected.item.alternate[0].href) + '"></iframe>')
 				break
 
 			case "logout":
@@ -426,11 +432,14 @@ $(function() {
 		cmd('read')
 	})
 
-	// Pocket
+	// Mobilizer
 	$$.button.instapaper.click(function() {
+		cmd('mobilizer')
+	})
+
+	//Instapaper & Pocket
+	$$.button.share.click(function() {
 		cmd('instapaper')
-		// $$.postWrapper.addClass('instapaper')
-		// $$.post.html('<iframe id="instapaper" src="http://www.instapaper.com/m?u=' + core.urlencode(selected.item.alternate[0].href) + '"></iframe>')
 	})
 
 	// Pocket login

@@ -91,7 +91,7 @@ input, textarea { font-family: "Ubuntu", "Helvetica", "Arial", sans-serif; }
 #search-input { display: block; -webkit-box-flex: 1; -webkit-user-select: text; height: 25px; margin-top: 5px; padding: 5px 10px; font-size: 13px; box-sizing: border-box; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 0 white; border-radius: 3px; border: 0; border: 1px solid #cccccc; color: #4c4c4c; outline: 0; line-height: 15px; }
 #search-input.active { background: lightblue; }
 
-#link-url { position: absolute; display: block; top: 0; bottom: 0; left: 155px; right: 35px; line-height: 35px; font-size: 13px; color: #4c4c4c; text-shadow: 0 1px 0 white; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; text-align: right; }
+#link-url { position: absolute; display: block; top: 0; bottom: 0; left: 193px; right: 35px; line-height: 35px; font-size: 13px; color: #4c4c4c; text-shadow: 0 1px 0 white; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; text-align: right; }
 
 #feeds, #filters { font-size: 13px; }
 #feeds li, #filters li { cursor: default; text-align: left; text-shadow: 0 1px 0 white; }
