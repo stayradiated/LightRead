@@ -79,6 +79,8 @@ input, textarea { font-family: "Ubuntu", "Helvetica", "Arial", sans-serif; }
 
 #instapaper-button { background: url(../images/icon_instapaper.png) no-repeat 8px 8px; margin: 0 2px; }
 
+#share-button { background: url(../images/btn_share.png) no-repeat 8px 8px; margin: 0 2px; }
+
 #post iframe#instapaper { width: 100%; height: 100%; margin: 0; padding: 0; box-shadow: none; background: #f4f4f4; }
 
 #read-button { background: url(../images/btn_read.png) no-repeat 8px -17px; margin: 8px 2px 0; height: 17px; }
