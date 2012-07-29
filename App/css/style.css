@@ -216,8 +216,7 @@ input, textarea { font-family: "Ubuntu", "Helvetica", "Arial", sans-serif; }
 #settings .close { position: absolute; display: block; top: 0; bottom: auto; left: 7px; right: auto; background: url(../images/btn_exit.png); width: 17px; height: 28px; cursor: pointer; }
 #settings .close:hover { background-position-y: -28px; }
 #settings h2 { margin-top: 0; text-align: center; font-size: 15px; height: 40px; line-height: 40px; border-bottom: 1px solid rgba(0, 0, 0, 0.2); box-shadow: 0 1px 0 white; border-radius: 5px 5px 0 0; background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fafafa), color-stop(100%, #f6f6f6)); background: -webkit-linear-gradient(top, #fafafa 0%, #f6f6f6 100%); background: -moz-linear-gradient(top, #fafafa 0%, #f6f6f6 100%); background: -o-linear-gradient(top, #fafafa 0%, #f6f6f6 100%); background: -ms-linear-gradient(top, #fafafa 0%, #f6f6f6 100%); background: linear-gradient(top, #fafafa 0%, #f6f6f6 100%); color: #3b3b3b; text-shadow: 0 1px 0 #fcfcfc; }
-#settings h3 { text-indent: -9999px; cursor: default; height: 28px; margin-top: 0; margin-bottom: 15px; border-radius: 4px 4px 0 0; background: url(../images/modal_header.png) repeat-x; }
-#settings h3:after { content: ""; position: absolute; display: block; top: 0; bottom: auto; left: 30px; right: auto; width: 63px; height: 28px; background: url(../images/settings_header.png); }
+#settings h3 { margin: 20px 0 10px; color: #4d1f41; padding: 0 25px; font-size: 24px; font-weight: 300; font-family: "Ubuntu Light", "Ubuntu", "Helvetica", "Arial", sans-serif; }
 #settings > div { padding: 10px 25px; }
 #settings > div:first-of-type { padding-top: 0; }
 #settings > div:not(:last-child) { border-bottom: 1px solid #cccccc; box-shadow: 0 1px 0 white; }
