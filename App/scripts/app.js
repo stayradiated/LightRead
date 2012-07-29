@@ -437,11 +437,6 @@ $(function() {
 		cmd('mobilizer')
 	})
 
-	//Instapaper & Pocket
-	$$.button.share.click(function() {
-		cmd('instapaper')
-	})
-
 	// Pocket login
 	$$.modal.pocket.button.click(function() {
 
@@ -474,6 +469,13 @@ $(function() {
 			}
 		})
 
+	})
+
+	// Share button
+	$$.button.share.click(function(e) {
+		e.clientY -= 40
+		ui.showContextMenu(e, $(this), 'share')
+		return false
 	})
 
 	// Close Post

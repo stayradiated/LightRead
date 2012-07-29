@@ -1062,6 +1062,17 @@ ui = {
 					section: false
 				})
 				break
+			case 'share':
+				items.push({
+					className: 'pocket',
+					text: 'Send to Pocket',
+					section: false
+				},{
+					className: 'instapaper',
+					text: 'Send to Instapaper',
+					section: false
+				})
+				break
 		}
 
 		$this.addClass('hover')
@@ -1134,6 +1145,19 @@ ui = {
 					document.location = item.alternate[0].href
 				})
 
+				break
+
+			case 'share':
+			
+				// Pocket
+				$$.contextMenu.find('.pocket').click(function() {
+					cmd('pocket')
+				})
+				
+				// Instapaper
+				$$.contextMenu.find('.instapaper').click(function() {
+					cmd('instapaper')
+				})
 				break
 
 		}
