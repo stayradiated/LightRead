@@ -184,7 +184,8 @@ input, textarea
 			#read-button,
 			#star-button,
 			#close-post-button,
-			#instapaper-button
+			#instapaper-button,
+			#share-button
 				opacity: 0.4
 
 	#post-window
@@ -238,6 +239,7 @@ input, textarea
 	height: 35px
 	background: $bar_bg
 	border-top: 1px solid $bar_border
+	font-size: 0
 
 	div
 		display: inline-block
@@ -347,6 +349,17 @@ input, textarea
 #share-button
 	background: url(../images/btn_share.png) no-repeat 8px 8px
 	margin: 0 2px
+
+	select
+		background: transparent
+		width: 18px
+		font-size: 0
+		height: 18px
+		border: 0
+		-webkit-appearance: none
+
+		&:focus
+			outline: 0
 
 #post iframe#instapaper
 	width: 100%

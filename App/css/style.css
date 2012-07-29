@@ -39,7 +39,7 @@ input, textarea { font-family: "Ubuntu", "Helvetica", "Arial", sans-serif; }
 #articles-column.scope:after { border-bottom-color: #e6e5e3; }
 
 #post-column { min-width: 20px; height: 100%; background: url(../images/articles_bg.png); }
-#post-column .bar.disabled #read-button, #post-column .bar.disabled #star-button, #post-column .bar.disabled #close-post-button, #post-column .bar.disabled #instapaper-button { opacity: 0.4; }
+#post-column .bar.disabled #read-button, #post-column .bar.disabled #star-button, #post-column .bar.disabled #close-post-button, #post-column .bar.disabled #instapaper-button, #post-column .bar.disabled #share-button { opacity: 0.4; }
 #post-column #post-window { position: absolute; display: block; top: 0; bottom: 36px; left: 0; right: 0; overflow-y: auto; }
 #post-column #post-window.instapaper { background: #f4f4f4; }
 #post-column #post-window.instapaper #post { margin: 0; padding: 0; max-width: 100%; }
@@ -54,7 +54,7 @@ input, textarea { font-family: "Ubuntu", "Helvetica", "Arial", sans-serif; }
 
 #hidden { display: none; }
 
-.bar { position: absolute; display: block; top: auto; bottom: 0; left: 0; right: 0; height: 35px; background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.08) 0%, rgba(255, 255, 255, 0.08) 100%); border-top: 1px solid rgba(0, 0, 0, 0.2); }
+.bar { position: absolute; display: block; top: auto; bottom: 0; left: 0; right: 0; height: 35px; background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.08) 0%, rgba(255, 255, 255, 0.08) 100%); border-top: 1px solid rgba(0, 0, 0, 0.2); font-size: 0; }
 .bar div { display: inline-block; }
 .bar button { width: 35px; height: 35px; border: 0; line-height: 35px; vertical-align: top; background: transparent; padding: 0; }
 
@@ -80,6 +80,8 @@ input, textarea { font-family: "Ubuntu", "Helvetica", "Arial", sans-serif; }
 #instapaper-button { background: url(../images/icon_instapaper.png) no-repeat 8px 8px; margin: 0 2px; }
 
 #share-button { background: url(../images/btn_share.png) no-repeat 8px 8px; margin: 0 2px; }
+#share-button select { background: transparent; width: 18px; font-size: 0; height: 18px; border: 0; -webkit-appearance: none; }
+#share-button select:focus { outline: 0; }
 
 #post iframe#instapaper { width: 100%; height: 100%; margin: 0; padding: 0; box-shadow: none; background: #f4f4f4; }
 
