@@ -132,6 +132,12 @@ $(function() {
 				username: $('#modal .pocket-login input[type=text]'),
 				password: $('#modal .pocket-login input[type=password]'),
 				button: $('#modal .pocket-login button')
+			},
+			instapaper: {
+				el: $('#modal .instapaper-login'),
+				username: $('#modal .instapaper-login input[type=text]'),
+				password: $('#modal .instapaper-login input[type=password]'),
+				button: $('#modal .instapaper-login button')
 			}
 		},
 		button: {
@@ -228,6 +234,17 @@ $(function() {
 				} else {
 					if (selected.item) {
 						core.pocket.add(selected.item)
+					}
+				}
+				break
+
+			case "instapaper":
+				if (!core.instapaper.user.loggedIn) {
+					$$.overlay.show()
+					$$.modal.instapaper.el.show()
+				} else {
+					if (selected.item) {
+						core.instapaper.add(selected.item)
 					}
 				}
 				break
@@ -411,7 +428,7 @@ $(function() {
 
 	// Pocket
 	$$.button.instapaper.click(function() {
-		cmd('pocket')
+		cmd('instapaper')
 		// $$.postWrapper.addClass('instapaper')
 		// $$.post.html('<iframe id="instapaper" src="http://www.instapaper.com/m?u=' + core.urlencode(selected.item.alternate[0].href) + '"></iframe>')
 	})
@@ -428,6 +445,23 @@ $(function() {
 				$$.overlay.hide()
 			} else {
 				$$.modal.pocket.password.val('')
+			}
+		})
+
+	})
+
+	// Instapaper
+	$$.modal.instapaper.button.click(function() {
+
+		var username = $$.modal.instapaper.username.val(),
+			password = $$.modal.instapaper.password.val()
+
+		core.instapaper.login(username, password, function(loggedIn) {
+			if (loggedIn) {
+				$$.modal.instapaper.el.hide()
+				$$.overlay.hide()
+			} else {
+				$$.modal.instapaper.password.val('')
 			}
 		})
 

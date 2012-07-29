@@ -1288,6 +1288,66 @@ core = {
 			}
 		}
 
+	},
+
+	// *************************************
+	// *
+	// * Instapaper
+	// *
+	// *************************************
+
+	instapaper: {
+
+		user: {
+			loggedIn: false,
+			username: '',
+			password: ''
+		},
+
+		login: function(username, password, callback) {
+
+			var url = "https://www.instapaper.com/api/authenticate"
+				url += "?username=" + username
+				url += "&password=" + password
+
+			$.ajax({
+				url: url,
+				success: function() {
+					core.instapaper.user.username = username
+					core.instapaper.user.password = password
+					core.instapaper.user.loggedIn = true
+					callback(true)
+					storage.savePrefs()
+				},
+				error: function(e) {
+					callback(false)
+				}
+			})
+
+		},
+
+		logout: function() {
+			core.instapaper.user.username = ''
+			core.instapaper.user.password = ''
+			core.instapaper.user.loggedIn = false
+		},
+
+		add: function(item) {
+
+			if (core.instapaper.user.loggedIn) {
+				var url = "https://www.instapaper.com/api/add"
+				url += "?username=" + core.instapaper.user.username
+				url += "&password=" + core.instapaper.user.password
+				url += "&url=" + item.alternate[0].href
+				url += "&title=" + item.title
+				$.get(url, function(data) {
+					console.log(data)
+				})
+			} else {
+				cmd('instapaper')
+			}
+		}
+
 	}
 
 }

@@ -56,10 +56,16 @@ window.storage = {
 							}
 
 							break
+
 						case 'pocket':
-							var user = JSON.parse(row.value)
-							core.pocket.user = user
+							core.pocket.user = JSON.parse(row.value)
 							core.pocket.user.loggedIn = true
+							break
+
+						case 'instapaper':
+							core.instapaper.user = JSON.parse(row.value)
+							core.instapaper.user.loggedIn = true
+							break
 					}
 				}
 				if (callback) callback()
@@ -119,6 +125,7 @@ window.storage = {
 			tx.executeSql('INSERT INTO user (key, value) VALUES (?, ?)', ['sync', JSON.stringify(sync)])
 			tx.executeSql('INSERT INTO user (key, value) VALUES (?, ?)', ['settings', JSON.stringify(settings)])
 			tx.executeSql('INSERT INTO user (key, value) VALUES (?, ?)', ['pocket', JSON.stringify(core.pocket.user)])
+			tx.executeSql('INSERT INTO user (key, value) VALUES (?, ?)', ['instapaper', JSON.stringify(core.instapaper.user)])
 		})
 	},
 	saveIcons: function() {
