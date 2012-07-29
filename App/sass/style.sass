@@ -789,36 +789,13 @@ input, textarea
 		box-shadow: 0 0 5px rgba(0,0,0,0.3)
 		z-index: 300
 
-		.close
-			@include absolute(0, auto, auto, 7px)
-			background: url(../images/btn_exit.png) no-repeat
-			width: 17px
-			height: 28px
-			cursor: pointer
-
-			&:hover
-				background-position-y: -28px
-
 		h3
-			// font-family: $font_thin
-			// font-size: 14px
-			// font-weight: 600
-			// text-shadow: 0 0 2px rgba(0,0,0,0.2)
-			text-indent: -9999px
-			cursor: default
-			height: 28px
-			margin-top: 0
-			margin-bottom: 20px
-			// color: #dfdbd2
-			// line-height: 28px
-			// padding-left: 30px
-			border-radius: 5px 5px 0 0
-			background: url(../images/modal_header.png) repeat-x
-
-			&:after
-				content: ''
-				height: 28px
-				@include absolute(0,auto,auto,30px)
+			margin: 20px 0 10px
+			color: $purple
+			padding: 0 25px
+			font-size: 24px
+			font-weight: 300
+			font-family: $font_thin
 
 		p
 			font-size: 13px
@@ -1189,16 +1166,6 @@ input, textarea
 	box-shadow: 0 2px 6px rgba(0,0,0,0.2)
 	z-index: 300
 	display: none
-
-	.close
-		@include absolute(0, auto, auto, 7px)
-		background: url(../images/btn_exit.png)
-		width: 17px
-		height: 28px
-		cursor: pointer
-
-		&:hover
-			background-position-y: -28px
 
 	h2
 		margin-top: 0
