@@ -1236,6 +1236,35 @@ ui = {
 		$$.settings.max.special.val(settings.max.special)
 		$$.settings.max.read.val(settings.max.read)
 		core.refreshOnTimer()
+	},
+
+	pocket: function() {
+		var username = $$.modal.pocket.username.val(),
+			password = $$.modal.pocket.password.val()
+
+		core.pocket.login(username, password, function(loggedIn) {
+			if (loggedIn) {
+				$$.modal.pocket.el.hide()
+				$$.overlay.hide()
+				cmd('pocket')
+			} else {
+				$$.modal.pocket.password.val('')
+			}
+		})
+	},
+	instapaper: function() {
+		var username = $$.modal.instapaper.username.val(),
+			password = $$.modal.instapaper.password.val()
+
+		core.instapaper.login(username, password, function(loggedIn) {
+			if (loggedIn) {
+				$$.modal.instapaper.el.hide()
+				$$.overlay.hide()
+				cmd('instapaper')
+			} else {
+				$$.modal.instapaper.password.val('')
+			}
+		})
 	}
 }
 

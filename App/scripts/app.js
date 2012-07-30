@@ -439,37 +439,24 @@ $(function() {
 
 	// Pocket login
 	$$.modal.pocket.button.click(function() {
-
-		var username = $$.modal.pocket.username.val(),
-			password = $$.modal.pocket.password.val()
-
-		core.pocket.login(username, password, function(loggedIn) {
-			if (loggedIn) {
-				$$.modal.pocket.el.hide()
-				$$.overlay.hide()
-			} else {
-				$$.modal.pocket.password.val('')
-			}
-		})
-
+		ui.pocket()
+	})
+	$$.modal.pocket.el.find('input').keydown(function(e) {
+		if (e.keyCode == 13) {
+			ui.pocket()
+		}
 	})
 
 	// Instapaper
 	$$.modal.instapaper.button.click(function() {
-
-		var username = $$.modal.instapaper.username.val(),
-			password = $$.modal.instapaper.password.val()
-
-		core.instapaper.login(username, password, function(loggedIn) {
-			if (loggedIn) {
-				$$.modal.instapaper.el.hide()
-				$$.overlay.hide()
-			} else {
-				$$.modal.instapaper.password.val('')
-			}
-		})
-
+		ui.instapaper()
 	})
+	$$.modal.instapaper.el.find('input').keydown(function(e) {
+		if (e.keyCode == 13) {
+			ui.instapaper()
+		}
+	})
+
 
 	// Share button
 	$$.button.share.click(function(e) {

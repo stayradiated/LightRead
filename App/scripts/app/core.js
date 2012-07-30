@@ -1269,6 +1269,7 @@ core = {
 			core.pocket.user.username = ''
 			core.pocket.user.password = ''
 			core.pocket.user.loggedIn = false
+			storage.savePrefs()
 		},
 
 		add: function(item) {
@@ -1280,8 +1281,17 @@ core = {
 				url += "&apikey=52dAvce7d6282Kd70gpp34cp59T0w58c"
 				url += "&url=" + item.alternate[0].href
 				url += "&title=" + item.title
-				$.get(url, function(data) {
-					console.log(data)
+				$.ajax({
+					url: url,
+					success: function(data) {
+						console.log(data)
+					},
+					error: function(e) {
+						if (e.status == 401) {
+							core.pocket.logout()
+							cmd('pocket')
+						}
+					}
 				})
 			} else {
 				cmd('pocket')
@@ -1330,6 +1340,7 @@ core = {
 			core.instapaper.user.username = ''
 			core.instapaper.user.password = ''
 			core.instapaper.user.loggedIn = false
+			storage.savePrefs()
 		},
 
 		add: function(item) {
@@ -1342,6 +1353,10 @@ core = {
 				url += "&title=" + item.title
 				$.get(url, function(data) {
 					console.log(data)
+					if (data == '403') {
+						core.instapaper.logout()
+						cmd('instapaper')
+					}
 				})
 			} else {
 				cmd('instapaper')

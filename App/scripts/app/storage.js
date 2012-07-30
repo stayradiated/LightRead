@@ -149,6 +149,8 @@ window.storage = {
 	},
 	flush: function() {
 		localStorage.clear()
+		core.pocket.logout()
+		core.instapaper.logout()
 		db.transaction(function(tx) {
 			tx.executeSql('DROP TABLE feeds')
 			tx.executeSql('DROP TABLE items')
