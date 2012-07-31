@@ -1265,6 +1265,14 @@ ui = {
 				$$.modal.instapaper.password.val('')
 			}
 		})
+	},
+	share: {
+		setActive: function() {
+			$$.button.share.addClass('active')
+		},
+		setInactive: function() {
+			$$.button.share.removeClass('active')
+		}
 	}
 }
 

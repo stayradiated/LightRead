@@ -1244,6 +1244,8 @@ core = {
 
 		login: function(username, password, callback) {
 
+			ui.share.setActive()
+
 			var url = "https://readitlaterlist.com/v2/stats?"
 				url += "username=" + username
 				url += "&password=" + password
@@ -1255,6 +1257,7 @@ core = {
 					core.pocket.user.username = username
 					core.pocket.user.password = password
 					core.pocket.user.loggedIn = true
+					ui.share.setInactive()
 					callback(true)
 					storage.savePrefs()
 				},
@@ -1275,6 +1278,7 @@ core = {
 		add: function(item) {
 
 			if (core.pocket.user.loggedIn) {
+				ui.share.setActive()
 				var url = "https://readitlaterlist.com/v2/add?"
 				url += "username=" + core.pocket.user.username
 				url += "&password=" + core.pocket.user.password
@@ -1283,8 +1287,8 @@ core = {
 				url += "&title=" + item.title
 				$.ajax({
 					url: url,
-					success: function(data) {
-						console.log(data)
+					success: function() {
+						ui.share.setInactive()
 					},
 					error: function(e) {
 						if (e.status == 401) {
@@ -1316,6 +1320,8 @@ core = {
 
 		login: function(username, password, callback) {
 
+			ui.share.setActive()
+
 			var url = "https://www.instapaper.com/api/authenticate"
 				url += "?username=" + username
 				url += "&password=" + password
@@ -1326,6 +1332,7 @@ core = {
 					core.instapaper.user.username = username
 					core.instapaper.user.password = password
 					core.instapaper.user.loggedIn = true
+					ui.share.setInactive()
 					callback(true)
 					storage.savePrefs()
 				},
@@ -1346,16 +1353,23 @@ core = {
 		add: function(item) {
 
 			if (core.instapaper.user.loggedIn) {
+				ui.share.setActive()
 				var url = "https://www.instapaper.com/api/add"
 				url += "?username=" + core.instapaper.user.username
 				url += "&password=" + core.instapaper.user.password
 				url += "&url=" + item.alternate[0].href
 				url += "&title=" + item.title
-				$.get(url, function(data) {
-					console.log(data)
-					if (data == '403') {
-						core.instapaper.logout()
-						cmd('instapaper')
+
+				$.ajax({
+					url: url,
+					success: function() {
+						ui.share.setInactive()
+					},
+					error: function(e) {
+						if (e.status == 403) {
+							core.instapaper.logout()
+							cmd('instapaper')
+						}
 					}
 				})
 			} else {
