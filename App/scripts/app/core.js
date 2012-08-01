@@ -759,6 +759,8 @@ core = {
 			feed = reader.TAGS['reading-list']
 		} else if (feed == 'starred') {
 			feed = reader.TAGS.starred
+		} else if (feed.id) {
+			feed = feed.id
 		}
 
 		core.addChange('feed', feed, 'markAllAsRead', true)
