@@ -517,7 +517,7 @@ ui = {
 		}
 
 		$$.postWrapper.removeClass('instapaper')
-		$$.post.html(template.post(model).replace(/<iframe /g, '<xframe ', 'ig').replace(/<\/iframe>/g,'</xframe', 'ig')).find('a:has(img)').addClass('hasImage')
+		$$.post.html(template.post(model).replace(/<iframe/ig, '<xframe').replace(/<\/iframe>/ig,'</xframe')).find('a:has(img)').addClass('hasImage')
 
 		// Scroll to top
 		$$.postWrapper[0].scrollTop = 0
@@ -550,8 +550,8 @@ ui = {
 			_this.replaceWith('<a class="youtube" href="' + _this.attr('src').replace('embed/', 'watch?v=') + '"><img src="' + url + '"></a>')
 		}
 
-		//Removes iFrame
-		$$.post.find('p').first().find('xframe').closest('p').remove()
+		//Removes iFrame (And parts of posts -- why did we have this here?)
+		// $$.post.find('p').first().find('xframe').closest('p').remove()
 
 		//Scrubs YouTube
 
