@@ -41,7 +41,7 @@ window.storage = {
 						case 'settings':
 							settings = JSON.parse(row.value)
 
-							var defaultSettings = new DEFAULT_SETTINGS()
+							var defaultSettings = default_settings()
 
 							if (!settings.hasOwnProperty('max')) {
 								settings.max = defaultSettings.max

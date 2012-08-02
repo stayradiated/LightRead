@@ -1021,10 +1021,12 @@ core = {
 
 	},
 
-	// The super awesome function that keeps everything up to date
+	// Download feeds and articles form Google Reader
 	refresh: function() {
 		ui.sync.start()
 		onLine(function(status) {
+
+			// If we are online...
 			if(status) {
 				if(sync.pending) {
 					core.sync(function() {
@@ -1045,13 +1047,13 @@ core = {
 						})
 					})
 				}
+
 			} else {
 				console.log("Not online...")
 
-				// Jono - set the timeout to end after one rotation of the icon.
 				setTimeout(function() {
 					ui.sync.end()
-				}, 1000)
+				}, 300)
 			}
 		})
 	},

@@ -19,7 +19,7 @@ sync = {
 	}
 }
 
-function DEFAULT_SETTINGS() {
+function default_settings() {
 	return {
 		sync: {
 			interval: 0,
@@ -39,24 +39,37 @@ function DEFAULT_SETTINGS() {
 	}
 }
 
-settings = new DEFAULT_SETTINGS()
+settings = default_settings()
+
+network_status = {
+	status: true,
+	time: 0 // time since check
+}
 
 // window.navigator.onLine polyfill
 onLine = function(callback) {
-	var checkurl = "http://caffeinatedco.de/online.json" + "?" + Math.random()
-	jQuery.ajax({
-		url:checkurl,
-		type: "HEAD",
-		dataType:"json",
-		timeout: 2000, //Wait 2 secs if connection problem
-		async: true,
-		success:function(data, status){
-			callback(true)
-		},
-		error:function(x, t, m){
-			callback(false)
-		}
-	})
+	if (network_status.time < Date.now() - 10000) {
+		console.log("Checking for an active internet connection...")
+		jQuery.ajax({
+			url: "http://caffeinatedco.de/online.json" + "?" + Math.random(),
+			type: "HEAD",
+			dataType:"json",
+			timeout: 2000, //Wait 2 secs if connection problem
+			async: true,
+			success:function(data, status){
+				network_status.status = true
+				network_status.time = Date.now()
+				callback(true)
+			},
+			error:function(x, t, m){
+				network_status.status = false
+				network_status.time = Date.now()
+				callback(false)
+			}
+		})
+	} else {
+		callback(network_status.status)
+	}
 }
 
 $(function() {
