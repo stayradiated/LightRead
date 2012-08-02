@@ -51,9 +51,7 @@ onLine = function(callback) {
 	if (network_status.time < Date.now() - 10000) {
 		console.log("Checking for an active internet connection...")
 		jQuery.ajax({
-			url: "http://caffeinatedco.de/online.json" + "?" + Math.random(),
-			type: "HEAD",
-			dataType:"json",
+			url: "http://www.google.com/reader?" + Math.random(),
 			timeout: 2000, //Wait 2 secs if connection problem
 			async: true,
 			success:function(data, status){
