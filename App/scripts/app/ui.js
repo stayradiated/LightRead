@@ -507,13 +507,18 @@ ui = {
 
 	// Load an Item as a Post
 	loadPost: function(post) {
+
+		//Fix Sites with no link
+		var link = "#"
+		try { link = post.alternate[0].href } catch (err) {}
+
 		var model = {
 			feed: core.getFeed(post.origin.streamId).title,
 			title: post.title,
 			author: post.author,
 			time: core.longDate(post.published)+" "+core.time(post.published),
 			content: core.content(post),
-			link: post.alternate[0].href
+			link: link
 		}
 
 		$$.postWrapper.removeClass('instapaper')
