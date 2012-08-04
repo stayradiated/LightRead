@@ -361,6 +361,9 @@ $(function() {
 			case 'copy':
 				document.title = 'copy|' + value
 				break
+			case 'gwibber':
+ 				document.title = 'gwibber|' + value
+ 				break
 		}
 	}
 

@@ -1071,6 +1071,10 @@ ui = {
 					className: 'instapaper',
 					text: 'Send to Instapaper',
 					section: false
+				},{
+					className: 'gwibber',
+					text: 'Send to Gwibber',
+					section: false
 				})
 				break
 		}
@@ -1157,6 +1161,13 @@ ui = {
 				// Instapaper
 				$$.contextMenu.find('.instapaper').click(function() {
 					cmd('instapaper')
+				})
+
+				// Gwibber
+				$$.contextMenu.find('.gwibber').click(function() {
+					if(selected.item) {
+						python('gwibber', selected.item.title+" "+selected.item.alternate[0].href)
+					}
 				})
 				break
 
@@ -1252,6 +1263,7 @@ ui = {
 			}
 		})
 	},
+
 	instapaper: function() {
 		var username = $$.modal.instapaper.username.val(),
 			password = $$.modal.instapaper.password.val()
@@ -1266,6 +1278,7 @@ ui = {
 			}
 		})
 	},
+
 	share: {
 		setActive: function() {
 			$$.button.share.addClass('active')
