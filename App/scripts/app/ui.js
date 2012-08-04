@@ -545,9 +545,17 @@ ui = {
 		//Loops through array of selectors
 		for (var i=0; i < video.length; i++) {
 			_this = $(video[i])
-			var url = "http://img." + /youtube(.+)/.exec(_this.attr('src').split("?")[0])[0] + "/0.jpg"
+			console.log("video is "+_this.attr('src').split("src=")[1]+" ")
+			var url = _this.attr('src').split("src=")[1]
+			var width = /width=(.*)&/.exec(url)[1]
+			var height = /height=(.*)/.exec(url)[1]
+			console.log("url='"+url+"' width='"+width+"' height='"+height+"'")
+			/*
+			var url = "http://img." + /youtube(.+)/.exec(_this.attr('src').split("?")[1])[0] + "/0.jpg"
 			url = url.replace('embed', 'vi')
 			_this.replaceWith('<a class="youtube" href="' + _this.attr('src').replace('embed/', 'watch?v=') + '"><img src="' + url + '"></a>')
+			*/
+			_this.replaceWith('<embed src="'+url+'" width="'+width+'" height="'+height+'" allowscriptaccess="never" allowfullscreen="true" wmode="transparent" type="application/x-shockwave-flash" title="Flash">')
 		}
 
 		//Removes iFrame (And parts of posts -- why did we have this here?)
@@ -1071,6 +1079,10 @@ ui = {
 					className: 'instapaper',
 					text: 'Send to Instapaper',
 					section: false
+				},{
+					className: 'gwibber',
+					text: 'Send to Gwibber',
+					section: false
 				})
 				break
 		}
@@ -1157,6 +1169,13 @@ ui = {
 				// Instapaper
 				$$.contextMenu.find('.instapaper').click(function() {
 					cmd('instapaper')
+				})
+
+				// Gwibber
+				$$.contextMenu.find('.gwibber').click(function() {
+					if(selected.item) {
+						python('gwibber', selected.item.title+" "+selected.item.alternate[0].href)
+					}
 				})
 				break
 
@@ -1252,6 +1271,7 @@ ui = {
 			}
 		})
 	},
+
 	instapaper: function() {
 		var username = $$.modal.instapaper.username.val(),
 			password = $$.modal.instapaper.password.val()
@@ -1266,6 +1286,7 @@ ui = {
 			}
 		})
 	},
+
 	share: {
 		setActive: function() {
 			$$.button.share.addClass('active')
