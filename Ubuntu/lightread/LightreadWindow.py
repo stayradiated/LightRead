@@ -35,7 +35,7 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('lightread')
 
-import subprocess
+import subprocess, os
 from gi.repository import Gtk, Gdk, WebKit, Notify # pylint: disable=E0611
 try:
     from gi.repository import Unity, Dbusmenu
@@ -48,12 +48,8 @@ from lightread_lib import Window
 from lightread_lib.helpers import get_media_file
 from lightread.AboutLightreadDialog import AboutLightreadDialog
 
-"""try:
-    from gi.repository import GwibberGtk
-    sharingsupport = 'true'
-except ImportError:
-    pass
-"""
+# Check for sharingsupport - make sure that gwibber-poster is in PATH
+sharingsupport = os.path.isfile("/usr/bin/gwibber-poster")
 
 # See lightread_lib.Window.py for more details about how this class works
 class LightreadWindow(Window):
@@ -161,16 +157,9 @@ class LightreadWindow(Window):
                     clipboard.set_text(title[1], -1)
                     clipboard.store()
 
-                """elif title[0] == 'share':
-                    if sharingsupport == 'true':
-                        share = Gtk.Window()
-                        share.set_title("Share")
-                        share.set_icon_name("gwibber")
-                        share.resize(400, 150)
-                        entry = GwibberGtk.Entry()
-                        share.add(entry)
-                        share.show_all()
-                        share.present()"""
+                elif title[0] == 'gwibber':
+                    if sharingsupport:
+                        subprocess.call(["/usr/bin/gwibber-poster", "--message", title[1]])
 
         # Connects to WebView
         self.webview.connect('title-changed', title_changed)
