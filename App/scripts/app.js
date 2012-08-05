@@ -38,6 +38,7 @@ function default_settings() {
 		autoInstapaperizer: false,
 		nightMode: false,
 		rememberLastFeed: true,
+		lastFeed: false,
 		label: {}
 	}
 }

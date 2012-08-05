@@ -9,7 +9,19 @@ ui = {
 		$$.loading.el.hide()
 		ui.loadFeeds()
 		ui.updateFilters()
-		ui.selectFilter($$.filters.all)
+
+		if (settings.rememberLastFeed && settings.lastFeed) {
+			var feed = settings.lastFeed
+
+			// Filters
+			if (feed == 'all' || feed == 'unread' || feed == 'starred') {
+				ui.selectFilter($$.filters[feed])
+
+			// Feed
+			} else if (core.getFeed(feed)) {
+				ui.selectFeed(ui.getFeedView(feed))
+			}
+		}
 	},
 
 	reload: function() {
@@ -604,6 +616,10 @@ ui = {
 		selected.filter = type
 		selected.feed = type
 
+		// Save last feed (so we can open it again at startup)
+		settings.lastFeed = type
+		storage.savePrefs()
+
 		// Close post
 		ui.closePost()
 
@@ -626,6 +642,10 @@ ui = {
 
 		// Set selected.feed for other functions
 		selected.feed = core.getFeed(id)
+
+		// Save feed id (so we can open it again at startup)
+		settings.lastFeed = id
+		storage.savePrefs()
 
 		// Close post
 		ui.closePost()
