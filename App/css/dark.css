@@ -1,0 +1,53 @@
+.splitter {
+	text-shadow: 0 1px 0 #fff;
+}
+
+#feeds-column {
+	background: #444;
+}
+
+#feeds-column #feeds {
+	border-top: 1px dashed #333;
+}
+#feeds-column #filters {
+	border-bottom: 1px solid #444;
+}
+
+
+#feeds li, #filters li {
+	text-shadow: 0 1px 1px #222;
+}
+
+#feeds li .title, #filters li .title {
+	color: #eee;
+}
+
+#feeds li .icon, #filters li .icon {
+	background-clip: padding-box;
+	background: #eee;
+	border: 1px solid #444;
+	box-shadow: none;
+}
+
+#feeds li .count, #filters li .count {
+	background: #333;
+	border: 1px solid #222;
+	box-shadow: none;
+	text-shadow: none;
+	color: #eee;
+
+}
+
+#feeds li.feed.selected, #feeds li.filter.selected, #feeds li.label header.selected, #filters li.feed.selected, #filters li.filter.selected, #filters li.label header.selected {
+	border-top: 1px solid #222;
+	border-bottom: 1px solid #222;
+	background: #333;
+	box-shadow: none;
+}
+
+.bar {
+	border-top: 1px solid #333;
+}
+.bar button {
+	-webkit-filter: invert() brightness(4%) contrast(1.4);
+}
