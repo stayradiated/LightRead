@@ -39,20 +39,13 @@ window.storage = {
 							sync = JSON.parse(row.value)
 							break
 						case 'settings':
-							settings = JSON.parse(row.value)
+							saved_settings = JSON.parse(row.value)
+							settings = default_settings()
 
-							var defaultSettings = default_settings()
-
-							if (!settings.hasOwnProperty('max')) {
-								settings.max = defaultSettings.max
-							}
-
-							if (!settings.hasOwnProperty('notifications')) {
-								settings.notifications = defaultSettings.notifications
-							}
-
-							if (!settings.hasOwnProperty('label')) {
-								settings.label = defaultSettings.label
+							for (var key in settings) {
+								if (saved_settings.hasOwnProperty(key)) {
+									settings[key] = saved_settings[key]
+								}
 							}
 
 							break

@@ -1064,7 +1064,6 @@ core = {
 		var timer = settings.sync.interval * 60000
 		clearTimeout(core.refreshTimeout)
 		if (timer > 0) {
-			console.log("Setting timeout")
 			core.refreshTimeout = setTimeout(function() {
 				core.refresh()
 				core.refreshOnTimer()

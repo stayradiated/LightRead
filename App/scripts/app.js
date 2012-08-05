@@ -35,6 +35,9 @@ function default_settings() {
 			special: 50
 		},
 		notifications: true,
+		autoInstapaperizer: false,
+		nightMode: false,
+		rememberLastFeed: true,
 		label: {}
 	}
 }
@@ -190,6 +193,9 @@ $(function() {
 				interval: $('#sync-interval')
 			},
 			notifications: $('#show-notifications'),
+			autoInstapaperizer: $('#auto-instapaperizer'),
+			nightMode: $('#night-mode'),
+			rememberLastFeed: $('#remember-last-feed'),
 			max: {
 				special: $('#max-special'),
 				read: $('#max-read')
@@ -347,7 +353,6 @@ $(function() {
 		document.title = 'null'
 		switch(req) {
 			case 'reload':
-				console.log("Reloading")
 				document.title = 'reload|'
 				break
 			case 'count':
@@ -607,6 +612,17 @@ $(function() {
 	})
 	$$.settings.max.read.on('change', function() {
 		settings.max.read = Number($(this).val())
+		storage.savePrefs()
+	})
+	$$.settings.autoInstapaperizer.on('change', function() {
+		settings.autoInstapaperizer = $(this).prop('checked')
+		storage.savePrefs()
+	})
+	$$.settings.nightMode.on('change', function() {
+		ui.nightMode($(this).prop('checked'))
+	})
+	$$.settings.rememberLastFeed.on('change', function() {
+		settings.rememberLastFeed = $(this).prop('checked')
 		storage.savePrefs()
 	})
 

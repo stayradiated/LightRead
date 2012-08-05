@@ -516,6 +516,12 @@ ui = {
 			link: post.alternate[0].href
 		}
 
+		// Auto instapaperizer
+		if (settings.autoInstapaperizer) {
+			cmd('mobilizer')
+			return
+		}
+
 		$$.postWrapper.removeClass('instapaper')
 		$$.post.html(template.post(model).replace(/<iframe/ig, '<xframe').replace(/<\/iframe>/ig,'</xframe')).find('a:has(img)').addClass('hasImage')
 
@@ -1235,6 +1241,9 @@ ui = {
 		$$.settings.notifications.prop('checked', settings.notifications)
 		$$.settings.max.special.val(settings.max.special)
 		$$.settings.max.read.val(settings.max.read)
+		$$.settings.autoInstapaperizer.prop('checked', settings.autoInstapaperizer)
+		$$.settings.nightMode.prop('checked', settings.nightMode)
+		$$.settings.rememberLastFeed.prop('checked', settings.rememberLastFeed)
 		core.refreshOnTimer()
 	},
 
@@ -1273,6 +1282,16 @@ ui = {
 		setInactive: function() {
 			$$.button.share.removeClass('active')
 		}
+	},
+	nightMode: function(status) {
+		if (status) {
+			// Enable nightmode
+		} else {
+			// Disable nightmode
+		}
+
+		settings.nightMode = status
+		storage.savePrefs()
 	}
 }
 
