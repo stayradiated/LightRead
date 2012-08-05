@@ -1289,6 +1289,7 @@ ui = {
 		$$.settings.nightMode.prop('checked', settings.nightMode)
 		$$.settings.rememberLastFeed.prop('checked', settings.rememberLastFeed)
 		core.refreshOnTimer()
+		ui.nightMode()
 	},
 
 	pocket: function() {
@@ -1330,14 +1331,20 @@ ui = {
 		}
 	},
 	nightMode: function(status) {
-		if (status) {
-			// Enable nightmode
+		if (status === undefined) {
+			status = settings.nightMode
 		} else {
-			// Disable nightmode
+			settings.nightMode = status
+			storage.savePrefs()
 		}
 
-		settings.nightMode = status
-		storage.savePrefs()
+		if (status) {
+			// Enable nightmode
+			$('head').append('<link class="night-mode" rel="stylesheet" href="css/dark.css">')
+		} else {
+			// Disable nightmode
+			$('head .night-mode').remove()
+		}
 	}
 }
 
