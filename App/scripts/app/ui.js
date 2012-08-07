@@ -568,17 +568,9 @@ ui = {
 		//Loops through array of selectors
 		for (var i=0; i < video.length; i++) {
 			_this = $(video[i])
-			console.log("video is "+_this.attr('src').split("src=")[1]+" ")
-			var url = _this.attr('src').split("src=")[1]
-			var width = /width=(.*)&/.exec(url)[1]
-			var height = /height=(.*)/.exec(url)[1]
-			console.log("url='"+url+"' width='"+width+"' height='"+height+"'")
-			/*
-			var url = "http://img." + /youtube(.+)/.exec(_this.attr('src').split("?")[1])[0] + "/0.jpg"
-			url = url.replace('embed', 'vi')
-			_this.replaceWith('<a class="youtube" href="' + _this.attr('src').replace('embed/', 'watch?v=') + '"><img src="' + url + '"></a>')
-			*/
-			_this.replaceWith('<embed src="'+url+'" width="'+width+'" height="'+height+'" allowscriptaccess="never" allowfullscreen="true" wmode="transparent" type="application/x-shockwave-flash" title="Flash">')
+			var video_id = _this.attr('src').split("/v/")[1].split("&width")[0]
+			var url = "http://img.youtube.com/vi/" + video_id + "/0.jpg"
+			_this.replaceWith('<a class="youtube" href="http://youtube.com/watch?v=' + video_id + '"><img src="' + url + '"></a>')
 		}
 
 		//Removes iFrame (And parts of posts -- why did we have this here?)
