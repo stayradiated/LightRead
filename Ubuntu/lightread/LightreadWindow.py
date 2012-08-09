@@ -5,7 +5,7 @@
 # Copyright (C) 2012 Jono Cooper
 # Copyright (c) The Regents of the University of California.
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
 # are met:
@@ -17,7 +17,7 @@
 # 3. Neither the name of the University nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
 # ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -54,7 +54,7 @@ sharingsupport = os.path.isfile("/usr/bin/gwibber-poster")
 # See lightread_lib.Window.py for more details about how this class works
 class LightreadWindow(Window):
     __gtype_name__ = "LightreadWindow"
-    
+
     def finish_initializing(self, builder): # pylint: disable=E1002
         """Set up the main window"""
         super(LightreadWindow, self).finish_initializing(builder)
@@ -77,7 +77,7 @@ class LightreadWindow(Window):
         #security = self.webframe.get_security_origin()
         #print security.get_all_web_databases()
         #print security.web-database-quota()
-        
+
         self.webview.show()
 
         #Menubar
@@ -95,9 +95,10 @@ class LightreadWindow(Window):
 
         # Unity Support
         Notify.init('Lightread')
+        self.notification = Notify.Notification.new('Lightread', '', 'lightread')
         try:
             launcher = Unity.LauncherEntry.get_for_desktop_id ("extras-lightread.desktop")
- 
+
             ql = Dbusmenu.Menuitem.new ()
             updatenews = Dbusmenu.Menuitem.new ()
             updatenews.property_set (Dbusmenu.MENUITEM_PROP_LABEL, "Update News")
@@ -138,19 +139,18 @@ class LightreadWindow(Window):
                         else:
                             launcher.set_property("count_visible", True)
                             self.set_title(title[1] + " - Lightread")
-                            
+
                         launcher.set_property("count", int(title[1]))
                     except UnboundLocalError:
                         pass
-                    
+
 
                 elif title[0] == 'notify':
-                    notification = Notify.Notification.new(
-                        title[1],
-                        title[2],
-                        get_media_file('lightread.png')
-                    )
-                    notification.show()
+                    # Update notification and show only if not changed
+                    if self.notification.get_property('body') != title[2]:
+                        self.notification.set_property('body', title[2])
+                        self.notification.show()
+
 
                 elif title[0] == 'copy':
                     clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
