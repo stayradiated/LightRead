@@ -1,9 +1,9 @@
 [Desktop Entry]
 _Name=Lightread
 _Comment=Lightread application
-Categories=GNOME;Utility;
+Categories=GNOME;Utility;Internet;
 Exec=lightread
-Icon=/usr/share/lightread/media/lightread.png
+Icon=lightread
 Terminal=false
 Type=Application
 Keywords=rss;atom;google;reader;news;feed;
