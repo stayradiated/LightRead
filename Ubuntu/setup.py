@@ -6,7 +6,7 @@
 # Copyright (C) 2012 Jono Cooper
 # Copyright (c) The Regents of the University of California.
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
 # are met:
@@ -18,7 +18,7 @@
 # 3. Neither the name of the University nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
 # ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -68,36 +68,16 @@ def update_config(values = {}):
     return oldvalues
 
 
-def update_desktop_file(datadir):
-
-    try:
-        fin = file('lightread.desktop.in', 'r')
-        fout = file(fin.name + '.new', 'w')
-
-        for line in fin:            
-            if 'Icon=' in line:
-                line = "Icon=%s\n" % (datadir + 'media/lightread.png')
-            fout.write(line)
-        fout.flush()
-        fout.close()
-        fin.close()
-        os.rename(fout.name, fin.name)
-    except (OSError, IOError), e:
-        print ("ERROR: Can't find lightread.desktop.in")
-        sys.exit(1)
-
-
 class InstallAndUpdateDataDirectory(DistUtilsExtra.auto.install_auto):
     def run(self):
         values = {'__lightread_data_directory__': "'%s'" % (self.prefix + '/share/lightread/'),
                   '__version__': "'%s'" % self.distribution.get_version()}
         previous_values = update_config(values)
-        update_desktop_file(self.prefix + '/share/lightread/')
         DistUtilsExtra.auto.install_auto.run(self)
         update_config(previous_values)
 
 
-        
+
 ##################################################################################
 ###################### YOU SHOULD MODIFY ONLY WHAT IS BELOW ######################
 ##################################################################################
@@ -111,6 +91,7 @@ DistUtilsExtra.auto.setup(
     description='A lightweight news reader.',
     #long_description='Here a longer description',
     url='https://launchpad.net/lightread',
-    cmdclass={'install': InstallAndUpdateDataDirectory}
+    cmdclass={'install': InstallAndUpdateDataDirectory},
+    data_files=[('share/icons/hicolor/128x128/apps', ['data/media/lightread.png'])]
     )
 
