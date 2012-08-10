@@ -97,7 +97,6 @@ class InstallAndUpdateDataDirectory(DistUtilsExtra.auto.install_auto):
         update_config(previous_values)
 
 
-        
 ##################################################################################
 ###################### YOU SHOULD MODIFY ONLY WHAT IS BELOW ######################
 ##################################################################################

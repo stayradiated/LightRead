@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-08 22:01+1200\n"
+"POT-Creation-Date: 2012-08-10 18:23+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,6 +63,10 @@ msgstr ""
 msgid "caffeinatedco.de"
 msgstr ""
 
+#: ../lightread.py:53
+msgid "Show debug messages (-vv debugs lightread_lib also)"
+msgstr ""
+
 #: ../lightread.desktop.in.h:1 ../data/ui/LightreadWindow.ui.h:1
 msgid "Lightread"
 msgstr ""
@@ -92,41 +96,33 @@ msgid "Keep Unread"
 msgstr ""
 
 #: ../data/ui/LightreadWindow.ui.h:7
-msgid "Share"
-msgstr ""
-
-#: ../data/ui/LightreadWindow.ui.h:8
 msgid "_View"
 msgstr ""
 
-#: ../data/ui/LightreadWindow.ui.h:9
+#: ../data/ui/LightreadWindow.ui.h:8
 msgid "Next Article"
 msgstr ""
 
-#: ../data/ui/LightreadWindow.ui.h:10
+#: ../data/ui/LightreadWindow.ui.h:9
 msgid "Previous Article"
 msgstr ""
 
-#: ../data/ui/LightreadWindow.ui.h:11
+#: ../data/ui/LightreadWindow.ui.h:10
 msgid "All Items"
 msgstr ""
 
-#: ../data/ui/LightreadWindow.ui.h:12
+#: ../data/ui/LightreadWindow.ui.h:11
 msgid "Unread"
 msgstr ""
 
-#: ../data/ui/LightreadWindow.ui.h:13
+#: ../data/ui/LightreadWindow.ui.h:12
 msgid "Starred"
 msgstr ""
 
-#: ../data/ui/LightreadWindow.ui.h:14
+#: ../data/ui/LightreadWindow.ui.h:13
 msgid "_Help"
 msgstr ""
 
-#: ../data/ui/LightreadWindow.ui.h:15
+#: ../data/ui/LightreadWindow.ui.h:14
 msgid "Contents"
-msgstr ""
-
-#: ../lightread/__init__.py:51
-msgid "Show debug messages (-vv debugs lightread_lib also)"
 msgstr ""

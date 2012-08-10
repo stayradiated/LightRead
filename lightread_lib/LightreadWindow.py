@@ -44,9 +44,9 @@ except ImportError:
 import logging
 logger = logging.getLogger('lightread')
 
-from lightread_lib import Window
+from lightread_lib.Window import Window
 from lightread_lib.helpers import get_media_file
-from lightread.AboutLightreadDialog import AboutLightreadDialog
+from lightread_lib.AboutLightreadDialog import AboutLightreadDialog
 
 # Check for sharingsupport - make sure that gwibber-poster is in PATH
 sharingsupport = os.path.isfile("/usr/bin/gwibber-poster")

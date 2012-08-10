@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 ### BEGIN LICENSE
 # Copyright (C) 2012 Caffeinated Code <caffeinatedco.de>
@@ -31,6 +32,8 @@
 # SUCH DAMAGE.
 ### END LICENSE
 
+import sys
+import os
 import optparse
 
 import gettext
@@ -39,25 +42,20 @@ gettext.textdomain('lightread')
 
 from gi.repository import Gtk # pylint: disable=E0611
 
-from lightread import LightreadWindow
+from lightread_lib import LightreadWindow
+from lightread_lib.helpers import set_up_logging
+from lightread_lib.lightreadconfig import get_version
 
-from lightread_lib import set_up_logging, get_version
+"""Support for command line options"""
+parser = optparse.OptionParser(version="%%prog %s" % get_version())
+parser.add_option(
+    "-v", "--verbose", action="count", dest="verbose",
+    help=_("Show debug messages (-vv debugs lightread_lib also)"))
+(options, args) = parser.parse_args()
 
-def parse_options():
-    """Support for command line options"""
-    parser = optparse.OptionParser(version="%%prog %s" % get_version())
-    parser.add_option(
-        "-v", "--verbose", action="count", dest="verbose",
-        help=_("Show debug messages (-vv debugs lightread_lib also)"))
-    (options, args) = parser.parse_args()
+set_up_logging(options)
 
-    set_up_logging(options)
-
-def main():
-    'constructor for your class instances'
-    parse_options()
-
-    # Run the application.    
-    window = LightreadWindow.LightreadWindow()
-    window.show()
-    Gtk.main()
+# Run the application.    
+window = LightreadWindow.LightreadWindow()
+window.show()
+Gtk.main()

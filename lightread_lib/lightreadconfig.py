@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 ### BEGIN LICENSE
 # Copyright (C) 2012 Caffeinated Code <caffeinatedco.de>
@@ -32,30 +31,61 @@
 # SUCH DAMAGE.
 ### END LICENSE
 
-import sys
+# THIS IS Lightread CONFIGURATION FILE
+# YOU CAN PUT THERE SOME GLOBAL VALUE
+# Do not touch unless you know what you're doing.
+# you're warned :)
+
+__all__ = [
+    'project_path_not_found',
+    'get_data_file',
+    'get_data_path',
+    ]
+
+# Where your project will look for your data (for instance, images and ui
+# files). By default, this is ../data, relative your trunk layout
+__lightread_data_directory__ = '/usr/share/lightread/'
+__license__ = 'BSD'
+__version__ = '1.0.20'
+
 import os
 
 import gettext
 from gettext import gettext as _
 gettext.textdomain('lightread')
 
-# Add project root directory (enable symlink and trunk execution)
-PROJECT_ROOT_DIRECTORY = os.path.abspath(
-    os.path.dirname(os.path.dirname(os.path.realpath(sys.argv[0]))))
+class project_path_not_found(Exception):
+    """Raised when we can't find the project directory."""
 
-python_path = []
-if os.path.abspath(__file__).startswith('/opt'):
-    syspath = sys.path[:] # copy to avoid infinite loop in pending objects
-    for path in syspath:
-        opt_path = path.replace('/usr', '/opt/extras.ubuntu.com/lightread')
-        python_path.insert(0, opt_path)
-        sys.path.insert(0, opt_path)
-if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'lightread'))
-    and PROJECT_ROOT_DIRECTORY not in sys.path):
-    python_path.insert(0, PROJECT_ROOT_DIRECTORY)
-    sys.path.insert(0, PROJECT_ROOT_DIRECTORY)
-if python_path:
-    os.putenv('PYTHONPATH', "%s:%s" % (os.getenv('PYTHONPATH', ''), ':'.join(python_path))) # for subprocesses
 
-import lightread
-lightread.main()
+def get_data_file(*path_segments):
+    """Get the full path to a data file.
+
+    Returns the path to a file underneath the data directory (as defined by
+    `get_data_path`). Equivalent to os.path.join(get_data_path(),
+    *path_segments).
+    """
+    return os.path.join(get_data_path(), *path_segments)
+
+
+def get_data_path():
+    """Retrieve lightread data path
+
+    This path is by default <lightread_lib_path>/../data/ in trunk
+    and /usr/share/lightread in an installed version but this path
+    is specified at installation time.
+    """
+
+    # Get pathname absolute or relative.
+    path = os.path.join(
+        os.path.dirname(__file__), __lightread_data_directory__)
+
+    abs_data_path = os.path.abspath(path)
+    if not os.path.exists(abs_data_path):
+        raise project_path_not_found
+
+    return abs_data_path
+
+
+def get_version():
+    return __version__
