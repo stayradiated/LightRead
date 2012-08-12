@@ -124,6 +124,10 @@ class LightreadWindow(Window):
                 return 1
             return
 
+        def console_message_cb(widget, message, line, source):
+            logger.debug('%s:%s "%s"' % (source, line, message))
+            return True
+
         def title_changed(widget, frame, title):
             if title != 'null':
 
@@ -164,6 +168,7 @@ class LightreadWindow(Window):
         # Connects to WebView
         self.webview.connect('title-changed', title_changed)
         self.webview.connect('navigation-requested', _navigation_requested_cb)
+        self.webview.connect('console-message', console_message_cb)
 
         self.add.connect ("activate", menuexternal, None)
         self.refresh.connect ("activate", menuexternal, None)
