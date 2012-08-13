@@ -560,15 +560,17 @@ ui = {
 		})
 
 		//YouTube Polyfill
-		var video = []
+		var youtube_videos = []
 		$$.post.find('xframe').map(function() {
-			if(/youtube.com/.test($(this).attr('src'))) video.push(this)
+			if(/youtube.com/.test($(this).attr('src'))) youtube_videos.push(this)
 		})
 
 		//Loops through array of selectors
-		for (var i=0; i < video.length; i++) {
-			_this = $(video[i])
-			var video_id = _this.attr('src').split("/v/")[1].split("&width")[0]
+		for (var i=0; i < youtube_videos.length; i++) {
+			_this = $(youtube_videos[i])
+			console.log("Found video: '"+_this.attr('src')+"'")
+			var video_id = /(v|embed)\/([^&?$]*)/.exec(_this.attr('src'))[2]
+			console.log("video_id: '"+video_id+"'")
 			var url = "http://img.youtube.com/vi/" + video_id + "/0.jpg"
 			_this.replaceWith('<a class="youtube" href="http://youtube.com/watch?v=' + video_id + '"><img src="' + url + '"></a>')
 		}
