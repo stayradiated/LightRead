@@ -69,15 +69,7 @@ class LightreadWindow(Window):
         self.webviewsettings.set_property("javascript-can-open-windows-automatically", True)
         self.webviewsettings.set_property("enable-universal-access-from-file-uris", True)
         self.webview.load_uri(get_media_file('app/index.html'))
-
-        #Sets Quota - This doesn't work with file:/// urls
-        #self.webframe = self.webview.get_main_frame()
-        #print self.webview.get_uri()
-        #print self.webframe.get_uri()
-        #security = self.webframe.get_security_origin()
-        #print security.get_all_web_databases()
-        #print security.web-database-quota()
-
+        
         self.webview.show()
 
         #Menubar
@@ -95,6 +87,8 @@ class LightreadWindow(Window):
 
         # Unity Support
         Notify.init('Lightread')
+        self.notification = Notify.Notification.new('Lightread', '', 'lightread')
+
         try:
             launcher = Unity.LauncherEntry.get_for_desktop_id ("extras-lightread.desktop")
 
@@ -149,12 +143,10 @@ class LightreadWindow(Window):
 
 
                 elif title[0] == 'notify':
-                    notification = Notify.Notification.new(
-                        title[1],
-                        title[2],
-                        'lightread'
-                    )
-                    notification.show()
+                    # Update notification and show only if not changed
+                    if self.notification.get_property('body') != title[2]:
+                        self.notification.set_property('body', title[2])
+                        self.notification.show()
 
                 elif title[0] == 'copy':
                     clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
