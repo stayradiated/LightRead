@@ -21,9 +21,8 @@ input, textarea { font-family: "Ubuntu", "Helvetica", "Arial", sans-serif; }
 #app { overflow: hidden; width: 100%; }
 #app > .vsplitbar { width: 1px; cursor: col-resize; background: #afaeac; }
 
-#right-side > .vsplitbar { width: 1px; cursor: col-resize; background: white; border-left: 1px solid #e1e1df; border-right: 3px solid #faf9f7; position: relative; }
+#right-side > .vsplitbar { width: 1px; background: #afaeac; border: 0; cursor: col-resize; border-left: 0px; border-right: 0px; }
 #right-side > .vsplitbar:after { content: ""; position: absolute; display: block; top: auto; bottom: 0; left: 0; right: auto; width: 4px; height: 35px; background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.08) 0%, rgba(255, 255, 255, 0.08) 100%); border-top: 1px solid rgba(0, 0, 0, 0.2); }
-
 #feeds-column { height: 100%; width: 200px; min-width: 20px; background: url(../images/feeds_bg.png); }
 #feeds-column * { -webkit-user-select: none; }
 #feeds-column ul { margin: 0; padding: 0; }

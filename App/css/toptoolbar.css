@@ -1,0 +1,13 @@
+#feeds-column #filters { top: 35px; bottom: 0 }
+#feeds-column #feeds { top: 136px; bottom: 0; }
+
+#articles-column #articles { top: 35px; bottom: 0; }
+#post-column #post-window { top: 35px; bottom: 0; }
+
+.bar { top: 0; bottom: 0; border-top: 0; border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
+
+.scope:after, .scope:before { top: 35px; bottom: 0px; -webkit-transform: rotate(180deg);}
+.scope:before { border-bottom-color: #d6d4d4; border-width: 10px; left: 50%; margin-left: -10px; }
+.scope:after { border-bottom-color: #b9b8b8; border-width: 11px; left: 50%; margin-left: -11px; }
+
+#articles .splitter:first-child { margin-top: 0; margin-bottom: 1px; }
