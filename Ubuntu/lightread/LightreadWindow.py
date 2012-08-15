@@ -106,8 +106,8 @@ class LightreadWindow(Window):
             self.webview.execute_script('cmd("refresh")')
 
         def menuexternal(this, widget, data = None):
-            print this
-            print this.get_name()
+            print(this)
+            print(this.get_name())
             self.webview.execute_script('cmd("' + this.get_name() + '")')
 
         def _navigation_requested_cb(view, frame, networkRequest):
