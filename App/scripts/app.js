@@ -37,6 +37,7 @@ function default_settings() {
 		notifications: true,
 		autoInstapaperizer: false,
 		nightMode: false,
+		topToolbar: false,
 		rememberLastFeed: true,
 		lastFeed: false,
 		label: {}
@@ -196,6 +197,7 @@ $(function() {
 			notifications: $('#show-notifications'),
 			autoInstapaperizer: $('#auto-instapaperizer'),
 			nightMode: $('#night-mode'),
+			topToolbar: $('#top-toolbar'),
 			rememberLastFeed: $('#remember-last-feed'),
 			max: {
 				special: $('#max-special'),
@@ -624,6 +626,9 @@ $(function() {
 	})
 	$$.settings.nightMode.on('change', function() {
 		ui.nightMode($(this).prop('checked'))
+	})
+	$$.settings.topToolbar.on('change', function() {
+		ui.topToolbar($(this).prop('checked'))
 	})
 	$$.settings.rememberLastFeed.on('change', function() {
 		settings.rememberLastFeed = $(this).prop('checked')

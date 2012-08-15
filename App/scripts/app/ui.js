@@ -1281,9 +1281,11 @@ ui = {
 		$$.settings.max.read.val(settings.max.read)
 		$$.settings.autoInstapaperizer.prop('checked', settings.autoInstapaperizer)
 		$$.settings.nightMode.prop('checked', settings.nightMode)
+		$$.settings.topToolbar.prop('checked', settings.topToolbar)
 		$$.settings.rememberLastFeed.prop('checked', settings.rememberLastFeed)
 		core.refreshOnTimer()
 		ui.nightMode()
+		ui.topToolbar()
 	},
 
 	pocket: function() {
@@ -1338,6 +1340,22 @@ ui = {
 		} else {
 			// Disable nightmode
 			$('head .night-mode').remove()
+		}
+	},
+	topToolbar: function(status) {
+		if (status === undefined) {
+			status = settings.topToolbar
+		} else {
+			settings.topToolbar = status
+			storage.savePrefs()
+		}
+
+		if (status) {
+			// Enable nightmode
+			$('head').append('<link class="top-toolbar" rel="stylesheet" href="css/toptoolbar.css">')
+		} else {
+			// Disable nightmode
+			$('head .top-toolbar').remove()
 		}
 	}
 }
