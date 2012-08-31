@@ -248,7 +248,7 @@ core = {
 	// A very useful function
 	// Can get items in a feed, label or even a filter
 	getItemsInFeed: function(feed) {
-		var results = [], i, j, subfeed, item
+		var results = [], i, j, subfeed, item, storedItemIds = []
 
 		switch(feed) {
 		case 'all':
@@ -257,7 +257,11 @@ core = {
 				feed = feeds[i]
 				if(storage.items.hasOwnProperty(feed.id)) {
 					for (j = 0; j < storage.items[feed.id].length; j++) {
-						item = storage.items[feed.id][j]
+						item = storage.items[feed.id][j];
+						if($.inArray(item.id, storedItemIds) != -1){
+						    continue;
+						}
+						storedItemIds.push(item.id);
 						results.push(item)
 					}
 				}
