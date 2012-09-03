@@ -575,6 +575,11 @@ ui = {
 			_this.replaceWith('<a class="youtube" href="http://youtube.com/watch?v=' + video_id + '"><img src="' + url + '"></a>')
 		}
 
+		//Clear selection
+		if(document.selection && document.selection.empty) {
+			document.selection.empty();
+		}
+
 		//Removes iFrame (And parts of posts -- why did we have this here?)
 		// $$.post.find('p').first().find('xframe').closest('p').remove()
 
