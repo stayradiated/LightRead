@@ -60,7 +60,12 @@ class LightreadWindow(Window):
         """Set up the main window"""
         super(LightreadWindow, self).finish_initializing(builder)
 
+        # Initialize the messaging indicator and pass it this main window
         self.indicator = LightreadIndicator(self)
+
+        # Connect to the delete-event signal triggered when the window's close button is pressed.
+        # Override the default delete event to allow lightread to continue functioning the background.
+        self.connect('delete-event', self._on_delete_event)
 
         self.AboutDialog = AboutLightreadDialog
         self.scroller = self.builder.get_object("scroller")
@@ -180,3 +185,10 @@ class LightreadWindow(Window):
             updatenews.connect ("item-activated", reload_feeds, None)
         except UnboundLocalError:
             pass
+
+    def _on_delete_event(self, widget, event):
+    """ Use PyGTK's hide_on_delete [http://www.pygtk.org/docs/pygtk/class-gtkwidget.html#method-gtkwidget--hide-on-delete]
+    to stop the window's close button from actually closing, and simply hiding instead.
+    This allows us to keep lightread running in the background. Clicking on the lightread indicator will call window.show()
+    and display the main lightread window. """
+        return self.hide_on_delete()
