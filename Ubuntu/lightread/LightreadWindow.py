@@ -47,6 +47,7 @@ logger = logging.getLogger('lightread')
 from lightread_lib import Window
 from lightread_lib.helpers import get_media_file
 from lightread.AboutLightreadDialog import AboutLightreadDialog
+from lightread.LightreadIndicator import LightreadIndicator
 
 # Check for sharingsupport - make sure that gwibber-poster is in PATH
 sharingsupport = os.path.isfile("/usr/bin/gwibber-poster")
@@ -58,6 +59,8 @@ class LightreadWindow(Window):
     def finish_initializing(self, builder): # pylint: disable=E1002
         """Set up the main window"""
         super(LightreadWindow, self).finish_initializing(builder)
+
+        self.indicator = LightreadIndicator(self)
 
         self.AboutDialog = AboutLightreadDialog
         self.scroller = self.builder.get_object("scroller")
@@ -138,6 +141,7 @@ class LightreadWindow(Window):
                             self.set_title(title[1] + " - Lightread")
 
                         launcher.set_property("count", int(title[1]))
+                        self.indicator.set_unread_count(int(title[1]))
                     except UnboundLocalError:
                         pass
 
