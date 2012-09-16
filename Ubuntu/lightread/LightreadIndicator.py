@@ -30,7 +30,7 @@
 # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 ### END LICENSE
-from gi.repository import Indicate # pylint: disable=E0611
+from gi.repository import Indicate
 
 class LightreadIndicator:
     def __init__(self, main_app_window):
@@ -60,4 +60,9 @@ class LightreadIndicator:
         self.ind.show()
 
     def display_main_app(self, indicator, signal):
-        self.main_app.show()
+        is_visible = self.main_app.get_property("visible")
+        if is_visible:
+            self.main_app.present()
+        else:
+            self.main_app.show()
+            
