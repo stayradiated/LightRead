@@ -122,6 +122,7 @@
 			<label class="mini" for="sync-interval">Refresh:</label>
 			<select id="sync-interval">
 				<option value="0">Manual</option>
+				<option value="1">1 Minute</option>
 				<option value="5">5 Minutes</option>
 				<option value="15">15 Minutes</option>
 				<option value="30">30 Minutes</option>
@@ -194,7 +195,7 @@
 		<div>
 			<input type="checkbox" id="show-notifications" checked><label for="show-notifications">Show notifications</label>
 			<input type="checkbox" id="auto-instapaperizer"><label for="auto-instapaperizer">Auto Instapaper</label>
-			<input type="checkbox" id="night-mode"><label for="night-mode">Night Mode</label>
+			<input type="checkbox" id="night-mode"><label for="night-mode">Night Mode</label><br>
 			<input type="checkbox" id="remember-last-feed" checked><label for="remember-last-feed">Remember Last Feed</label>
 		</div>
 	</div>
@@ -205,10 +206,10 @@
 		<div class="login">
 			<h3>Sign in to Google Reader</h3>
 			<div class="username-wrapper">
-				<label for="username">Email</label><input tabindex="1" id="username" type="text" placeholder="johnsmith@gmail.com">
+				<label for="username">Email</label><input tabindex="1" id="username" type="text" placeholder="example@gmail.com">
 			</div>
 			<div class="password-wrapper">
-				<label for="password">Password</label><input tabindex="2" id="password" type="password" placeholder="">
+				<label for="password">Password</label><input tabindex="2" id="password" type="password" placeholder="&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;">
 			</div>
 			<a class="login-button">Sign in</a>
 			<a href="https://accounts.google.com/NewAccount?service=reader">Register</a>
