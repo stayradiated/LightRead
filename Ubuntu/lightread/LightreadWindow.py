@@ -187,8 +187,8 @@ class LightreadWindow(Window):
             pass
 
     def _on_delete_event(self, widget, event):
-    """ Use PyGTK's hide_on_delete [http://www.pygtk.org/docs/pygtk/class-gtkwidget.html#method-gtkwidget--hide-on-delete]
-    to stop the window's close button from actually closing, and simply hiding instead.
-    This allows us to keep lightread running in the background. Clicking on the lightread indicator will call window.show()
-    and display the main lightread window. """
+    	""" Use PyGTK's hide_on_delete [http://www.pygtk.org/docs/pygtk/class-gtkwidget.html#method-gtkwidget--hide-on-delete]
+    	to stop the window's close button from actually closing, and simply hiding instead.
+    	This allows us to keep lightread running in the background. Clicking on the lightread indicator will call window.show()
+    	and display the main lightread window. """
         return self.hide_on_delete()
