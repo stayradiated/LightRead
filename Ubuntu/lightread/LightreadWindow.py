@@ -47,7 +47,10 @@ logger = logging.getLogger('lightread')
 from lightread_lib import Window
 from lightread_lib.helpers import get_media_file
 from lightread.AboutLightreadDialog import AboutLightreadDialog
-from lightread.LightreadIndicator import LightreadIndicator
+try:
+    from lightread.LightreadIndicator import LightreadIndicator
+except ImportError:
+    pass
 
 import json
 
@@ -76,7 +79,7 @@ class LightreadWindow(Window):
         self.webviewsettings.set_property("javascript-can-open-windows-automatically", True)
         self.webviewsettings.set_property("enable-universal-access-from-file-uris", True)
         self.webview.load_uri(get_media_file('app/index.html'))
-        
+
         self.webview.show()
 
         #Menubar
