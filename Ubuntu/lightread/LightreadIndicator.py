@@ -35,6 +35,7 @@ from gi.repository import Indicate
 class LightreadIndicator:
     def __init__(self, main_app_window):
         self.main_app = main_app_window
+        self.is_visible = False
 
         self.server = Indicate.Server.ref_default()         
         self.server.set_type("message.mail")
@@ -51,13 +52,12 @@ class LightreadIndicator:
         
         self.server.add_indicator(self.ind)
         
-        self.server.show()
-
     def set_unread_count(self, unread_count):
         self.ind.set_property("count", str(unread_count))
-        self.ind.set_property("draw-attention", 'true')
 
-        self.ind.show()
+        if self.is_visible:
+            self.ind.set_property("draw-attention", 'true')
+            self.ind.show()
 
     def display_main_app(self, indicator, signal):
         is_visible = self.main_app.get_property("visible")
@@ -65,4 +65,13 @@ class LightreadIndicator:
             self.main_app.present()
         else:
             self.main_app.show()
-            
+
+    def hide(self):
+        self.server.hide()
+        self.ind.hide()
+        self.is_visible = False
+
+    def show(self):
+        self.server.show()
+        self.ind.show()
+        self.is_visible = True
