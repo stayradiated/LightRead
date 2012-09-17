@@ -39,6 +39,8 @@ function default_settings() {
 		nightMode: false,
 		rememberLastFeed: true,
 		lastFeed: false,
+		indicators: false,
+		background: false,
 		label: {}
 	}
 }
@@ -197,6 +199,8 @@ $(function() {
 			autoInstapaperizer: $('#auto-instapaperizer'),
 			nightMode: $('#night-mode'),
 			rememberLastFeed: $('#remember-last-feed'),
+			indicators: $('#show-indicators'),
+			background: $('#run-background'),
 			max: {
 				special: $('#max-special'),
 				read: $('#max-read')
@@ -369,6 +373,9 @@ $(function() {
 				break
 			case 'gwibber':
  				document.title = 'gwibber|' + value
+ 				break
+ 			case 'settings':
+ 				document.title = 'settings|' + value
  				break
 		}
 	}
@@ -627,6 +634,21 @@ $(function() {
 	})
 	$$.settings.rememberLastFeed.on('change', function() {
 		settings.rememberLastFeed = $(this).prop('checked')
+		storage.savePrefs()
+	})
+	$$.settings.indicators.on('change', function() {
+		settings.indicators = $(this).prop('checked')
+		if (!settings.indicators) {
+			$('#run-background').attr('disabled', true);
+			$('#run-background').attr('checked',false);
+			settings.background = false;
+		} else {
+			$('#run-background').removeAttr('disabled');
+		}
+		storage.savePrefs()
+	})
+	$$.settings.background.on('change', function() {
+		settings.background = $(this).prop('checked')
 		storage.savePrefs()
 	})
 

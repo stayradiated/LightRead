@@ -49,6 +49,8 @@ from lightread_lib.helpers import get_media_file
 from lightread.AboutLightreadDialog import AboutLightreadDialog
 from lightread.LightreadIndicator import LightreadIndicator
 
+import json
+
 # Check for sharingsupport - make sure that gwibber-poster is in PATH
 sharingsupport = os.path.isfile("/usr/bin/gwibber-poster")
 
@@ -60,12 +62,9 @@ class LightreadWindow(Window):
         """Set up the main window"""
         super(LightreadWindow, self).finish_initializing(builder)
 
-        # Initialize the messaging indicator and pass it this main window
-        self.indicator = LightreadIndicator(self)
-
-        # Connect to the delete-event signal triggered when the window's close button is pressed.
-        # Override the default delete event to allow lightread to continue functioning the background.
-        self.connect('delete-event', self._on_delete_event)
+        # We'll need to keep track of the indicator and handler later, so declare them here
+        self.indicator = None
+        self.window_close_handler = None
 
         self.AboutDialog = AboutLightreadDialog
         self.scroller = self.builder.get_object("scroller")
@@ -146,7 +145,8 @@ class LightreadWindow(Window):
                             self.set_title(title[1] + " - Lightread")
 
                         launcher.set_property("count", int(title[1]))
-                        self.indicator.set_unread_count(int(title[1]))
+                        if self.indicator is not None:
+                            self.indicator.set_unread_count(int(title[1]))
                     except UnboundLocalError:
                         pass
 
@@ -165,6 +165,26 @@ class LightreadWindow(Window):
                 elif title[0] == 'gwibber':
                     if sharingsupport:
                         subprocess.call(["/usr/bin/gwibber-poster", "--message", title[1]])
+
+                elif title[0] == 'settings':
+
+                    settings_json = json.loads(title[1])
+
+                    if settings_json.get('indicators') == True:
+                        if self.indicator is None:
+                            self.indicator = LightreadIndicator(self)
+                        self.indicator.show()
+                    elif settings_json.get('indicators') == False and self.indicator is not None:
+                        # indicator set to false but was already created: hide it
+                        self.indicator.hide()
+
+                    # if settings background true and not self.is connected delete-event
+                    if settings_json.get('background') == True and self.window_close_handler is None:
+                        self.window_close_handler = self.connect('delete-event', self._on_delete_event)
+                    elif settings_json.get('background') == False and self.window_close_handler is not None:
+                        self.disconnect(self.window_close_handler)
+                        self.window_close_handler = None
+
 
         # Connects to WebView
         self.webview.connect('title-changed', title_changed)
