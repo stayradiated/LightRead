@@ -37,11 +37,39 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('lightread')
 
-from gi.repository import Gtk # pylint: disable=E0611
+from gi.repository import Gtk, Gio # pylint: disable=E0611
 
 from lightread import LightreadWindow
 
 from lightread_lib import set_up_logging, get_version
+
+class LightreadApp(Gtk.Application):
+    """ Wrap lightread in a Gtk.Application instance which by default allows only single instances of applications."""
+    def __init__(self):
+        Gtk.Application.__init__(self, application_id="org.stayradiated.lightread", flags=Gio.ApplicationFlags.FLAGS_NONE)
+        self.connect("activate", self.on_activate)
+
+    def on_activate(self, data=None):
+        """
+        Check if the application has been activated previously by looking for the LightreadWindow
+        attached to the application. If one is found just bring it to the front with present().
+        If no windows are attached then this must be the first lightread activation... so start it up.
+        """
+        # Try and get any windows belonging to this application.
+        existing_windows = self.get_windows()
+
+        if (len(existing_windows) > 0):
+            # Lightread instance already exists so just bring it to the front.
+            existing_windows[0].present()
+        else:
+            # No pre-existing instance, startup regularly.
+            parse_options()
+            # Startup the main lightread window.
+            window = LightreadWindow.LightreadWindow()
+            # Connect the window to our application so other instances can find it and bring it to the front.
+            window.set_application(self)
+            window.show()
+            Gtk.main()
 
 def parse_options():
     """Support for command line options"""
@@ -54,10 +82,5 @@ def parse_options():
     set_up_logging(options)
 
 def main():
-    'constructor for your class instances'
-    parse_options()
-
-    # Run the application.    
-    window = LightreadWindow.LightreadWindow()
-    window.show()
-    Gtk.main()
+    app = LightreadApp()
+    app.run(None)
