@@ -1287,8 +1287,13 @@ ui = {
 		$$.settings.autoInstapaperizer.prop('checked', settings.autoInstapaperizer)
 		$$.settings.nightMode.prop('checked', settings.nightMode)
 		$$.settings.rememberLastFeed.prop('checked', settings.rememberLastFeed)
+		$$.settings.indicators.prop('checked', settings.indicators)
+		$$.settings.background.prop('disabled', !settings.indicators)
+		$$.settings.background.prop('checked', settings.background)
 		core.refreshOnTimer()
 		ui.nightMode()
+
+		python('settings', JSON.stringify(settings))
 	},
 
 	pocket: function() {

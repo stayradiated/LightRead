@@ -120,6 +120,7 @@ window.storage = {
 			tx.executeSql('INSERT INTO user (key, value) VALUES (?, ?)', ['pocket', JSON.stringify(core.pocket.user)])
 			tx.executeSql('INSERT INTO user (key, value) VALUES (?, ?)', ['instapaper', JSON.stringify(core.instapaper.user)])
 		})
+		python('settings', JSON.stringify(settings))
 	},
 	saveIcons: function() {
 		db.transaction(function(tx) {
