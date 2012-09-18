@@ -35,8 +35,9 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('lightread')
 
-import subprocess, os
-from gi.repository import Gtk, Gdk, WebKit, Notify # pylint: disable=E0611
+import subprocess
+import os
+from gi.repository import Gtk, Gdk, WebKit, Notify  # pylint: disable=E0611
 try:
     from gi.repository import Unity, Dbusmenu
 except ImportError:
@@ -57,11 +58,12 @@ import json
 # Check for sharingsupport - make sure that gwibber-poster is in PATH
 sharingsupport = os.path.isfile("/usr/bin/gwibber-poster")
 
+
 # See lightread_lib.Window.py for more details about how this class works
 class LightreadWindow(Window):
     __gtype_name__ = "LightreadWindow"
 
-    def finish_initializing(self, builder): # pylint: disable=E1002
+    def finish_initializing(self, builder):  # pylint: disable=E1002
         """Set up the main window"""
         super(LightreadWindow, self).finish_initializing(builder)
 
@@ -94,28 +96,27 @@ class LightreadWindow(Window):
         self.filter_unread = self.builder.get_object("filter-unread")
         self.filter_starred = self.builder.get_object("filter-starred")
 
-
         # Unity Support
         Notify.init('Lightread')
         self.notification = Notify.Notification.new('Lightread', '', 'lightread')
 
         try:
-            launcher = Unity.LauncherEntry.get_for_desktop_id ("extras-lightread.desktop")
+            launcher = Unity.LauncherEntry.get_for_desktop_id("extras-lightread.desktop")
 
-            ql = Dbusmenu.Menuitem.new ()
-            updatenews = Dbusmenu.Menuitem.new ()
-            updatenews.property_set (Dbusmenu.MENUITEM_PROP_LABEL, "Update News")
-            updatenews.property_set_bool (Dbusmenu.MENUITEM_PROP_VISIBLE, True)
-            ql.child_append (updatenews)
+            ql = Dbusmenu.Menuitem.new()
+            updatenews = Dbusmenu.Menuitem.new()
+            updatenews.property_set(Dbusmenu.MENUITEM_PROP_LABEL, "Update News")
+            updatenews.property_set_bool(Dbusmenu.MENUITEM_PROP_VISIBLE, True)
+            ql.child_append(updatenews)
             launcher.set_property("quicklist", ql)
         except NameError:
             pass
 
         # Message Passing Stuff
-        def reload_feeds(this, widget, data = None):
+        def reload_feeds(this, widget, data=None):
             self.webview.execute_script('cmd("refresh")')
 
-        def menuexternal(this, widget, data = None):
+        def menuexternal(this, widget, data=None):
             print(this)
             print(this.get_name())
             self.webview.execute_script('cmd("' + this.get_name() + '")')
@@ -153,11 +154,10 @@ class LightreadWindow(Window):
                     except UnboundLocalError:
                         pass
 
-
                 elif title[0] == 'notify':
                     # Update notification and show only if not changed and window not focused
                     if self.notification.get_property('body') != title[2]:
-                        if self.is_active() != True:
+                        if self.is_active() is not True:
                             self.notification.set_property('body', title[2])
                             self.notification.show()
 
@@ -174,45 +174,44 @@ class LightreadWindow(Window):
 
                     settings_json = json.loads(title[1])
 
-                    if settings_json.get('indicators') == True:
+                    if settings_json.get('indicators') is True:
                         if self.indicator is None:
                             self.indicator = LightreadIndicator(self)
                         self.indicator.show()
-                    elif settings_json.get('indicators') == False and self.indicator is not None:
+                    elif settings_json.get('indicators') is False and self.indicator is not None:
                         # indicator set to false but was already created: hide it
                         self.indicator.hide()
 
                     # if settings background true and not self.is connected delete-event
-                    if settings_json.get('background') == True and self.window_close_handler is None:
+                    if settings_json.get('background') is True and self.window_close_handler is None:
                         self.window_close_handler = self.connect('delete-event', self._on_delete_event)
-                    elif settings_json.get('background') == False and self.window_close_handler is not None:
+                    elif settings_json.get('background') is False and self.window_close_handler is not None:
                         self.disconnect(self.window_close_handler)
                         self.window_close_handler = None
-
 
         # Connects to WebView
         self.webview.connect('title-changed', title_changed)
         self.webview.connect('navigation-requested', _navigation_requested_cb)
         self.webview.connect('console-message', console_message_cb)
 
-        self.add.connect ("activate", menuexternal, None)
-        self.refresh.connect ("activate", menuexternal, None)
-        self.star.connect ("activate", menuexternal, None)
-        self.read.connect ("activate", menuexternal, None)
-        self.logout.connect ("activate", menuexternal, None)
-        self.next_article.connect ("activate", menuexternal, None)
-        self.prev_article.connect ("activate", menuexternal, None)
-        self.filter_all.connect ("activate", menuexternal, None)
-        self.filter_unread.connect ("activate", menuexternal, None)
-        self.filter_starred.connect ("activate", menuexternal, None)
+        self.add.connect("activate", menuexternal, None)
+        self.refresh.connect("activate", menuexternal, None)
+        self.star.connect("activate", menuexternal, None)
+        self.read.connect("activate", menuexternal, None)
+        self.logout.connect("activate", menuexternal, None)
+        self.next_article.connect("activate", menuexternal, None)
+        self.prev_article.connect("activate", menuexternal, None)
+        self.filter_all.connect("activate", menuexternal, None)
+        self.filter_unread.connect("activate", menuexternal, None)
+        self.filter_starred.connect("activate", menuexternal, None)
         try:
-            updatenews.connect ("item-activated", reload_feeds, None)
+            updatenews.connect("item-activated", reload_feeds, None)
         except UnboundLocalError:
             pass
 
     def _on_delete_event(self, widget, event):
-    	""" Use PyGTK's hide_on_delete [http://www.pygtk.org/docs/pygtk/class-gtkwidget.html#method-gtkwidget--hide-on-delete]
-    	to stop the window's close button from actually closing, and simply hiding instead.
-    	This allows us to keep lightread running in the background. Clicking on the lightread indicator will call window.show()
-    	and display the main lightread window. """
+        """ Use PyGTK's hide_on_delete [http://www.pygtk.org/docs/pygtk/class-gtkwidget.html#method-gtkwidget--hide-on-delete]
+        to stop the window's close button from actually closing, and simply hiding instead.
+        This allows us to keep lightread running in the background. Clicking on the lightread indicator will call window.show()
+        and display the main lightread window. """
         return self.hide_on_delete()

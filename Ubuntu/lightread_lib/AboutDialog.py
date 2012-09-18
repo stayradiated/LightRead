@@ -5,7 +5,7 @@
 # Copyright (C) 2012 Jono Cooper
 # Copyright (c) The Regents of the University of California.
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
 # are met:
@@ -17,7 +17,7 @@
 # 3. Neither the name of the University nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
 # ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -31,17 +31,18 @@
 # SUCH DAMAGE.
 ### END LICENSE
 
-from gi.repository import Gtk # pylint: disable=E0611
+from gi.repository import Gtk  # pylint: disable=E0611
 
 from . helpers import get_builder
+
 
 class AboutDialog(Gtk.AboutDialog):
     __gtype_name__ = "AboutDialog"
 
     def __new__(cls):
-        """Special static method that's automatically called by Python when 
+        """Special static method that's automatically called by Python when
         constructing a new instance of this class.
-        
+
         Returns a fully instantiated AboutDialog object.
         """
         builder = get_builder('AboutLightreadDialog')
@@ -56,10 +57,9 @@ class AboutDialog(Gtk.AboutDialog):
         and creating a AboutDialog object with it in order
         to finish initializing the start of the new AboutLightreadDialog
         instance.
-        
+
         Put your initialization code in here and leave __init__ undefined.
         """
         # Get a reference to the builder and set up the signals.
         self.builder = builder
         self.ui = builder.get_ui(self)
-

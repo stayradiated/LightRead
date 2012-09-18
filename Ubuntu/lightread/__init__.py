@@ -5,7 +5,7 @@
 # Copyright (C) 2012 Jono Cooper
 # Copyright (c) The Regents of the University of California.
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
 # are met:
@@ -17,7 +17,7 @@
 # 3. Neither the name of the University nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
 # ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -37,11 +37,12 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('lightread')
 
-from gi.repository import Gtk, Gio # pylint: disable=E0611
+from gi.repository import Gtk, Gio  # pylint: disable=E0611
 
 from lightread import LightreadWindow
 
 from lightread_lib import set_up_logging, get_version
+
 
 class LightreadApp(Gtk.Application):
     """ Wrap lightread in a Gtk.Application instance which by default allows only single instances of applications."""
@@ -71,6 +72,7 @@ class LightreadApp(Gtk.Application):
             window.show()
             Gtk.main()
 
+
 def parse_options():
     """Support for command line options"""
     parser = optparse.OptionParser(version="%%prog %s" % get_version())
@@ -80,6 +82,7 @@ def parse_options():
     (options, args) = parser.parse_args()
 
     set_up_logging(options)
+
 
 def main():
     app = LightreadApp()
