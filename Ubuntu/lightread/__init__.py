@@ -37,7 +37,7 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('lightread')
 
-from gi.repository import Gtk, Gio # pylint: disable=E0611
+from gi.repository import Gtk, Gio  # pylint: disable=E0611
 
 from lightread import LightreadWindow
 

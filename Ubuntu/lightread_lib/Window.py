@@ -31,7 +31,7 @@
 # SUCH DAMAGE.
 ### END LICENSE
 
-from gi.repository import Gio, Gtk # pylint: disable=E0611
+from gi.repository import Gio, Gtk  # pylint: disable=E0611
 import logging
 logger = logging.getLogger('lightread_lib')
 
@@ -74,7 +74,7 @@ class Window(Gtk.Window):
         # Get a reference to the builder and set up the signals.
         self.builder = builder
         self.ui = builder.get_ui(self, True)
-        self.AboutDialog = None # class
+        self.AboutDialog = None  # class
 
         self.settings = Gio.Settings("net.launchpad.lightread")
 
@@ -83,7 +83,7 @@ class Window(Gtk.Window):
         # See https://wiki.ubuntu.com/UbuntuDevelopment/Internationalisation/Coding
         # for more information about Launchpad integration.
         try:
-            from gi.repository import LaunchpadIntegration # pylint: disable=E0611
+            from gi.repository import LaunchpadIntegration  # pylint: disable=E0611
             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
             LaunchpadIntegration.set_sourcepackagename('lightread')
         except ImportError:
@@ -108,7 +108,7 @@ class Window(Gtk.Window):
     def on_mnu_about_activate(self, widget, data=None):
         """Display the about box for lightread."""
         if self.AboutDialog is not None:
-            about = self.AboutDialog() # pylint: disable=E1102
+            about = self.AboutDialog()  # pylint: disable=E1102
             response = about.run()
             about.destroy()
 

@@ -33,7 +33,7 @@
 
 '''Enhances builder connections, provides object to access glade objects'''
 
-from gi.repository import GObject, Gtk # pylint: disable=E0611
+from gi.repository import GObject, Gtk  # pylint: disable=E0611
 
 import inspect
 import functools

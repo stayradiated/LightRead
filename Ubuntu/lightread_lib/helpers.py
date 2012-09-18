@@ -118,7 +118,7 @@ def get_help_uri(page=None):
 
 
 def show_uri(parent, link):
-    from gi.repository import Gtk # pylint: disable=E0611
+    from gi.repository import Gtk  # pylint: disable=E0611
     screen = parent.get_screen()
     Gtk.show_uri(screen, link, Gtk.get_current_event_time())
 

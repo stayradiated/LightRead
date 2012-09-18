@@ -36,7 +36,7 @@ from gettext import gettext as _
 gettext.textdomain('lightread')
 
 import subprocess, os
-from gi.repository import Gtk, Gdk, WebKit, Notify # pylint: disable=E0611
+from gi.repository import Gtk, Gdk, WebKit, Notify  # pylint: disable=E0611
 try:
     from gi.repository import Unity, Dbusmenu
 except ImportError:
@@ -62,7 +62,7 @@ sharingsupport = os.path.isfile("/usr/bin/gwibber-poster")
 class LightreadWindow(Window):
     __gtype_name__ = "LightreadWindow"
 
-    def finish_initializing(self, builder): # pylint: disable=E1002
+    def finish_initializing(self, builder):  # pylint: disable=E1002
         """Set up the main window"""
         super(LightreadWindow, self).finish_initializing(builder)
 

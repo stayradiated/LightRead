@@ -31,7 +31,7 @@
 # SUCH DAMAGE.
 ### END LICENSE
 
-from gi.repository import Gtk # pylint: disable=E0611
+from gi.repository import Gtk  # pylint: disable=E0611
 
 from . helpers import get_builder
 

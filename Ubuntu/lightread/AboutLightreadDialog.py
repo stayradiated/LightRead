@@ -45,7 +45,7 @@ from lightread_lib.AboutDialog import AboutDialog
 class AboutLightreadDialog(AboutDialog):
     __gtype_name__ = "AboutLightreadDialog"
 
-    def finish_initializing(self, builder): # pylint: disable=E1002
+    def finish_initializing(self, builder):  # pylint: disable=E1002
         """Set up the about dialog"""
         super(AboutLightreadDialog, self).finish_initializing(builder)
 
