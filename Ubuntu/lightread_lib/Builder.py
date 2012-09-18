@@ -5,7 +5,7 @@
 # Copyright (C) 2012 Jono Cooper
 # Copyright (c) The Regents of the University of California.
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
 # are met:
@@ -17,7 +17,7 @@
 # 3. Neither the name of the University nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
 # ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -190,7 +190,7 @@ class UiFactory():
         cannot_message = """cannot bind ui.%s, name already exists
         consider using a pythonic name instead of design name '%s'"""
         consider_message = """consider using a pythonic name instead of design name '%s'"""
-        
+
         for (widget_name, widget) in widget_dict.items():
             pyname = make_pyname(widget_name)
             if pyname != widget_name:
@@ -223,7 +223,7 @@ def make_pyname(name):
     return pyname
 
 
-# Until bug https://bugzilla.gnome.org/show_bug.cgi?id=652127 is fixed, we 
+# Until bug https://bugzilla.gnome.org/show_bug.cgi?id=652127 is fixed, we
 # need to reimplement inspect.getmembers.  GObject introspection doesn't
 # play nice with it.
 def getmembers(obj, check):

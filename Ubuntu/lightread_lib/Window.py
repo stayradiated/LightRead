@@ -5,7 +5,7 @@
 # Copyright (C) 2012 Jono Cooper
 # Copyright (c) The Regents of the University of California.
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
 # are met:
@@ -17,7 +17,7 @@
 # 3. Neither the name of the University nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
 # ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -42,7 +42,7 @@ from . helpers import get_builder, show_uri, get_help_uri
 class Window(Gtk.Window):
     __gtype_name__ = "Window"
 
-    # To construct a new instance of this method, the following notable 
+    # To construct a new instance of this method, the following notable
     # methods are called in this order:
     # __new__(cls)
     # __init__(self)
@@ -51,11 +51,11 @@ class Window(Gtk.Window):
     #
     # For this reason, it's recommended you leave __init__ empty and put
     # your initialization code in finish_initializing
-    
+
     def __new__(cls):
-        """Special static method that's automatically called by Python when 
+        """Special static method that's automatically called by Python when
         constructing a new instance of this class.
-        
+
         Returns a fully instantiated BaseLightreadWindow object.
         """
         builder = get_builder('LightreadWindow')
