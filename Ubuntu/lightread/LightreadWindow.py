@@ -101,13 +101,13 @@ class LightreadWindow(Window):
         self.notification = Notify.Notification.new('Lightread', '', 'lightread')
 
         try:
-            launcher = Unity.LauncherEntry.get_for_desktop_id ("extras-lightread.desktop")
+            launcher = Unity.LauncherEntry.get_for_desktop_id("extras-lightread.desktop")
 
-            ql = Dbusmenu.Menuitem.new ()
-            updatenews = Dbusmenu.Menuitem.new ()
-            updatenews.property_set (Dbusmenu.MENUITEM_PROP_LABEL, "Update News")
-            updatenews.property_set_bool (Dbusmenu.MENUITEM_PROP_VISIBLE, True)
-            ql.child_append (updatenews)
+            ql = Dbusmenu.Menuitem.new()
+            updatenews = Dbusmenu.Menuitem.new()
+            updatenews.property_set(Dbusmenu.MENUITEM_PROP_LABEL, "Update News")
+            updatenews.property_set_bool(Dbusmenu.MENUITEM_PROP_VISIBLE, True)
+            ql.child_append(updatenews)
             launcher.set_property("quicklist", ql)
         except NameError:
             pass
@@ -196,18 +196,18 @@ class LightreadWindow(Window):
         self.webview.connect('navigation-requested', _navigation_requested_cb)
         self.webview.connect('console-message', console_message_cb)
 
-        self.add.connect ("activate", menuexternal, None)
-        self.refresh.connect ("activate", menuexternal, None)
-        self.star.connect ("activate", menuexternal, None)
-        self.read.connect ("activate", menuexternal, None)
-        self.logout.connect ("activate", menuexternal, None)
-        self.next_article.connect ("activate", menuexternal, None)
-        self.prev_article.connect ("activate", menuexternal, None)
-        self.filter_all.connect ("activate", menuexternal, None)
-        self.filter_unread.connect ("activate", menuexternal, None)
-        self.filter_starred.connect ("activate", menuexternal, None)
+        self.add.connect("activate", menuexternal, None)
+        self.refresh.connect("activate", menuexternal, None)
+        self.star.connect("activate", menuexternal, None)
+        self.read.connect("activate", menuexternal, None)
+        self.logout.connect("activate", menuexternal, None)
+        self.next_article.connect("activate", menuexternal, None)
+        self.prev_article.connect("activate", menuexternal, None)
+        self.filter_all.connect("activate", menuexternal, None)
+        self.filter_unread.connect("activate", menuexternal, None)
+        self.filter_starred.connect("activate", menuexternal, None)
         try:
-            updatenews.connect ("item-activated", reload_feeds, None)
+            updatenews.connect("item-activated", reload_feeds, None)
         except UnboundLocalError:
             pass
 

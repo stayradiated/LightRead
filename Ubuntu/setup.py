@@ -63,7 +63,7 @@ def update_config(values={}):
         fin.close()
         os.rename(fout.name, fin.name)
     except (OSError, IOError), e:
-        print ("ERROR: Can't find lightread_lib/lightreadconfig.py")
+        print("ERROR: Can't find lightread_lib/lightreadconfig.py")
         sys.exit(1)
     return oldvalues
 
