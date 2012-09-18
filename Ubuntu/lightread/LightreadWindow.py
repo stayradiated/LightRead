@@ -155,10 +155,11 @@ class LightreadWindow(Window):
 
 
                 elif title[0] == 'notify':
-                    # Update notification and show only if not changed
+                    # Update notification and show only if not changed and window not focused
                     if self.notification.get_property('body') != title[2]:
-                        self.notification.set_property('body', title[2])
-                        self.notification.show()
+                        if self.is_active() != True:
+                            self.notification.set_property('body', title[2])
+                            self.notification.show()
 
                 elif title[0] == 'copy':
                     clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)

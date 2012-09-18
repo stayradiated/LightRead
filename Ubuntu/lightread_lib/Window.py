@@ -75,7 +75,7 @@ class Window(Gtk.Window):
         self.ui = builder.get_ui(self, True)
         self.AboutDialog = None # class
 
-        self.settings = Gio.Settings("net.launchpad.lightread")
+        #self.settings = Gio.Settings("net.launchpad.lightread")
 
         # Optional Launchpad integration
         # This shouldn't crash if not found as it is simply used for bug reporting.

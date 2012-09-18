@@ -58,7 +58,7 @@ onLine = function(callback) {
 		console.log("Checking for an active internet connection...")
 		jQuery.ajax({
 			url: "http://www.google.com/reader?" + Math.random(),
-			timeout: 2000, //Wait 2 secs if connection problem
+			timeout: 8000, //Wait 8 secs if connection problem - NZ internet is slow!
 			async: true,
 			success:function(data, status){
 				network_status.status = true
