@@ -35,7 +35,8 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('lightread')
 
-import subprocess, os
+import subprocess
+import os
 from gi.repository import Gtk, Gdk, WebKit, Notify  # pylint: disable=E0611
 try:
     from gi.repository import Unity, Dbusmenu
