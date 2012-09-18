@@ -157,7 +157,7 @@ class LightreadWindow(Window):
                 elif title[0] == 'notify':
                     # Update notification and show only if not changed and window not focused
                     if self.notification.get_property('body') != title[2]:
-                        if self.is_active() != True:
+                        if self.is_active() is not True:
                             self.notification.set_property('body', title[2])
                             self.notification.show()
 
@@ -174,18 +174,18 @@ class LightreadWindow(Window):
 
                     settings_json = json.loads(title[1])
 
-                    if settings_json.get('indicators') == True:
+                    if settings_json.get('indicators') is True:
                         if self.indicator is None:
                             self.indicator = LightreadIndicator(self)
                         self.indicator.show()
-                    elif settings_json.get('indicators') == False and self.indicator is not None:
+                    elif settings_json.get('indicators') is False and self.indicator is not None:
                         # indicator set to false but was already created: hide it
                         self.indicator.hide()
 
                     # if settings background true and not self.is connected delete-event
-                    if settings_json.get('background') == True and self.window_close_handler is None:
+                    if settings_json.get('background') is True and self.window_close_handler is None:
                         self.window_close_handler = self.connect('delete-event', self._on_delete_event)
-                    elif settings_json.get('background') == False and self.window_close_handler is not None:
+                    elif settings_json.get('background') is False and self.window_close_handler is not None:
                         self.disconnect(self.window_close_handler)
                         self.window_close_handler = None
 
