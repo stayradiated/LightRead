@@ -43,7 +43,7 @@ from lightread import AboutLightreadDialog
 class TestExample(unittest.TestCase):
     def setUp(self):
         self.AboutLightreadDialog_members = [
-        'AboutDialog', 'AboutLightreadDialog', 'gettext', 'logger', 'logging']
+            'AboutDialog', 'AboutLightreadDialog', 'gettext', 'logger', 'logging']
 
     def test_AboutLightreadDialog_members(self):
         all_members = dir(AboutLightreadDialog)
