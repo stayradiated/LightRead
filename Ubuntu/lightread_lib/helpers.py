@@ -42,6 +42,7 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('lightread')
 
+
 def get_builder(builder_file_name):
     """Return a fully-instantiated Gtk.Builder instance from specified ui
     file
@@ -68,9 +69,11 @@ def get_media_file(media_file_name):
 
     return "file:///"+media_filename
 
+
 class NullHandler(logging.Handler):
     def emit(self, record):
         pass
+
 
 def set_up_logging(opts):
     # add a handler to prevent basicConfig
@@ -97,6 +100,7 @@ def set_up_logging(opts):
         if opts.verbose > 1:
             lib_logger.setLevel(logging.DEBUG)
 
+
 def get_help_uri(page=None):
     # help_uri from source tree - default language
     here = os.path.dirname(__file__)
@@ -112,10 +116,12 @@ def get_help_uri(page=None):
 
     return help_uri
 
+
 def show_uri(parent, link):
     from gi.repository import Gtk # pylint: disable=E0611
     screen = parent.get_screen()
     Gtk.show_uri(screen, link, Gtk.get_current_event_time())
+
 
 def alias(alternative_function_name):
     '''see http://www.drdobbs.com/web-development/184406073#l9'''

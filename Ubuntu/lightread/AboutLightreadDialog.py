@@ -40,6 +40,7 @@ logger = logging.getLogger('lightread')
 
 from lightread_lib.AboutDialog import AboutDialog
 
+
 # See lightread_lib.AboutDialog.py for more details about how this class works.
 class AboutLightreadDialog(AboutDialog):
     __gtype_name__ = "AboutLightreadDialog"

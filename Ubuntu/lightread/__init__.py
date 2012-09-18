@@ -43,6 +43,7 @@ from lightread import LightreadWindow
 
 from lightread_lib import set_up_logging, get_version
 
+
 class LightreadApp(Gtk.Application):
     """ Wrap lightread in a Gtk.Application instance which by default allows only single instances of applications."""
     def __init__(self):
@@ -71,6 +72,7 @@ class LightreadApp(Gtk.Application):
             window.show()
             Gtk.main()
 
+
 def parse_options():
     """Support for command line options"""
     parser = optparse.OptionParser(version="%%prog %s" % get_version())
@@ -80,6 +82,7 @@ def parse_options():
     (options, args) = parser.parse_args()
 
     set_up_logging(options)
+
 
 def main():
     app = LightreadApp()

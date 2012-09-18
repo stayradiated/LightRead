@@ -44,8 +44,8 @@ except ImportError:
     sys.exit(1)
 assert DistUtilsExtra.auto.__version__ >= '2.18', 'needs DistUtilsExtra.auto >= 2.18'
 
-def update_config(values = {}):
 
+def update_config(values = {}):
     oldvalues = {}
     try:
         fin = file('lightread_lib/lightreadconfig.py', 'r')

@@ -37,6 +37,7 @@ logger = logging.getLogger('lightread_lib')
 
 from . helpers import get_builder, show_uri, get_help_uri
 
+
 # This class is meant to be subclassed by LightreadWindow.  It provides
 # common functions and some boilerplate.
 class Window(Gtk.Window):

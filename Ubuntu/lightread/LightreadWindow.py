@@ -57,6 +57,7 @@ import json
 # Check for sharingsupport - make sure that gwibber-poster is in PATH
 sharingsupport = os.path.isfile("/usr/bin/gwibber-poster")
 
+
 # See lightread_lib.Window.py for more details about how this class works
 class LightreadWindow(Window):
     __gtype_name__ = "LightreadWindow"

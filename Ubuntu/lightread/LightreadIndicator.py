@@ -32,6 +32,7 @@
 ### END LICENSE
 from gi.repository import Indicate
 
+
 class LightreadIndicator:
     def __init__(self, main_app_window):
         self.main_app = main_app_window

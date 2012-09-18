@@ -35,6 +35,7 @@ from gi.repository import Gtk # pylint: disable=E0611
 
 from . helpers import get_builder
 
+
 class AboutDialog(Gtk.AboutDialog):
     __gtype_name__ = "AboutDialog"
 
