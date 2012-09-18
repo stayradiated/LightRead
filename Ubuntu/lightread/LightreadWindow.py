@@ -113,10 +113,10 @@ class LightreadWindow(Window):
             pass
 
         # Message Passing Stuff
-        def reload_feeds(this, widget, data = None):
+        def reload_feeds(this, widget, data=None):
             self.webview.execute_script('cmd("refresh")')
 
-        def menuexternal(this, widget, data = None):
+        def menuexternal(this, widget, data=None):
             print(this)
             print(this.get_name())
             self.webview.execute_script('cmd("' + this.get_name() + '")')
