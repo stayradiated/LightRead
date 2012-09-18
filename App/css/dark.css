@@ -45,9 +45,45 @@
 	box-shadow: none;
 }
 
+#articles-column {
+	background: #555;
+	color: #fff;
+}
+#articles li {
+	border-bottom: 1px solid #444;
+	border-top: 1px solid #666;
+}
+#articles li header {
+	color: #ddd;
+	text-shadow: 0 1px 0 #333;
+}
+#articles li header .feed {
+	color: #eee;
+}
+#articles li .title {
+	color: #fff;
+	text-shadow: 0 1px 1px #222;
+}
+#articles li .snippet {
+	color: #eee;
+	text-shadow: 0 1px 1px #333;
+}
+#articles li.read .title {
+	color: #ddd;
+	text-shadow: 0 1px 1px #333;
+}
+#articles li.read .snippet {
+	color: #ccc;
+	text-shadow: 0 1px 1px #444;
+}
+
 .bar {
 	border-top: 1px solid #333;
 }
 .bar button {
 	-webkit-filter: invert() brightness(4%) contrast(1.4);
+}
+
+#app > .vsplitbar {
+	background: #333;
 }
