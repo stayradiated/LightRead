@@ -3,17 +3,16 @@ Changelog
 
 1.2 (Not released)
 - Share via Gwibber to Social Networks
+- Messaging Menu
 - Opens last read feed on startup
-- Watch embedded videos
 - Fixes Feeds without links
 - Fixes Tabular Layours
 - Option for auto view in instapaper
-
-###Targeted incomplete features
-- Night Mode
-- Translations
-- Native Python SQLite using AJAX
-- Further left column in GTK
+- Opens last used feed
+- Fixed Settings Layout
+- Added Shorter Refresh Interval
+- Fixed same news listed many times
+- Fixed duplication of notifications
 
 
 1.1.1 (2/8/2012)
