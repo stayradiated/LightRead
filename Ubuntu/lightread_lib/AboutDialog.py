@@ -63,4 +63,3 @@ class AboutDialog(Gtk.AboutDialog):
         # Get a reference to the builder and set up the signals.
         self.builder = builder
         self.ui = builder.get_ui(self)
-

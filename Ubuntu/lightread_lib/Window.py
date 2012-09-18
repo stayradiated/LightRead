@@ -120,4 +120,3 @@ class Window(Gtk.Window):
         """Called when the LightreadWindow is closed."""
         # Clean up code for saving application state should be added here.
         Gtk.main_quit()
-

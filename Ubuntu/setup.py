@@ -94,4 +94,3 @@ DistUtilsExtra.auto.setup(
     cmdclass={'install': InstallAndUpdateDataDirectory},
     data_files=[('share/icons/hicolor/128x128/apps', ['data/media/lightread.png'])]
 )
-

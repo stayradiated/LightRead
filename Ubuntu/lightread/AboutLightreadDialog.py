@@ -50,4 +50,3 @@ class AboutLightreadDialog(AboutDialog):
         super(AboutLightreadDialog, self).finish_initializing(builder)
 
         # Code for other initialization actions should be added here.
-
