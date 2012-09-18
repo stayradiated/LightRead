@@ -77,11 +77,9 @@ class InstallAndUpdateDataDirectory(DistUtilsExtra.auto.install_auto):
         update_config(previous_values)
 
 
-
 ##################################################################################
 ###################### YOU SHOULD MODIFY ONLY WHAT IS BELOW ######################
 ##################################################################################
-
 DistUtilsExtra.auto.setup(
     name='lightread',
     version='1.0.20',

@@ -95,7 +95,6 @@ class LightreadWindow(Window):
         self.filter_unread = self.builder.get_object("filter-unread")
         self.filter_starred = self.builder.get_object("filter-starred")
 
-
         # Unity Support
         Notify.init('Lightread')
         self.notification = Notify.Notification.new('Lightread', '', 'lightread')
@@ -154,7 +153,6 @@ class LightreadWindow(Window):
                     except UnboundLocalError:
                         pass
 
-
                 elif title[0] == 'notify':
                     # Update notification and show only if not changed and window not focused
                     if self.notification.get_property('body') != title[2]:
@@ -189,7 +187,6 @@ class LightreadWindow(Window):
                     elif settings_json.get('background') is False and self.window_close_handler is not None:
                         self.disconnect(self.window_close_handler)
                         self.window_close_handler = None
-
 
         # Connects to WebView
         self.webview.connect('title-changed', title_changed)
