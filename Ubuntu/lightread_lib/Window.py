@@ -5,7 +5,7 @@
 # Copyright (C) 2012 Jono Cooper
 # Copyright (c) The Regents of the University of California.
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
 # are met:
@@ -17,7 +17,7 @@
 # 3. Neither the name of the University nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
 # ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -31,18 +31,19 @@
 # SUCH DAMAGE.
 ### END LICENSE
 
-from gi.repository import Gio, Gtk # pylint: disable=E0611
+from gi.repository import Gio, Gtk  # pylint: disable=E0611
 import logging
 logger = logging.getLogger('lightread_lib')
 
 from . helpers import get_builder, show_uri, get_help_uri
+
 
 # This class is meant to be subclassed by LightreadWindow.  It provides
 # common functions and some boilerplate.
 class Window(Gtk.Window):
     __gtype_name__ = "Window"
 
-    # To construct a new instance of this method, the following notable 
+    # To construct a new instance of this method, the following notable
     # methods are called in this order:
     # __new__(cls)
     # __init__(self)
@@ -51,11 +52,11 @@ class Window(Gtk.Window):
     #
     # For this reason, it's recommended you leave __init__ empty and put
     # your initialization code in finish_initializing
-    
+
     def __new__(cls):
-        """Special static method that's automatically called by Python when 
+        """Special static method that's automatically called by Python when
         constructing a new instance of this class.
-        
+
         Returns a fully instantiated BaseLightreadWindow object.
         """
         builder = get_builder('LightreadWindow')
@@ -73,7 +74,7 @@ class Window(Gtk.Window):
         # Get a reference to the builder and set up the signals.
         self.builder = builder
         self.ui = builder.get_ui(self, True)
-        self.AboutDialog = None # class
+        self.AboutDialog = None  # class
 
         self.settings = Gio.Settings("net.launchpad.lightread")
 
@@ -82,7 +83,7 @@ class Window(Gtk.Window):
         # See https://wiki.ubuntu.com/UbuntuDevelopment/Internationalisation/Coding
         # for more information about Launchpad integration.
         try:
-            from gi.repository import LaunchpadIntegration # pylint: disable=E0611
+            from gi.repository import LaunchpadIntegration  # pylint: disable=E0611
             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
             LaunchpadIntegration.set_sourcepackagename('lightread')
         except ImportError:
@@ -107,7 +108,7 @@ class Window(Gtk.Window):
     def on_mnu_about_activate(self, widget, data=None):
         """Display the about box for lightread."""
         if self.AboutDialog is not None:
-            about = self.AboutDialog() # pylint: disable=E1102
+            about = self.AboutDialog()  # pylint: disable=E1102
             response = about.run()
             about.destroy()
 
@@ -119,4 +120,3 @@ class Window(Gtk.Window):
         """Called when the LightreadWindow is closed."""
         # Clean up code for saving application state should be added here.
         Gtk.main_quit()
-

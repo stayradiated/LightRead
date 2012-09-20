@@ -44,15 +44,15 @@ except ImportError:
     sys.exit(1)
 assert DistUtilsExtra.auto.__version__ >= '2.18', 'needs DistUtilsExtra.auto >= 2.18'
 
-def update_config(values = {}):
 
+def update_config(values={}):
     oldvalues = {}
     try:
         fin = file('lightread_lib/lightreadconfig.py', 'r')
         fout = file(fin.name + '.new', 'w')
 
         for line in fin:
-            fields = line.split(' = ') # Separate variable from value
+            fields = line.split(' = ')  # Separate variable from value
             if fields[0] in values:
                 oldvalues[fields[0]] = fields[1].strip()
                 line = "%s = %s\n" % (fields[0], values[fields[0]])
@@ -63,7 +63,7 @@ def update_config(values = {}):
         fin.close()
         os.rename(fout.name, fin.name)
     except (OSError, IOError), e:
-        print ("ERROR: Can't find lightread_lib/lightreadconfig.py")
+        print("ERROR: Can't find lightread_lib/lightreadconfig.py")
         sys.exit(1)
     return oldvalues
 
@@ -77,11 +77,9 @@ class InstallAndUpdateDataDirectory(DistUtilsExtra.auto.install_auto):
         update_config(previous_values)
 
 
-
 ##################################################################################
 ###################### YOU SHOULD MODIFY ONLY WHAT IS BELOW ######################
 ##################################################################################
-
 DistUtilsExtra.auto.setup(
     name='lightread',
     version='1.0.20',
@@ -93,5 +91,4 @@ DistUtilsExtra.auto.setup(
     url='https://launchpad.net/lightread',
     cmdclass={'install': InstallAndUpdateDataDirectory},
     data_files=[('share/icons/hicolor/128x128/apps', ['data/media/lightread.png'])]
-    )
-
+)

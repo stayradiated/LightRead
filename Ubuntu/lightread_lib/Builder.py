@@ -5,7 +5,7 @@
 # Copyright (C) 2012 Jono Cooper
 # Copyright (c) The Regents of the University of California.
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
 # are met:
@@ -17,7 +17,7 @@
 # 3. Neither the name of the University nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
 # ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -33,7 +33,7 @@
 
 '''Enhances builder connections, provides object to access glade objects'''
 
-from gi.repository import GObject, Gtk # pylint: disable=E0611
+from gi.repository import GObject, Gtk  # pylint: disable=E0611
 
 import inspect
 import functools
@@ -69,15 +69,15 @@ class Builder(Gtk.Builder):
 
 # pylint: disable=R0201
 # this is a method so that a subclass of Builder can redefine it
-    def default_handler(self,
-        handler_name, filename, *args, **kwargs):
+    def default_handler(self, handler_name, filename, *args, **kwargs):
         '''helps the apprentice guru
 
-    glade defined handlers that do not exist come here instead.
-    An apprentice guru might wonder which signal does what he wants,
-    now he can define any likely candidates in glade and notice which
-    ones get triggered when he plays with the project.
-    this method does not appear in Gtk.Builder'''
+        glade defined handlers that do not exist come here instead.
+        An apprentice guru might wonder which signal does what he wants,
+        now he can define any likely candidates in glade and notice which
+        ones get triggered when he plays with the project.
+        this method does not appear in Gtk.Builder'''
+
         logger.debug('''tried to call non-existent function:%s()
         expected in %s
         args:%s
@@ -114,8 +114,8 @@ class Builder(Gtk.Builder):
 
             connections = [
                 (name,
-                ele_signal.attrib['name'],
-                ele_signal.attrib['handler']) for ele_signal in ele_signals]
+                    ele_signal.attrib['name'],
+                    ele_signal.attrib['handler']) for ele_signal in ele_signals]
 
             if connections:
                 self.connections.extend(connections)
@@ -123,7 +123,7 @@ class Builder(Gtk.Builder):
         ele_signals = tree.getiterator("signal")
         for ele_signal in ele_signals:
             self.glade_handler_dict.update(
-            {ele_signal.attrib["handler"]: None})
+                {ele_signal.attrib["handler"]: None})
 
     def connect_signals(self, callback_obj):
         '''connect the handlers defined in glade
@@ -145,7 +145,7 @@ class Builder(Gtk.Builder):
 
                 # replace the run time warning
                 logger.warn("expected handler '%s' in %s",
-                 item[0], filename)
+                            item[0], filename)
 
         # connect glade define handlers
         Gtk.Builder.connect_signals(self, connection_dict)
@@ -154,7 +154,7 @@ class Builder(Gtk.Builder):
         for connection in self.connections:
             widget_name, signal_name, handler_name = connection
             logger.debug("connect builder by design '%s', '%s', '%s'",
-             widget_name, signal_name, handler_name)
+                         widget_name, signal_name, handler_name)
 
     def get_ui(self, callback_obj=None, by_name=True):
         '''Creates the ui object with widgets as attributes
@@ -190,7 +190,7 @@ class UiFactory():
         cannot_message = """cannot bind ui.%s, name already exists
         consider using a pythonic name instead of design name '%s'"""
         consider_message = """consider using a pythonic name instead of design name '%s'"""
-        
+
         for (widget_name, widget) in widget_dict.items():
             pyname = make_pyname(widget_name)
             if pyname != widget_name:
@@ -216,14 +216,14 @@ def make_pyname(name):
     pyname = ''
     for character in name:
         if (character.isalpha() or character == '_' or
-            (pyname and character.isdigit())):
+                (pyname and character.isdigit())):
             pyname += character
         else:
             pyname += '_'
     return pyname
 
 
-# Until bug https://bugzilla.gnome.org/show_bug.cgi?id=652127 is fixed, we 
+# Until bug https://bugzilla.gnome.org/show_bug.cgi?id=652127 is fixed, we
 # need to reimplement inspect.getmembers.  GObject introspection doesn't
 # play nice with it.
 def getmembers(obj, check):
@@ -300,13 +300,13 @@ def auto_connect_by_name(callback_obj, builder):
                 handler_names.append("on_%s" % sig)
 
             do_connect(item, sig, handler_names,
-             callback_handler_dict, builder.connections)
+                       callback_handler_dict, builder.connections)
 
     log_unconnected_functions(callback_handler_dict, builder.connections)
 
 
 def do_connect(item, signal_name, handler_names,
-        callback_handler_dict, connections):
+               callback_handler_dict, connections):
     '''connect this signal to an unused handler'''
     widget_name, widget = item
 
@@ -319,7 +319,7 @@ def do_connect(item, signal_name, handler_names,
             connections.append(connection)
 
             logger.debug("connect builder by name '%s','%s', '%s'",
-             widget_name, signal_name, handler_name)
+                         widget_name, signal_name, handler_name)
 
 
 def log_unconnected_functions(callback_handler_dict, connections):
