@@ -49,6 +49,9 @@
 	background: #555;
 	color: #fff;
 }
+#articles::-webkit-scrollbar-track, #articles::-webkit-scrollbar-thumb {
+	border-left: 1px solid #444;
+}
 #articles li {
 	border-bottom: 1px solid #444;
 	border-top: 1px solid #666;
@@ -76,12 +79,59 @@
 	color: #ccc;
 	text-shadow: 0 1px 1px #444;
 }
+#articles li.selected {
+	border-top: 1px solid #404040;
+	border-bottom: 1px solid #666;
+	background: #444;
+	box-shadow: 0 -1px #5F5F5F, inset 0 -1px 0 #383838;
+}
+#articles .splitter + li.selected {
+	padding-top: 0;
+	box-shadow: 0 -1px #404040, inset 0 -1px 0 #383838;
+	border-top: 1px solid #333;
+}
+#articles .splitter:first-child {
+	border-top: 1px solid #444;
+}
+#articles .splitter {
+	color: #fafafa;
+	background: -webkit-linear-gradient(#555, #444);
+	text-shadow: 0 1px 0 #222;
+	border-top: 1px solid #434343;
+	border-bottom: 1px solid #3c3c3c;
+}
+#right-side > .vsplitbar {
+	background: #555;
+	border-right: 3px solid #555;
+	border-left: 1px solid #444;
+}
+#right-side > .vsplitbar::after {
+	border-top: 1px solid #333;
+}
+
+#post-column {
+	background: #555;
+}
+#post-column.scope::after {
+	border-bottom-color: #4d4d4d;
+}
+#post-column.scope::before {
+	border-bottom-color: #333;
+}
+#post {
+	color: #eee;
+	text-shadow: 0 1px 0 #444;
+}
 
 .bar {
 	border-top: 1px solid #333;
 }
 .bar button {
 	-webkit-filter: invert() brightness(4%) contrast(1.4);
+}
+#item-count {
+	color: #fff;
+	text-shadow: 0 1px 0 #444;
 }
 
 #app > .vsplitbar {
