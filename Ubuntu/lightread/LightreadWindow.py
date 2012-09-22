@@ -55,6 +55,11 @@ except ImportError:
 
 import json
 
+# Set up SQLite database
+import sqlite3 as sq
+sql_connection = sq.connect('test.db')
+sql_cursor = sql_connection.cursor()
+
 # Check for sharingsupport - make sure that gwibber-poster is in PATH
 sharingsupport = os.path.isfile("/usr/bin/gwibber-poster")
 
@@ -62,6 +67,14 @@ sharingsupport = os.path.isfile("/usr/bin/gwibber-poster")
 # See lightread_lib.Window.py for more details about how this class works
 class LightreadWindow(Window):
     __gtype_name__ = "LightreadWindow"
+
+    def inspect_webview(self, inspector, widget, data=None):
+        inspector_view = WebKit.WebView()
+        self.inspector_window.add(inspector_view)
+        self.inspector_window.resize(800, 400)
+        self.inspector_window.show_all()
+        self.inspector_window.present()
+        return inspector_view
 
     def finish_initializing(self, builder):  # pylint: disable=E1002
         """Set up the main window"""
@@ -80,7 +93,12 @@ class LightreadWindow(Window):
         self.webviewsettings = self.webview.get_settings()
         self.webviewsettings.set_property("javascript-can-open-windows-automatically", True)
         self.webviewsettings.set_property("enable-universal-access-from-file-uris", True)
+        self.webviewsettings.set_property("enable-developer-extras", True)
         self.webview.load_uri(get_media_file('app/index.html'))
+
+        self.webview_inspector = self.webview.get_inspector()
+        self.webview_inspector.connect('inspect-web-view', self.inspect_webview)
+        self.inspector_window = Gtk.Window()
 
         self.webview.show()
 
@@ -133,9 +151,33 @@ class LightreadWindow(Window):
             logger.debug('%s:%s "%s"' % (source, line, message))
             return True
 
+        def sql_exec(command):
+            sql_cursor.execute(command)
+            return sql_cursor.fetchall()
+
         def title_changed(widget, frame, title):
             if title != 'null':
 
+                INDICATOR = "!COMMAND!"
+                if title.startswith(INDICATOR):
+                    try:
+                        instructions = json.loads(title[len(INDICATOR):])
+                    except:
+                        return
+
+                    # Execute SQL here
+                    print ""
+                    print instructions['command']['sql']
+
+                    retval = sql_exec(instructions['command']['sql'])
+
+                    print retval
+                    print ""
+
+                    self.webview.execute_script('window.py_ctrl.receive("%s", %s)' % (instructions['id'], json.dumps(retval)))
+                    return
+
+                print title
                 title = title.split("|")
 
                 #Gets Data from Disk
