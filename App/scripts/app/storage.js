@@ -23,22 +23,18 @@
 		},
 		// db.insert('feeds', {column1: 'value1', column2: 'value2'});
 		insert: function(table, data) {
-			// Remove all the apostrophes
-			data.value = data.value.replace(/'/g, "&#39;")
+			var formattedData = this._formatData(data);
 
-			// Split the object into two strings
-			var columns = "", values = "";
-			for (var key in data) {
-				if (data.hasOwnProperty(key)) {
-					columns += key + ", ";
-					values += "'" + data[key] + "', ";
-				}
-			}
-			// Remove extra ", "
-			columns = columns.slice(0, -2);
-			values = values.slice(0, -2);
 			py_ctrl.send({
-				sql: "INSERT INTO " + table + " (" + columns + ") VALUES (" + values + ")"
+				sql: "INSERT INTO " + table + " (" + formattedData.columns + ") VALUES (" + formattedData.values + ")"
+			});
+		},
+		// db.upsert('feeds', {column1: 'value1', column2: 'value2'});
+		upsert: function(table, data) {
+			var formattedData = this._formatData(data);
+
+			py_ctrl.send({
+				sql: "REPLACE INTO " + table + " (" + formattedData.columns + ") VALUES (" + formattedData.values + ")"
 			});
 		},
 		// db.empty('feeds')
@@ -46,6 +42,25 @@
 			py_ctrl.send({
 				sql: "DELETE FROM " + table
 			});
+		},
+		_formatData: function(data) {
+			// Remove all the apostrophes
+			data.value = data.value.replace(/'/g, "&#39;")
+
+			// Split the object into two strings
+			var columns = [];
+			var values = [];
+			for (var key in data) {
+				if (data.hasOwnProperty(key)) {
+					columns.push(key);
+					values.push("'" + data[key] + "'");
+				}
+			}
+			// Transform into comma-delimited strings
+			columns = columns.join(",");
+			values = values.join(",");
+
+			return {"columns": columns, "values": values};
 		}
 	};
 
@@ -71,21 +86,22 @@
 		},
 		loadAuth: function(callback) {
 			db.select('user', function(results) {
-				var len = results.length, i, row
+				var len = results.length;
+				var i, row;
 				for (i = 0; i < len; i++) {
 					row = results[i];
-					switch(row.key) {
+					switch(row[0]) {
 						case 'user':
-							localStorage.User = row.value
+							localStorage.User = row[1]
 							break
 						case 'auth':
-							localStorage.Auth = row.value
+							localStorage.Auth = row[1]
 							break
 						case 'sync':
-							sync = JSON.parse(row.value)
+							sync = JSON.parse(row[1])
 							break
 						case 'settings':
-							saved_settings = JSON.parse(row.value)
+							saved_settings = JSON.parse(row[1])
 							settings = default_settings()
 
 							for (var key in settings) {
@@ -97,23 +113,24 @@
 							break
 
 						case 'pocket':
-							core.pocket.user = JSON.parse(row.value)
+							core.pocket.user = JSON.parse(row[1])
 							core.pocket.user.loggedIn = true
 							break
 
 						case 'instapaper':
-							core.instapaper.user = JSON.parse(row.value)
+							core.instapaper.user = JSON.parse(row[1])
 							core.instapaper.user.loggedIn = true
 							break
 					}
 				}
+
 				if (callback) callback();
 			});
 			db.select('icons', function(results) {
 				var len = results.length, i, row
 				for (i = 0; i < len; i++) {
 					row = results[i];
-					localStorage['icon-' + row.key] = row.value
+					localStorage['icon-' + row[0]] = row[1]
 				}
 			});
 		},
@@ -151,10 +168,10 @@
 			db.insert('user', {key: 'auth', value: auth});
 		},
 		savePrefs: function() {
-			db.insert('user', {key: 'sync', value: JSON.stringify(sync)});
-			db.insert('user', {key: 'settings', value: JSON.stringify(settings)});
-			db.insert('user', {key: 'pocket', value: JSON.stringify(core.pocket.user)});
-			db.insert('user', {key: 'instapaper', value: JSON.stringify(core.instapaper.user)});
+			db.upsert('user', {key: 'sync', value: JSON.stringify(sync)});
+			db.upsert('user', {key: 'settings', value: JSON.stringify(settings)});
+			db.upsert('user', {key: 'pocket', value: JSON.stringify(core.pocket.user)});
+			db.upsert('user', {key: 'instapaper', value: JSON.stringify(core.instapaper.user)});
 			python('settings', JSON.stringify(settings));
 		},
 		saveIcons: function() {
@@ -168,7 +185,7 @@
 		init: function() {
 			db.create('feeds', 'key text, value text');
 			db.create('items', 'key text, value text');
-			db.create('user', 'key text, value text');
+			db.create('user', 'key text unique, value text');
 			db.create('icons', 'key text, value text');
 		},
 		flush: function() {
