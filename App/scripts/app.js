@@ -240,7 +240,7 @@ $(function() {
 		e.stopPropagation()
 	})
 
-	cmd = function(req) {
+	cmd = function(req, args) {
 		switch(req) {
 
 			case "add":
@@ -349,6 +349,12 @@ $(function() {
 			case 'markAllAsRead':
 				if (selected.feed.id) {
 					core.markAllAsRead(selected.feed.id)
+				}
+				break
+
+			case 'select-feed':
+				if (args && args.feedID) {
+					ui.selectFeed(ui.getFeedView(args.feedID));
 				}
 				break
 		}
