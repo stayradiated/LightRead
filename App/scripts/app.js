@@ -377,6 +377,9 @@ $(function() {
  			case 'settings':
  				document.title = 'settings|' + value
  				break
+ 			case 'feed_count':
+ 				document.title = 'feed_count|' + value
+ 				break
 		}
 	}
 
