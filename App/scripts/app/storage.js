@@ -23,12 +23,15 @@
 		},
 		// db.insert('feeds', {column1: 'value1', column2: 'value2'});
 		insert: function(table, data) {
+			// Remove all the apostrophes
+			data.value = data.value.replace(/'/g, "&#39;")
+
 			// Split the object into two strings
 			var columns = "", values = "";
 			for (var key in data) {
 				if (data.hasOwnProperty(key)) {
 					columns += key + ", ";
-					values += data[key] + ", ";
+					values += "'" + data[key] + "', ";
 				}
 			}
 			// Remove extra ", "
@@ -54,16 +57,16 @@
 			db.select('feeds', function(results) {
 				var len = results.length, i
 				for (i = 0; i < len; i++) {
-					storage.feeds.push(JSON.parse(results[i].value))
+					storage.feeds.push(JSON.parse(results[i][1]))
 				}
 			});
 			db.select('items', function(results) {
 				var len = results.length, i, row
 				for (i = 0; i < len; i++) {
 					row = results[i]
-					storage.items[row.key] = JSON.parse(row.value)
+					storage.items[row[0]] = JSON.parse(row[1])
 				}
-				callback()
+				if (callback) callback();
 			});
 		},
 		loadAuth: function(callback) {

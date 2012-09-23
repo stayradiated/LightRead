@@ -5,7 +5,8 @@
 	window.py_ctrl = {
 		send: function(params, callback) {
 			var id = Math.random().toString();
-			requests[id] = callback || false;
+			// console.time(id);
+			requests[id] = callback;
 			document.title = null;
 			document.title = INDICATOR + JSON.stringify({
 				id: id,
@@ -13,6 +14,7 @@
 			});
 		},
 		receive: function(id, reply) {
+			// console.timeEnd(id);
 			if (typeof (requests[id]) == 'function') {
 				requests[id](reply);
 				delete requests[id];

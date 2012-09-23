@@ -55,9 +55,18 @@ except ImportError:
 
 import json
 
+# Get home folder
+from xdg.BaseDirectory import *
+sql_db_path = os.path.join(xdg_data_home, 'com.caffeinatedcode', 'lightread');
+
+if not os.path.exists(sql_db_path):
+    os.makedirs(sql_db_path)
+
+sql_db_path = os.path.join(sql_db_path, 'db.sqlite3')
+
 # Set up SQLite database
 import sqlite3 as sq
-sql_connection = sq.connect('test.db')
+sql_connection = sq.connect(sql_db_path)
 sql_cursor = sql_connection.cursor()
 
 # Check for sharingsupport - make sure that gwibber-poster is in PATH
@@ -153,6 +162,7 @@ class LightreadWindow(Window):
 
         def sql_exec(command):
             sql_cursor.execute(command)
+            sql_connection.commit()
             return sql_cursor.fetchall()
 
         def title_changed(widget, frame, title):
@@ -166,13 +176,7 @@ class LightreadWindow(Window):
                         return
 
                     # Execute SQL here
-                    print ""
-                    print instructions['command']['sql']
-
                     retval = sql_exec(instructions['command']['sql'])
-
-                    print retval
-                    print ""
 
                     self.webview.execute_script('window.py_ctrl.receive("%s", %s)' % (instructions['id'], json.dumps(retval)))
                     return
