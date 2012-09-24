@@ -175,12 +175,12 @@ class LightreadWindow(Window):
                     # Execute SQL here
                     if "sql" in instructions['command']:
                         retval = sql_exec(instructions['command']['sql'])
+                        self.webview.execute_script('window.py_ctrl.receive("%s", %s)' % (instructions['id'], json.dumps(retval)))
 
                     # Commit SQL to disk
                     if "commit" in instructions['command']:
                         sql_connection.commit()
 
-                    self.webview.execute_script('window.py_ctrl.receive("%s", %s)' % (instructions['id'], json.dumps(retval)))
                     return
 
                 print title
