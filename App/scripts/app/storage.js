@@ -43,6 +43,12 @@
 				sql: "DELETE FROM " + table
 			});
 		},
+		// db.commit()
+		commit: function() {
+			py_ctrl.send({
+				commit: true
+			});
+		},
 		_formatData: function(data) {
 			// Remove all the apostrophes
 			data.value = data.value.replace(/'/g, "&#39;")
@@ -161,6 +167,8 @@
 				value = JSON.stringify(storage.items[key]);
 				db.insert('items', {key: key, value: value});
 			}
+
+			db.commit();
 		},
 		setUser: function(user) {
 			storage.user = user;

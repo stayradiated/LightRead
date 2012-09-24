@@ -160,7 +160,6 @@ class LightreadWindow(Window):
 
         def sql_exec(command):
             sql_cursor.execute(command)
-            sql_connection.commit()
             return sql_cursor.fetchall()
 
         def title_changed(widget, frame, title):
@@ -174,7 +173,12 @@ class LightreadWindow(Window):
                         return
 
                     # Execute SQL here
-                    retval = sql_exec(instructions['command']['sql'])
+                    if "sql" in instructions.command:
+                        retval = sql_exec(instructions['command']['sql'])
+
+                    # Commit SQL to disk
+                    if "commit" in instructions.command:
+                        sql_connection.commit()
 
                     self.webview.execute_script('window.py_ctrl.receive("%s", %s)' % (instructions['id'], json.dumps(retval)))
                     return

@@ -22,20 +22,22 @@
 		},
 		web: {
 			send: function(params, callback) {
-				py_ctrl.db.transaction(function(tx) {
-					tx.executeSql(params.sql, [], function(tx, rs) {
-						var tmp_array = [];
-						for(var i=0; i<rs.rows.length; i++) {
-							var row = rs.rows.item(i);
-							var index = tmp_array.length;
-							tmp_array.push([]);
-							for (var key in row) {
-								tmp_array[index].push(row[key]);
+				if (params.hasOwnProperty('sql')) {
+					py_ctrl.db.transaction(function(tx) {
+						tx.executeSql(params.sql, [], function(tx, rs) {
+							var tmp_array = [];
+							for(var i=0; i<rs.rows.length; i++) {
+								var row = rs.rows.item(i);
+								var index = tmp_array.length;
+								tmp_array.push([]);
+								for (var key in row) {
+									tmp_array[index].push(row[key]);
+								}
 							}
-						}
-						if (callback) callback(tmp_array);
+							if (callback) callback(tmp_array);
+						});
 					});
-				});
+				}
 			}
 		},
 		use_web: function() {
