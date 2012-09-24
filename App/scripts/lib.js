@@ -589,7 +589,6 @@ try {
 		},
 		web: {
 			send: function(params, callback) {
-				console.log(params.sql);
 				py_ctrl.db.transaction(function(tx) {
 					tx.executeSql(params.sql, [], function(tx, rs) {
 						var tmp_array = [];
@@ -601,7 +600,6 @@ try {
 								tmp_array[index].push(row[key]);
 							}
 						}
-						console.log(tmp_array);
 						if (callback) callback(tmp_array);
 					});
 				});
@@ -613,8 +611,6 @@ try {
 		}
 	};
 	var requests = py_ctrl.requests = {};
-
-	py_ctrl.use_web();
 
 })();
 /* ./lib/reader.js */

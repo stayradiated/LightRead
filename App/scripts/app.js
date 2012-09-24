@@ -19,6 +19,12 @@ sync = {
 	}
 }
 
+mode = 'python';
+if (document.location.href.slice(0,6) == 'chrome') {
+	mode = 'web';
+	py_ctrl.use_web();
+}
+
 function default_settings() {
 	return {
 		sync: {
