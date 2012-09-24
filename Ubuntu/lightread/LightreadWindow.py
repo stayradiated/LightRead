@@ -34,6 +34,8 @@
 import logging
 logger = logging.getLogger('lightread')
 
+import urllib
+
 import gettext
 from gettext import gettext as _
 gettext.textdomain('lightread')
@@ -74,6 +76,11 @@ sharingsupport = os.path.isfile("/usr/bin/gwibber-poster")
 # See lightread_lib.Window.py for more details about how this class works
 class LightreadWindow(Window):
     __gtype_name__ = "LightreadWindow"
+
+    def select_feed(self, feed_id):
+        select_args = {'feedID': feed_id}
+        js_comm = 'cmd("%s", %s)' % ('select-feed', json.dumps(select_args))
+        self.webview.execute_script(js_comm)
 
     def inspect_webview(self, inspector, widget, data=None):
         inspector_view = WebKit.WebView()
@@ -197,8 +204,6 @@ class LightreadWindow(Window):
                             self.set_title(title[1] + " - Lightread")
 
                         launcher.set_property("count", int(title[1]))
-                        if self.indicator is not None:
-                            self.indicator.set_unread_count(int(title[1]))
                     except UnboundLocalError:
                         pass
 
@@ -236,6 +241,15 @@ class LightreadWindow(Window):
                     elif settings_json.get('background') is False and self.window_close_handler is not None:
                         self.disconnect(self.window_close_handler)
                         self.window_close_handler = None
+
+                elif title[0] == 'feed_count':
+                    if self.indicator is not None:
+                        feed_json = json.loads(title[1])
+                        count = int(feed_json['count'])
+                        if count > 0:
+                            self.indicator.add_indicator(urllib.unquote(feed_json['id']), urllib.unquote(feed_json['title']), count)
+                        else:
+                            self.indicator.remove_indicator(urllib.unquote(feed_json['id']))
 
         # Connects to WebView
         self.webview.connect('title-changed', title_changed)

@@ -246,7 +246,7 @@ $(function() {
 		e.stopPropagation()
 	})
 
-	cmd = function(req) {
+	cmd = function(req, args) {
 		switch(req) {
 
 			case "add":
@@ -357,6 +357,12 @@ $(function() {
 					core.markAllAsRead(selected.feed.id)
 				}
 				break
+
+			case 'select-feed':
+				if (args && args.feedID) {
+					ui.selectFeed(ui.getFeedView(args.feedID));
+				}
+				break
 		}
 	}
 
@@ -382,6 +388,9 @@ $(function() {
  				break
  			case 'settings':
  				document.title = 'settings|' + value
+ 				break
+ 			case 'feed_count':
+ 				document.title = 'feed_count|' + value
  				break
 		}
 	}
