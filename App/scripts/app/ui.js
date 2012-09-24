@@ -392,6 +392,8 @@ ui = {
 			title: feed.title,
 			count: count
 		}
+
+		python('feed_count', JSON.stringify({"id": encodeURIComponent(model.id), "title": encodeURIComponent(model.title), "count": model.count}))
 		return template.feed(model)
 	},
 

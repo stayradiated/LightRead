@@ -32,33 +32,56 @@
 ### END LICENSE
 from gi.repository import Indicate
 
+# Note: it seems the messaging api has been improved greatly for Quantal [12.10]
+# Unfortunately it isn't backwards compatible. The only decent reference I can find
+# for now is https://wiki.edubuntu.org/MeetingLogs/devweek1208/libmessagingmenu
 
 class LightreadIndicator:
     def __init__(self, main_app_window):
         self.main_app = main_app_window
         self.is_visible = False
+        self.indicators = {}
+        self.desktop_file = "/usr/share/applications/extras-lightread.desktop"
 
+        # Create the base messaging server with the application name and icon
         self.server = Indicate.Server.ref_default()
         self.server.set_type("message.mail")
+        self.server.set_desktop_file(self.desktop_file)
+        self.server.connect("server-display", self.display_main_app)
 
         # Apparently if we don't provide a [valid] desktop file
         # the messaging menu displays our indicator as the top-level entry
         # which is exactly what I want to do here...
         # self.server.set_desktop_file("lightread.desktop")
+        # self.ind = Indicate.Indicator()
+        # self.ind.set_property("subtype", "mail")
+        # self.ind.set_property("name", "Lightread")
+        # self.ind.connect("user-display", self.display_main_app)
 
-        self.ind = Indicate.Indicator()
-        self.ind.set_property("subtype", "mail")
-        self.ind.set_property("name", "Lightread")
-        self.ind.connect("user-display", self.display_main_app)
+        # self.server.add_indicator(self.ind)
 
-        self.server.add_indicator(self.ind)
+    def add_indicator(self, feed_id, feed_title, feed_count):
+        if feed_id in self.indicators.keys():
+            indicator = self.indicators[feed_id]
+        else:
+            indicator = Indicate.Indicator()
+            indicator.set_property("subtype", "mail")
+            indicator.set_property("name", feed_title)
+            indicator.connect("user-display", self.display_feed, feed_id)
+            self.indicators[feed_id] = indicator
+            self.server.add_indicator(indicator)
 
-    def set_unread_count(self, unread_count):
-        self.ind.set_property("count", str(unread_count))
+        indicator.set_property('count', str(feed_count))
+        indicator.set_property('draw-attention', 'true')
+        indicator.show()
 
-        if self.is_visible:
-            self.ind.set_property("draw-attention", 'true')
-            self.ind.show()
+    def remove_indicator(self, feed_id):
+        if feed_id in self.indicators.keys():
+            indicator = self.indicators[feed_id]
+            # indicator.set_property('count', '0')
+            # indicator.set_property('draw-attention', 'false')
+            # indicator.hide()
+            self.server.remove_indicator(indicator)
 
     def display_main_app(self, indicator, signal):
         is_visible = self.main_app.get_property("visible")
@@ -67,12 +90,14 @@ class LightreadIndicator:
         else:
             self.main_app.show()
 
+    def display_feed(self, indicator, signal, feed_id):
+        self.display_main_app(indicator, signal)
+        self.main_app.select_feed(feed_id)
+
     def hide(self):
         self.server.hide()
-        self.ind.hide()
         self.is_visible = False
 
     def show(self):
         self.server.show()
-        self.ind.show()
         self.is_visible = True
