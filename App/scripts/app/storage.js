@@ -53,6 +53,7 @@
 	window.storage = {
 		feeds: [],
 		items: {},
+		icons: {},
 		load: function(callback) {
 			db.select('feeds', function(results) {
 				var len = results.length, i
@@ -76,10 +77,10 @@
 					row = results[i];
 					switch(row.key) {
 						case 'user':
-							localStorage.User = row.value
+							storage.user = row.value
 							break
 						case 'auth':
-							localStorage.Auth = row.value
+							storage.auth = row.value
 							break
 						case 'sync':
 							sync = JSON.parse(row.value)
@@ -113,7 +114,7 @@
 				var len = results.length, i, row
 				for (i = 0; i < len; i++) {
 					row = results[i];
-					localStorage['icon-' + row.key] = row.value
+					storage.icons['icon-' + row.key] = row[1]
 				}
 			});
 		},
@@ -145,9 +146,11 @@
 			}
 		},
 		setUser: function(user) {
+			storage.user = user;
 			db.insert('user', {key: 'user', value: user});
 		},
 		setAuth: function(auth) {
+			storage.auth = auth;
 			db.insert('user', {key: 'auth', value: auth});
 		},
 		savePrefs: function() {
@@ -159,10 +162,8 @@
 		},
 		saveIcons: function() {
 			db.empty('icons');
-			for (var key in localStorage) {
-				if (_.string.startsWith(key, 'icon-')) {
-					db.insert('icons', {key: key.substr(5), value: localStorage[key]});
-				}
+			for (var key in storage.icons) {
+				db.insert('icons', {key: key, value: storage.icons[key]});
 			}
 		},
 		init: function() {

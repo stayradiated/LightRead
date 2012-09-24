@@ -1273,8 +1273,8 @@ ui = {
 	},
 
 	loadSettings: function() {
-		if (localStorage.User) {
-			$$.settings.email.html(JSON.parse(localStorage.User).userEmail)
+		if (storage.user) {
+			$$.settings.email.html(JSON.parse(storage.user).userEmail)
 		}
 		$$.settings.sync.interval.val(settings.sync.interval)
 		$$.settings.sync.onStart.prop('checked', settings.sync.onStart)

@@ -64,11 +64,10 @@
 
 	// managing the logged in user
 	reader.setUser = function(user) {
-		localStorage.User = JSON.stringify(user)
-		storage.setUser(localStorage.User)
+		storage.setUser(JSON.stringify(user))
 	}
 	reader.getUser = function() {
-		return JSON.parse(localStorage.User)
+		return JSON.parse(storage.user)
 	}
 
 	// managing the app authentication
@@ -203,8 +202,8 @@
 		reader.is_logged_in = false
 		reader.is_initialized = true
 		// check storage for the tokens we need.
-		if(localStorage.Auth && localStorage.Auth !== "undefined") {
-			reader.setAuth(localStorage.Auth)
+		if(storage.auth && storage.auth !== "undefined") {
+			reader.setAuth(storage.auth)
 			reader.is_logged_in = true
 		}
 		return (reader.is_logged_in)
@@ -222,8 +221,7 @@
 				Passwd : password
 			},
 			onSuccess : function(transport) {
-				localStorage.Auth = _.string.lines(transport.responseText)[2].replace("Auth=", "")
-				storage.setAuth(localStorage.Auth)
+				storage.setAuth(_.string.lines(transport.responseText)[2].replace("Auth=", ""))
 				reader.load()
 				getUserInfo(successCallback)
 			},
@@ -236,8 +234,7 @@
 
 	reader.logout = function() {
 		reader.is_logged_in = false
-		localStorage.Auth = undefined
-		storage.setAuth(localStorage.Auth)
+		storage.setAuth(undefined)
 		reader.setUser({})
 		reader.setAuth("")
 		reader.setFeeds([])
@@ -746,7 +743,7 @@
 	// returns url for image to use in the icon
 	reader.getIconForFeed = function(feedUrl) {
 
-		var iconStorage = localStorage.getItem('icon-' + feedUrl)
+		var iconStorage = storage.icons[feedUrl]
 		if (iconStorage) {
 			// Reuse existing Data URL from localStorage
 			return iconStorage
@@ -782,7 +779,7 @@
 						}
 
 						try {
-							localStorage.setItem('icon-' + feedUrl, result);
+							storage.icons[feedUrl] = result;
 							storage.saveIcons()
 						}
 						catch (e) {
