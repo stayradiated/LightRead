@@ -83,13 +83,6 @@ class LightreadIndicator:
             # indicator.hide()
             self.server.remove_indicator(indicator)
 
-    def new_mail(self, account, count):
-        indicator = self.indicators[account]
-        self.count += count
-        indicator.set_property('count', str(self.count))
-        indicator.set_property('draw-attention', 'true')
-        indicator.show()
-
     def display_main_app(self, indicator, signal):
         is_visible = self.main_app.get_property("visible")
         if is_visible:

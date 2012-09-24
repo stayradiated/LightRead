@@ -200,8 +200,6 @@ class LightreadWindow(Window):
                             self.set_title(title[1] + " - Lightread")
 
                         launcher.set_property("count", int(title[1]))
-                        # if self.indicator is not None:
-                        #     self.indicator.set_unread_count(int(title[1]))
                     except UnboundLocalError:
                         pass
 
