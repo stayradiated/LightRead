@@ -31,19 +31,19 @@
 # SUCH DAMAGE.
 ### END LICENSE
 
+import logging
+logger = logging.getLogger('lightread')
+
 import gettext
 from gettext import gettext as _
 gettext.textdomain('lightread')
 
-import subprocess
-import os
+import subprocess, os, json
 from gi.repository import Gtk, Gdk, WebKit, Notify  # pylint: disable=E0611
 try:
     from gi.repository import Unity, Dbusmenu
 except ImportError:
     pass
-import logging
-logger = logging.getLogger('lightread')
 
 from lightread_lib import Window
 from lightread_lib.helpers import get_media_file
@@ -53,11 +53,9 @@ try:
 except ImportError:
     pass
 
-import json
-
-# Get home folder
+# Get Storage Location for SQLite
 from xdg.BaseDirectory import *
-sql_db_path = os.path.join(xdg_data_home, 'com.caffeinatedcode', 'lightread');
+sql_db_path = os.path.join(xdg_data_home, 'com.caffeinatedcode.lightread');
 
 if not os.path.exists(sql_db_path):
     os.makedirs(sql_db_path)
