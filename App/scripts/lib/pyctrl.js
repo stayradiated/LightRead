@@ -23,9 +23,17 @@
 		web: {
 			send: function(params, callback) {
 				py_ctrl.db.transaction(function(tx) {
-					tx.executeSql(params.sql, [], function(results) {
-						console.log(results);
-						if (callback) callback(results);
+					tx.executeSql(params.sql, [], function(tx, rs) {
+						var tmp_array = [];
+						for(var i=0; i<rs.rows.length; i++) {
+							var row = rs.rows.item(i);
+							var index = tmp_array.length;
+							tmp_array.push([]);
+							for (var key in row) {
+								tmp_array[index].push(row[key]);
+							}
+						}
+						if (callback) callback(tmp_array);
 					});
 				});
 			}
@@ -36,7 +44,5 @@
 		}
 	};
 	var requests = py_ctrl.requests = {};
-
-	py_ctrl.use_web();
 
 })();
