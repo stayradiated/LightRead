@@ -41,7 +41,7 @@ from gettext import gettext as _
 gettext.textdomain('lightread')
 
 import subprocess, os, json
-from gi.repository import Gtk, Gdk, WebKit, Notify  # pylint: disable=E0611
+from gi.repository import Gtk, Gdk, WebKit, Notify, Soup  # pylint: disable=E0611
 try:
     from gi.repository import Unity, Dbusmenu
 except ImportError:
@@ -100,6 +100,14 @@ class LightreadWindow(Window):
 
         self.AboutDialog = AboutLightreadDialog
         self.scroller = self.builder.get_object("scroller")
+
+        #Enables Cookies
+        session = WebKit.get_default_session()
+        cache = os.path.join(xdg_data_home, 'com.caffeinatedcode.lightread')
+        cookie_jar = Soup.CookieJarText.new(os.path.join(cache, 'WebkitSession'), False)
+        session.add_feature(cookie_jar)
+        session.props.max_conns_per_host = 8
+
 
         self.webview = WebKit.WebView()
         self.scroller.add(self.webview)
