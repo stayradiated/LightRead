@@ -935,7 +935,7 @@ ui = {
 						completed = false
 					core.loadItems(undefined, function(percent) {
 
-						// Set progress bar to 90%
+						// Set progress bar to whatever the percentage is.
 						if(percent < 100) {
 							ui.setProgressBarVal(Math.round(percent))
 
