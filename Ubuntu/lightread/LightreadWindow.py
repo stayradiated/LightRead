@@ -65,13 +65,67 @@ if not os.path.exists(sql_db_path):
 sql_db_path = os.path.join(sql_db_path, 'db.sqlite3')
 
 # Set up SQLite database
-import sqlite3 as sq
-sql_connection = sq.connect(sql_db_path)
-sql_cursor = sql_connection.cursor()
+from threading import Thread
+from Queue import Queue
+import sqlite3
 
 # Check for sharingsupport - make sure that gwibber-poster is in PATH
 sharingsupport = os.path.isfile("/usr/bin/gwibber-poster")
 
+class SingleThreadOnly(object):
+    def __init__(self, db):
+        self.cnx = sqlite3.Connection(db) 
+        self.cursor = self.cnx.cursor()
+    def execute(self, req, arg=None):
+        self.cursor.execute(req, arg or tuple())
+    def select(self, req, arg=None):
+        self.execute(req, arg)
+        for raw in self.cursor:
+            yield raw
+    def commit(self):
+        self.cnx.commit()
+    def close(self):
+        self.cnx.close()
+
+class MultiThreadOK(Thread):
+    def __init__(self, db):
+        super(MultiThreadOK, self).__init__()
+        self.db=db
+        self.reqs=Queue()
+        self.start()
+    def run(self):
+        cnx = sqlite3.Connection(self.db) 
+        cursor = cnx.cursor()
+        while True:
+            req, arg, res = self.reqs.get()
+            if req=='--close--': break
+            elif req=='--commit--': 
+                cnx.commit()
+                break
+            elif req=='--fetchall--':
+                print cursor.fetchall()
+            cursor.execute(req, arg)
+            if res:
+                for rec in cursor:
+                    res.put(rec)
+                res.put('--no more--')
+        cnx.close()
+    def execute(self, req, arg=None, res=None):
+        self.reqs.put((req, arg or tuple(), res))
+    def select(self, req, arg=None):
+        res=Queue()
+        self.execute(req, arg, res)
+        while True:
+            rec=res.get()
+            if rec=='--no more--': break
+            yield rec
+    def commit(self):
+        sql.execute("--commit--")
+
+    def close(self):
+        self.execute('--close--')
+
+sql=MultiThreadOK(sql_db_path)
 
 # See lightread_lib.Window.py for more details about how this class works
 class LightreadWindow(Window):
@@ -175,7 +229,10 @@ class LightreadWindow(Window):
 
         def sql_exec(command):
             if command.startswith("SELECT"):
-                return sql.select(command)
+                output = []
+                for key, value in sql.select(command):
+                    output.append([key, value])
+                return output
             else:
                 sql.execute(command)
                 return []
