@@ -4,6 +4,10 @@ Changelog
 1.2 (Not released)
 - Share via Gwibber to Social Networks
 - Messaging Menu
+- Runs in Background
+- Uses SQLite to store data
+- A progress bar that doesn't lie to you
+- Dark Theme / Night Mode
 - Opens last read feed on startup
 - Fixes Feeds without links
 - Fixes Tabular Layours
