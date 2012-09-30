@@ -40,7 +40,10 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('lightread')
 
-import subprocess, os, json
+
+import subprocess, os, json, sqlite3
+from threading import Thread
+from Queue import Queue
 from gi.repository import Gtk, Gdk, WebKit, Notify, Soup  # pylint: disable=E0611
 try:
     from gi.repository import Unity, Dbusmenu
@@ -64,29 +67,7 @@ if not os.path.exists(sql_db_path):
 
 sql_db_path = os.path.join(sql_db_path, 'db.sqlite3')
 
-# Set up SQLite database
-from threading import Thread
-from Queue import Queue
-import sqlite3
-
-# Check for sharingsupport - make sure that gwibber-poster is in PATH
-sharingsupport = os.path.isfile("/usr/bin/gwibber-poster")
-
-class SingleThreadOnly(object):
-    def __init__(self, db):
-        self.cnx = sqlite3.Connection(db) 
-        self.cursor = self.cnx.cursor()
-    def execute(self, req, arg=None):
-        self.cursor.execute(req, arg or tuple())
-    def select(self, req, arg=None):
-        self.execute(req, arg)
-        for raw in self.cursor:
-            yield raw
-    def commit(self):
-        self.cnx.commit()
-    def close(self):
-        self.cnx.close()
-
+#Multithreaded SQLite. I have no idea how this works.
 class MultiThreadOK(Thread):
     def __init__(self, db):
         super(MultiThreadOK, self).__init__()
@@ -126,6 +107,9 @@ class MultiThreadOK(Thread):
         self.execute('--close--')
 
 sql=MultiThreadOK(sql_db_path)
+
+# Check for sharingsupport - make sure that gwibber-poster is in PATH
+sharingsupport = os.path.isfile("/usr/bin/gwibber-poster")
 
 # See lightread_lib.Window.py for more details about how this class works
 class LightreadWindow(Window):
@@ -254,7 +238,8 @@ class LightreadWindow(Window):
 
                     # Commit SQL to disk
                     if "commit" in instructions['command']:
-                        sql_connection.commit()
+                        sql.commit()
+                        print "Committing.."
 
                     return
 
