@@ -4,16 +4,16 @@
 	// Simple SQL replacement
 	var db = {
 		// db.create('feeds', 'key text, value text');
-		create: function(table, columns) {
+		create: function(table, columns, callback) {
 			py_ctrl.send({
 				sql: "CREATE TABLE IF NOT EXISTS " + table + " (" + columns + ")"
-			});
+			}, callback);
 		},
 		// db.drop('feeds');
-		drop: function(table) {
+		drop: function(table, callback) {
 			py_ctrl.send({
 				sql: "DROP TABLE " + table
-			});
+			}, callback);
 		},
 		// db.select('feeds', function(){});
 		select: function(table, callback) {
@@ -191,20 +191,23 @@
 				db.insert('icons', {key: key, value: storage.icons[key]});
 			}
 		},
-		init: function() {
+		init: function(callback) {
 			db.create('feeds', 'key text, value text');
 			db.create('items', 'key text, value text');
-			db.create('user', 'key text unique, value text');
 			db.create('icons', 'key text, value text');
+			db.create('user', 'key text unique, value text', function() {
+				if (callback) callback();
+			});
 		},
 		flush: function() {
-			localStorage.clear();
+			delete storage.user;
+			delete storage.auth;
 			core.pocket.logout();
 			core.instapaper.logout();
+			db.drop('icons');
 			db.drop('feeds');
 			db.drop('items');
 			db.drop('user');
-			db.drop('icons');
 			storage.init();
 			ui.reload();
 		}

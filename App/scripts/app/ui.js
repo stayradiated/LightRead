@@ -936,9 +936,8 @@ ui = {
 					core.loadItems(undefined, function(percent) {
 
 						// Set progress bar to 90%
-						if(!loaded) {
-							ui.setProgressBarVal(90)
-							loaded = true
+						if(percent < 100) {
+							ui.setProgressBarVal(Math.round(percent))
 
 						// Items have finished loading
 						} else if(percent >= 100 && !completed) {
@@ -970,7 +969,6 @@ ui = {
 								}, 500)
 							})
 						}
-						console.log(percent)
 					})
 				})
 			})

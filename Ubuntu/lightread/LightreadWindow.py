@@ -174,8 +174,11 @@ class LightreadWindow(Window):
             return True
 
         def sql_exec(command):
-            sql_cursor.execute(command)
-            return sql_cursor.fetchall()
+            if command.startswith("SELECT"):
+                return sql.select(command)
+            else:
+                sql.execute(command)
+                return []
 
         def title_changed(widget, frame, title):
             if title != 'null':
