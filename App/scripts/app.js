@@ -1,6 +1,12 @@
 
 /*jshint asi: true*/
 
+// Application specific settings
+var app = {
+	version: 1.2,
+	mode: 'python' // python, web
+};
+
 // Selected
 selected = {
 	feed: undefined,
@@ -19,9 +25,9 @@ sync = {
 	}
 }
 
-mode = 'python';
-if (document.location.href.slice(0,6) == 'chrome') {
-	mode = 'web';
+// Auto set to web version if using chrome
+if (app.mode == 'web' || document.location.href.slice(0,6) == 'chrome') {
+	app.mode = 'web';
 	py_ctrl.use_web();
 }
 

@@ -215,4 +215,27 @@
 
 	storage.init();
 
+	// Upgrade from pre 1.2
+	var upgradeStorage = function() {
+		console.log("Running upgrader. Hold on!");
+		// Stop using localstorage
+		for (var key in localStorage) {
+			var value = localStorage[key];
+			if (key == 'Auth') {
+				storage.setAuth(value);
+			} else if (key == 'User') {
+				storage.setUser(value);
+			} else if (key.slice(0,5) == 'icon-') {
+				storage.icons[key.slice(5)] = value;
+			} else {
+				continue;
+			}
+			localStorage.removeItem(key);
+		}
+	};
+	if (typeof(localStorage.Auth) == 'string' &&
+		typeof(localStorage.User) == 'string') {
+		upgradeStorage();
+	}
+
 })();
