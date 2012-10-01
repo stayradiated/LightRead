@@ -1021,6 +1021,9 @@ core = {
 				$$.modal.login.el.fadeIn(300)
 
 			}
+			setTimeout(function() {
+				py_ctrl.send({commit: true})
+			}, 1)
 		})
 
 	},
