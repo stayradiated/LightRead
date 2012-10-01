@@ -47,7 +47,7 @@ from lightread_lib import set_up_logging, get_version
 class LightreadApp(Gtk.Application):
     """ Wrap lightread in a Gtk.Application instance which by default allows only single instances of applications."""
     def __init__(self):
-        Gtk.Application.__init__(self, application_id="org.stayradiated.lightread", flags=Gio.ApplicationFlags.FLAGS_NONE)
+        Gtk.Application.__init__(self, application_id="com.caffeinatedcode.lightread", flags=Gio.ApplicationFlags.FLAGS_NONE)
         self.connect("activate", self.on_activate)
 
     def on_activate(self, data=None):
