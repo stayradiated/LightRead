@@ -915,69 +915,73 @@ ui = {
 		core.login(username, password, function() {
 
 			// Successfully logged in
-
-			// Fade out login form
-			$$.modal.login.el.fadeOut(300, function() {
-
-				// Fade in progress bar
-				$$.loading.progress.fadeIn(300)
-
-				// Load the users feeds
-				core.loadFeeds(function() {
-
-					// On load
-
-					// Load users settings
-					ui.loadSettings()
-
-					// Load users items in each feed
-					var loaded = false,
-						completed = false
-					core.loadItems(undefined, function(percent) {
-
-						// Set progress bar to whatever the percentage is.
-						if(percent < 100) {
-							ui.setProgressBarVal(Math.round(percent))
-
-						// Items have finished loading
-						} else if(percent >= 100 && !completed) {
-
-							// Make sure that it only runs once.
-							// Because it would be bad if it didn't
-							completed = true
-
-							// Set progress bar to 100%
-							ui.setProgressBarVal(100, function() {
-
-								// Load feeds in UI
-								ui.loadFeeds()
-
-								// Load filter counts in UI
-								ui.updateFilters()
-
-								// Select the All Items filter
-								ui.selectFilter($$.filters.all)
-
-								// After half a second, fade out the loading
-								// page and show the UI
-								setTimeout(function() {
-									$$.loading.el.fadeOut(300, function() {
-
-										// Reset progress bar
-										ui.setProgressBarVal(0)
-									})
-								}, 500)
-							})
-						}
-					})
-				})
-			})
+			ui.displayProgressBar();
+			
 		}, function() {
 			$$.modal.login.password.val('')
 			$$.modal.login.error.fadeIn(300)
 			setTimeout(function() {
 				$$.modal.login.error.fadeOut(300)
 			}, 3000)
+		})
+	},
+
+	displayProgressBar: function() {
+		// Fade out login form
+		$$.modal.login.el.fadeOut(300, function() {
+
+			// Fade in progress bar
+			$$.loading.progress.fadeIn(300)
+
+			// Load the users feeds
+			core.loadFeeds(function() {
+
+				// On load
+
+				// Load users settings
+				ui.loadSettings()
+
+				// Load users items in each feed
+				var loaded = false,
+					completed = false
+				core.loadItems(undefined, function(percent) {
+
+					// Set progress bar to whatever the percentage is.
+					if(percent < 100) {
+						ui.setProgressBarVal(Math.round(percent))
+
+					// Items have finished loading
+					} else if(percent >= 100 && !completed) {
+
+						// Make sure that it only runs once.
+						// Because it would be bad if it didn't
+						completed = true
+
+						// Set progress bar to 100%
+						ui.setProgressBarVal(100, function() {
+
+							// Load feeds in UI
+							ui.loadFeeds()
+
+							// Load filter counts in UI
+							ui.updateFilters()
+
+							// Select the All Items filter
+							ui.selectFilter($$.filters.all)
+
+							// After half a second, fade out the loading
+							// page and show the UI
+							setTimeout(function() {
+								$$.loading.el.fadeOut(300, function() {
+
+									// Reset progress bar
+									ui.setProgressBarVal(0)
+								})
+							}, 500)
+						})
+					}
+				})
+			})
 		})
 	},
 

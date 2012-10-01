@@ -1011,7 +1011,8 @@ core = {
 
 					} else {
 						// Run sync
-						core.refresh()
+						// core.refresh()
+						ui.displayProgressBar();
 					}
 				})
 
