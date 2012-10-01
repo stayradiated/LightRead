@@ -180,6 +180,9 @@
 #read-button {
 	background-image: url('../images/night/btn_read.png');
 }
+#instapaper-button {
+	background-image: url('../images/night/icon_instapaper.png');
+}
 
 #item-count {
 	color: #fff;
