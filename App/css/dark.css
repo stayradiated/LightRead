@@ -155,9 +155,32 @@
 .bar {
 	border-top: 1px solid #333;
 }
-.bar button {
-	-webkit-filter: invert() brightness(4%) contrast(1.4);
+
+#add-button {
+	background-image: url('../images/night/btn_add.png');
 }
+#close-post-button {
+	background-image: url('../images/night/btn_close.png');
+}
+#mark-all-as-read-trigger {
+	background-image: url('../images/night/btn_mark_all_read.png');
+}
+#search-button {
+	background-image: url('../images/night/btn_search.png');
+}
+#settings-button {
+	background-image: url('../images/night/btn_settings.png');
+}
+#share-button {
+	background-image: url('../images/night/btn_share.png');
+}
+#star-button {
+	background-image: url('../images/night/btn_star.png');
+}
+#read-button {
+	background-image: url('../images/night/btn_read.png');
+}
+
 #item-count {
 	color: #fff;
 	text-shadow: 0 1px 0 #444;

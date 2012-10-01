@@ -1346,9 +1346,16 @@ ui = {
 			storage.savePrefs()
 		}
 
+		var buttons = ["#add-button", "#close-post-button"];
+
 		if (status) {
 			// Enable nightmode
 			$('head').append('<link class="night-mode" rel="stylesheet" href="css/dark.css">')
+			// buttons.forEach(function(value) {
+			// 	$el = $(value);
+			// 	var src = $el.attr("src");
+			// 	$el.attr("src", src.replace("images", "images/night"));
+			// });
 		} else {
 			// Disable nightmode
 			$('head .night-mode').remove()
