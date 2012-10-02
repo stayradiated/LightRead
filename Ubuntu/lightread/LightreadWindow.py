@@ -62,9 +62,9 @@ except ImportError:
 from xdg.BaseDirectory import *
 sql_db_path = os.path.join(xdg_data_home, 'com.caffeinatedcode.lightread');
 
+# Create SQL database file
 if not os.path.exists(sql_db_path):
     os.makedirs(sql_db_path)
-
 sql_db_path = os.path.join(sql_db_path, 'db.sqlite3')
 
 #Multithreaded SQLite. I have no idea how this works.
@@ -106,7 +106,8 @@ class MultiThreadOK(Thread):
     def close(self):
         self.execute('--close--')
 
-sql=MultiThreadOK(sql_db_path)
+# Open database
+sql = MultiThreadOK(sql_db_path)
 
 # Check for sharingsupport - make sure that gwibber-poster is in PATH
 sharingsupport = os.path.isfile("/usr/bin/gwibber-poster")
@@ -212,7 +213,7 @@ class LightreadWindow(Window):
             return True
 
         def sql_exec(command):
-            if command.startswith("SELECT"):
+            if command.lower().startswith("select"):
                 output = []
                 for key, value in sql.select(command):
                     output.append([key, value])
