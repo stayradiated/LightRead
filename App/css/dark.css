@@ -183,6 +183,9 @@
 #instapaper-button {
 	background-image: url('../images/night/icon_instapaper.png');
 }
+#refresh-button {
+	background-image: url('../images/night/sync.png');
+}
 
 #item-count {
 	color: #fff;
