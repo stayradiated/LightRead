@@ -1024,7 +1024,7 @@ core = {
 			}
 			setTimeout(function() {
 				py_ctrl.send({commit: true})
-			}, 1)
+			}, 2000)
 		})
 
 	},
