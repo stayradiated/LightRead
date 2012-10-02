@@ -76,11 +76,20 @@
 		items: {},
 		icons: {},
 		load: function(callback) {
+			var itemsReady = false;
+			var feedsReady = false;
+			var onComplete = function() {
+				if (itemsReady && feedsReady) {
+					if (callback) callback();
+				}
+			};
 			db.select('feeds', function(results) {
 				var len = results.length, i
 				for (i = 0; i < len; i++) {
 					storage.feeds.push(JSON.parse(results[i][1]))
 				}
+				itemsReady = true;
+				onComplete();
 			});
 			db.select('items', function(results) {
 				var len = results.length, i, row
@@ -88,7 +97,8 @@
 					row = results[i]
 					storage.items[row[0]] = JSON.parse(row[1])
 				}
-				if (callback) callback();
+				feedsReady = true;
+				onComplete();
 			});
 		},
 		loadAuth: function(callback) {

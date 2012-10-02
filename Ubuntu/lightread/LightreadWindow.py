@@ -101,7 +101,8 @@ class MultiThreadOK(Thread):
             if rec=='--no more--': break
             yield rec
     def commit(self):
-        sql.execute("--commit--")
+        print "--commit--"
+        self.execute("--commit--")
 
     def close(self):
         self.execute('--close--')
@@ -240,7 +241,6 @@ class LightreadWindow(Window):
                     # Commit SQL to disk
                     if "commit" in instructions['command']:
                         sql.commit()
-                        print "Committing.."
 
                     return
 
