@@ -223,8 +223,6 @@
 		}
 	}
 
-	storage.init();
-
 	// Upgrade from pre 1.2
 	var upgradeStorage = function() {
 		console.log("Running upgrader. Hold on!");
@@ -232,20 +230,30 @@
 		for (var key in localStorage) {
 			var value = localStorage[key];
 			if (key == 'Auth') {
-				storage.setAuth(value);
+				var auth = value;
 			} else if (key == 'User') {
-				storage.setUser(value);
+				var user = value;
 			} else if (key.slice(0,5) == 'icon-') {
-				storage.icons[key.slice(5)] = value;
+				
 			} else {
 				continue;
 			}
 			localStorage.removeItem(key);
 		}
+
+		db.drop('user');
+
+		storage.init(function() {
+			storage.setAuth(auth);
+			storage.setUser(user);
+		});
+
 	};
 	if (typeof(localStorage.Auth) == 'string' &&
 		typeof(localStorage.User) == 'string') {
 		upgradeStorage();
+	} else {
+		storage.init();
 	}
 
 })();
