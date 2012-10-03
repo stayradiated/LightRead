@@ -255,7 +255,11 @@
 		upgradeStorage();
 	} else {
 		storage.init(function() {
+			console.log("Storage ready");
 			app.storageReady = true;
+			if (app.appReady) {
+				core.init();
+			}
 		});
 	}
 

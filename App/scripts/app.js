@@ -4,7 +4,9 @@
 // Application specific settings
 var app = {
 	version: 1.2,
-	mode: 'python' // python, web
+	mode: 'web', // python, web
+	storageReady: false,
+	appReady: false
 };
 
 // Selected
@@ -403,9 +405,13 @@ $(function() {
 	}
 
 	// Load feeds
+	console.log("core ready")
 	if (app.storageReady) {
 		console.log('App.js : Initiating core.init()...')
 		core.init()
+	} else {
+		console.log("Storage not ready yet")
+		app.appReady = true;
 	}
 
 	// Post
