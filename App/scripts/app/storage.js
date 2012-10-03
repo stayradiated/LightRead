@@ -244,6 +244,8 @@
 				storage.setAuth(auth);
 				storage.setUser(user);
 				console.log("Finished upgrading...");
+				app.storageReady = true;
+				core.init();
 			});
 		});
 
@@ -252,7 +254,9 @@
 		typeof(localStorage.User) == 'string') {
 		upgradeStorage();
 	} else {
-		storage.init();
+		storage.init(function() {
+			app.storageReady = true;
+		});
 	}
 
 })();

@@ -403,8 +403,10 @@ $(function() {
 	}
 
 	// Load feeds
-	console.log('Running core...')
-	core.init()
+	if (app.storageReady) {
+		console.log('App.js : Initiating core.init()...')
+		core.init()
+	}
 
 	// Post
 	$$.column.post.on('click', function() {

@@ -990,6 +990,8 @@ core = {
 
 	init: function() {
 
+		console.log("Running core.init")
+
 		// Load user credentials
 		storage.loadAuth(function() {
 
