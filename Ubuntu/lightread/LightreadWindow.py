@@ -40,10 +40,7 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('lightread')
 
-
-import subprocess, os, json, sqlite3
-from threading import Thread
-from Queue import Queue
+import subprocess, os, json
 from gi.repository import Gtk, Gdk, WebKit, Notify, Soup  # pylint: disable=E0611
 try:
     from gi.repository import Unity, Dbusmenu
@@ -60,55 +57,6 @@ except ImportError:
 
 # Get Storage Location for SQLite
 from xdg.BaseDirectory import *
-sql_db_path = os.path.join(xdg_data_home, 'com.caffeinatedcode.lightread');
-
-# Create SQL database file
-if not os.path.exists(sql_db_path):
-    os.makedirs(sql_db_path)
-sql_db_path = os.path.join(sql_db_path, 'db.sqlite3')
-
-#Multithreaded SQLite. I have no idea how this works.
-class MultiThreadOK(Thread):
-    def __init__(self, db):
-        super(MultiThreadOK, self).__init__()
-        self.db=db
-        self.reqs=Queue()
-        self.start()
-    def run(self):
-        cnx = sqlite3.Connection(self.db) 
-        cursor = cnx.cursor()
-        while True:
-            req, arg, res = self.reqs.get()
-            if req=='--close--': break
-            elif req=='--commit--': 
-                cnx.commit()
-                break
-            elif req=='--fetchall--':
-                print cursor.fetchall()
-            cursor.execute(req, arg)
-            if res:
-                for rec in cursor:
-                    res.put(rec)
-                res.put('--no more--')
-        cnx.close()
-    def execute(self, req, arg=None, res=None):
-        self.reqs.put((req, arg or tuple(), res))
-    def select(self, req, arg=None):
-        res=Queue()
-        self.execute(req, arg, res)
-        while True:
-            rec=res.get()
-            if rec=='--no more--': break
-            yield rec
-    def commit(self):
-        print "--commit--"
-        self.execute("--commit--")
-
-    def close(self):
-        self.execute('--close--')
-
-# Open database
-sql = MultiThreadOK(sql_db_path)
 
 # Check for sharingsupport - make sure that gwibber-poster is in PATH
 sharingsupport = os.path.isfile("/usr/bin/gwibber-poster")
@@ -213,37 +161,9 @@ class LightreadWindow(Window):
             logger.debug('%s:%s "%s"' % (source, line, message))
             return True
 
-        def sql_exec(command):
-            if command.lower().startswith("select"):
-                output = []
-                for key, value in sql.select(command):
-                    output.append([key, value])
-                return output
-            else:
-                sql.execute(command)
-                return []
-
         def title_changed(widget, frame, title):
             if title != 'null':
-
-                INDICATOR = "!COMMAND!"
-                if title.startswith(INDICATOR):
-                    try:
-                        instructions = json.loads(title[len(INDICATOR):])
-                    except:
-                        return
-
-                    # Execute SQL here
-                    if "sql" in instructions['command']:
-                        retval = sql_exec(instructions['command']['sql'])
-                        self.webview.execute_script('window.py_ctrl.receive("%s", %s)' % (instructions['id'], json.dumps(retval)))
-
-                    # Commit SQL to disk
-                    if "commit" in instructions['command']:
-                        sql.commit()
-
-                    return
-
+                
                 print title
                 title = title.split("|")
 

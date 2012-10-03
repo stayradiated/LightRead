@@ -28,8 +28,9 @@ sync = {
 // Auto set to web version if using chrome
 if (app.mode == 'web' || document.location.href.slice(0,6) == 'chrome') {
 	app.mode = 'web';
-	py_ctrl.use_web();
 }
+
+py_ctrl.use_web();
 
 function default_settings() {
 	return {
