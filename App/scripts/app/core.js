@@ -1001,6 +1001,8 @@ core = {
 				// Load feeds and items
 				storage.load(function() {
 
+					console.log("Numeber of feeds: ", storage.feeds.length);
+
 					// If we have feeds
 					if (storage.feeds.length !== 0) {
 						ui.init()

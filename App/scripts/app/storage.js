@@ -233,8 +233,6 @@
 				var auth = value;
 			} else if (key == 'User') {
 				var user = value;
-			} else if (key.slice(0,5) == 'icon-') {
-				
 			} else {
 				continue;
 			}
@@ -245,7 +243,7 @@
 			storage.init(function() {
 				storage.setAuth(auth);
 				storage.setUser(user);
-				console.log(storage.user);
+				console.log("Finished upgrading...");
 			});
 		});
 

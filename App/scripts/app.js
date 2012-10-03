@@ -403,6 +403,7 @@ $(function() {
 	}
 
 	// Load feeds
+	console.log('Running core...')
 	core.init()
 
 	// Post
