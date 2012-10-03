@@ -988,7 +988,7 @@ core = {
 	// *
 	// *************************************
 
-	init: function() {
+	init: function(isUpgrade) {
 
 		console.log("Running core.init")
 
@@ -1006,7 +1006,7 @@ core = {
 					console.log("Numeber of feeds: ", storage.feeds.length);
 
 					// If we have feeds
-					if (storage.feeds.length !== 0) {
+					if (!isUpgrade && storage.feeds.length !== 0) {
 						ui.init()
 
 						if (settings.sync.onStart) {

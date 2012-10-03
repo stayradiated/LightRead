@@ -245,7 +245,7 @@
 				storage.setUser(user);
 				console.log("Finished upgrading...");
 				app.storageReady = true;
-				core.init();
+				core.init("Is Upgrade");
 			});
 		});
 
