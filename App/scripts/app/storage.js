@@ -241,11 +241,12 @@
 			localStorage.removeItem(key);
 		}
 
-		db.drop('user');
-
-		storage.init(function() {
-			storage.setAuth(auth);
-			storage.setUser(user);
+		db.drop('user', function() {
+			storage.init(function() {
+				storage.setAuth(auth);
+				storage.setUser(user);
+				console.log(storage.user);
+			});
 		});
 
 	};
