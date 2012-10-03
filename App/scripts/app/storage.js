@@ -243,9 +243,7 @@
 			storage.init(function() {
 				storage.setAuth(auth);
 				storage.setUser(user);
-				console.log("Finished upgrading...");
 				app.storageReady = true;
-				core.init("Is Upgrade");
 			});
 		});
 
@@ -255,7 +253,6 @@
 		upgradeStorage();
 	} else {
 		storage.init(function() {
-			console.log("Storage ready");
 			app.storageReady = true;
 			if (app.appReady) {
 				core.init();
