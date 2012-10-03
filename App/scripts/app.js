@@ -430,7 +430,7 @@ $(function() {
 
 	$$.articles.on('scroll', function() {
 		var obj = $$.articles[0]
-		if (obj.scrollTop >= (obj.scrollHeight - obj.offsetHeight + 13)) {
+		if (obj.scrollTop >= (obj.scrollHeight - obj.offsetHeight)) {
 			ui.loadItems(selected.itemsArray, true, obj.scrollTop, 'all')
 		}
 	})
