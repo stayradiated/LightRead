@@ -31,6 +31,7 @@
 # SUCH DAMAGE.
 ### END LICENSE
 from gi.repository import Indicate
+from lightread_lib.helpers import get_media_file
 
 # Note: it seems the messaging api has been improved greatly for Quantal [12.10]
 # Unfortunately it isn't backwards compatible. The only decent reference I can find
@@ -42,7 +43,8 @@ class LightreadIndicator:
         self.is_visible = False
         self.indicators = {}
         self.desktop_file = "/usr/share/applications/extras-lightread.desktop"
-
+        self.icon_name = get_media_file('lightread.png')
+        
         # Create the base messaging server with the application name and icon
         self.server = Indicate.Server.ref_default()
         self.server.set_type("message.mail")

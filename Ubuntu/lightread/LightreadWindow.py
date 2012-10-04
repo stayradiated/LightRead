@@ -185,7 +185,7 @@ class LightreadWindow(Window):
                     # Update notification and show only if not changed and window not focused
                     if self.notification.get_property('body') != title[2]:
                         if self.is_active() is not True:
-                            self.notification.set_property('body', title[2])
+                            self.notification.set_property('body', title[2], get_media_file('lightread.png'))
                             self.notification.show()
 
                 elif title[0] == 'copy':

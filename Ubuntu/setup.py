@@ -82,13 +82,12 @@ class InstallAndUpdateDataDirectory(DistUtilsExtra.auto.install_auto):
 ##################################################################################
 DistUtilsExtra.auto.setup(
     name='lightread',
-    version='1.0.20',
+    version='1.2.1',
     license='BSD',
     author='George Czabania',
     author_email='george@czabania.com',
     description='A lightweight news reader.',
     #long_description='Here a longer description',
     url='https://launchpad.net/lightread',
-    cmdclass={'install': InstallAndUpdateDataDirectory},
-    data_files=[('share/icons/hicolor/128x128/apps', ['data/media/lightread.png'])]
+    cmdclass={'install': InstallAndUpdateDataDirectory}
 )
