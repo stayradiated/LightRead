@@ -1,0 +1,27 @@
+<page xmlns="http://projectmallard.org/1.0/"
+		type="topic"
+		id="signing">
+
+<info>
+	<link type="guide" xref="index#contents"/>
+	<credit type="author">
+		<name>Nekhelesh Ramananthan</name>
+		<email>krnekhelesh@gmail.com</email>
+		<years>2012</years>
+	</credit>
+	<desc>Creating an account</desc>
+</info>
+
+<title>First Run</title>
+<p>Lightread is a Google Reader application. You cannot use it without having a google account. On first run, you are prompted to enter your google account details. By syncing all your feeds with Google Reader, Lightread allows you to access your RSS feeds anywhere using just your google account.</p>
+
+<figure>
+	<title>Login details</title>
+	<media type="image" mime="image/png" src="figures/login-screen.png" width="384" height="207"/>
+	<desc>Enter your google account credentials</desc>
+</figure>
+
+<p>If you do not have a google account, you can register a new account by clicking the register button. This will open the google account creating wizard on your default web browser.</p>
+
+
+</page>

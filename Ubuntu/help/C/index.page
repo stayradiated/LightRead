@@ -7,8 +7,8 @@
   <title type="text">Lightread</title>
   <desc>The <app>Lightread</app> help.</desc>
   <credit type="author">
-    <name>George Czabania</name>
-    <email>george@czabania.com</email>
+    <name>Nekhelesh</name>
+    <email>krnekhelesh@gmail.com</email>
     <years>2012</years>
   </credit>
   <license href="http://creativecommons.org/licenses/by-sa/3.0/">
@@ -23,6 +23,26 @@
 <app>Lightread</app> Help
 </title>
 
-<p>Lightread was written in three weeks so we haven't had enough time to write a help manual. We apologize for any inconvenience this may have caused.</p>
+<p>Lightread is an offline RSS Google Reader. It is designed to be a one stop place for managing your entire collection of RSS feeds.</p>
+
+<figure>
+  <title>Lightread</title>
+  <media type="image" mime="image/png" src="figures/Lightread.png" width="750" height="450"/>
+  <desc>Main Lightread interface</desc>
+</figure>
+
+<!-- This is the visible index -->
+<section id="contents" style="2column">
+<!-- other pages needs to have a link to index#contents for this to work -->
+<title>Contents</title>
+</section>
+
+<section id="faq" style="2column">
+<title>Frequently Asked Questions</title>
+</section>
+
+<note style="important">
+<p>The help documentation is currently in development. Please report any errors that you find by reporting the bugs at launchpad <link href="https://launchpad.net/lightread">here</link>.</p>
+</note>
 
 </page>
