@@ -14,10 +14,13 @@ XB-Python-Version: ${python:Versions}
 Depends: ${misc:Depends},
  ${python:Depends},
  gir1.2-notify-0.7,
+ gir1.2-indicate-0.7,
  gir1.2-gtk-3.0,
  gir1.2-glib-2.0,
  gir1.2-dbusmenu-glib-0.4,
  gir1.2-unity-5.0,
+ gir1.2-soup-2.4,
+ python-xdg,
  gir1.2-webkit-3.0,
  gir1.2-launchpad-integration-3.0,
  yelp

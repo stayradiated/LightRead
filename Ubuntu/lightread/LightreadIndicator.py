@@ -5,7 +5,7 @@
 # Copyright (C) 2012 Jono Cooper
 # Copyright (c) The Regents of the University of California.
 # All rights reserved.
-#
+# 
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
 # are met:
@@ -17,7 +17,7 @@
 # 3. Neither the name of the University nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
-#
+# 
 # THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
 # ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -31,7 +31,6 @@
 # SUCH DAMAGE.
 ### END LICENSE
 from gi.repository import Indicate
-from lightread_lib.helpers import get_media_file
 
 # Note: it seems the messaging api has been improved greatly for Quantal [12.10]
 # Unfortunately it isn't backwards compatible. The only decent reference I can find
@@ -43,8 +42,7 @@ class LightreadIndicator:
         self.is_visible = False
         self.indicators = {}
         self.desktop_file = "/usr/share/applications/extras-lightread.desktop"
-        self.icon_name = get_media_file('lightread.png')
-        
+
         # Create the base messaging server with the application name and icon
         self.server = Indicate.Server.ref_default()
         self.server.set_type("message.mail")

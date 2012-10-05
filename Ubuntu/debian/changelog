@@ -1,9 +1,30 @@
+lightread (1.2.2) precise; urgency=low
+
+  * New release.
+
+ -- consindo <jono@caffeinatedco.de>  Fri, 05 Oct 2012 20:59:04 +1300
+
+lightread (1.2ubuntu1) precise; urgency=low
+
+  * 
+
+ -- Jono Cooper <jono@jono-netbook>  Fri, 05 Oct 2012 20:57:20 +1300
+
+lightread (1.2) precise; urgency=low
+
+  * Fix Packaging
+
+ -- consindo <jono@caffeinatedco.de>  Wed, 03 Oct 2012 16:36:00 +1300
+
 lightread (1.0.20) precise; urgency=low
 
+  [ consindo ]
   * Shows Count in Title
   * Improve Keyboard Shortcuts
 
- -- consindo <jono@caffeinatedco.de>  Tue, 17 Jul 2012 23:52:46 +1200
+  [ Jono Cooper ]
+
+ -- Jono Cooper <jono@jono-netbook>  Sun, 30 Sep 2012 23:55:11 +1300
 
 lightread (1.0.19) precise; urgency=low
 

@@ -25,7 +25,7 @@
     <property name="window_position">center</property>
     <property name="default_width">1200</property>
     <property name="default_height">675</property>
-    <property name="icon">../media/lightread.png</property>
+    <property name="icon">../../icons/hicolor/128x128/apps/lightread.png</property>
     <child>
       <object class="GtkVBox" id="vbox1">
         <property name="visible">True</property>

@@ -5,7 +5,7 @@
 # Copyright (C) 2012 Jono Cooper
 # Copyright (c) The Regents of the University of California.
 # All rights reserved.
-#
+# 
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
 # are met:
@@ -17,7 +17,7 @@
 # 3. Neither the name of the University nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
-#
+# 
 # THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
 # ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -126,7 +126,7 @@ class LightreadWindow(Window):
 
         # Unity Support
         Notify.init('Lightread')
-        self.notification = Notify.Notification.new('Lightread', '', 'lightread')
+        self.notification = Notify.Notification.new('Lightread', '', '/usr/share/icons/hicolor/128x128/apps/lightread.png')
 
         try:
             launcher = Unity.LauncherEntry.get_for_desktop_id("extras-lightread.desktop")
@@ -185,7 +185,7 @@ class LightreadWindow(Window):
                     # Update notification and show only if not changed and window not focused
                     if self.notification.get_property('body') != title[2]:
                         if self.is_active() is not True:
-                            self.notification.set_property('body', title[2], get_media_file('lightread.png'))
+                            self.notification.set_property('body', title[2])
                             self.notification.show()
 
                 elif title[0] == 'copy':
