@@ -1,0 +1,33 @@
+<page xmlns="http://projectmallard.org/1.0/"
+		type="topic"
+		id="file-bug">
+
+<info>
+	<link type="guide" xref="index#get-involved"/>
+	<credit type="author">
+		<name>Nekhelesh Ramananthan</name>
+		<email>krnekhelesh@gmail.com</email>
+		<years>2012</years>
+	</credit>
+	<desc>How and where to report problems?</desc>
+</info>
+
+<title>File a bug</title>
+<p>First of all, thank you very much for taking the time to report bugs to help improve <app>Lightread</app>. <app>Lightread</app> is an open source project meaning, you are welcome to have a look at the source code and help us identify and fix bugs.</p>
+
+<p>Bug management is currently done in Launchpad. It is a place where you can see the status of current bugs in <app>Lightread</app>.</p>
+
+<p>Follow the following steps to report a bug against <app>Lightread</app>,</p>
+
+<steps>
+  <item><p>Register for an account on <link href="https://launchpad.net/">Launchpad</link>, if you don't already have one.</p></item>
+  <item><p>Proceed to the <app>Lightread</app> project page on <link href="https://launchpad.net/lightread">Launchpad</link>.</p></item>
+  <item><p>Search for similar bugs. If a similar bug report exists add any additional information you think might be missing.</p></item>
+  <item><p>Otherwise proceed to create a new bug report. Try to provide as much information as possible to help the developer fix the issue.</p></item>
+  <item><p>Monitor the issue and respond to any questions asked by the developer. By default any new update on the bug report should send a email notification</p></item>
+  <item><p>If the bug is fixed, close the bug</p></item>
+</steps>
+
+
+
+</page>

@@ -1,0 +1,23 @@
+<page xmlns="http://projectmallard.org/1.0/"
+		type="topic"
+		id="starred-post">
+
+<info>
+	<link type="guide" xref="index#working-with-feeds"/>
+	<credit type="author">
+		<name>Nekhelesh Ramananthan</name>
+		<email>krnekhelesh@gmail.com</email>
+		<years>2012</years>
+	</credit>
+	<desc>Marking a post starred</desc>
+</info>
+
+<title>Starred post</title>
+<p><app>Lightread</app> provides you with the option to save a post for later reading. You can do this by marking a post starred. You can also use this feature to mark a feed important for easy identification in the future.</p>
+
+<p>Marking a post starred can be done by either pressing <keyseq><key>s</key></keyseq> or the <media type="image" mime="image/png" src="figures/btn_star.png">starred post icon</media> button located at the bottom.</p>
+
+<p>You can see all starred posts by clicking the Starred option in the sidebar or by pressing <keyseq><key>Ctrl</key><key>3</key></keyseq>.</p>
+
+
+</page>

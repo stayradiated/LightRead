@@ -1,0 +1,27 @@
+<page xmlns="http://projectmallard.org/1.0/"
+		type="topic"
+		id="add-feed">
+
+<info>
+	<link type="guide" xref="index#working-with-feeds"/>
+	<credit type="author">
+		<name>Nekhelesh Ramananthan</name>
+		<email>krnekhelesh@gmail.com</email>
+		<years>2012</years>
+	</credit>
+	<desc>Subscribing to a new feed</desc>
+</info>
+
+<title>Add feed</title>
+<p>Subscribing to a new feed is extremely easy. You can either press <keyseq><key>Ctrl</key><key>N</key></keyseq> or the <media type="image" mime="image/png" src="figures/btn_add.png">new feed icon</media> button which is found at the bottom left to add a new feed. You will then see a pop up as shown below, where you can type the web address to the rss feed you want to subscribe to.</p>
+
+<figure>
+  <media type="image" mime="image/png" src="figures/add-feed.png"/> 
+</figure>
+
+<note>
+<p>The web address that you enter should not refer to the actual website but rather to the rss feed of the website. This can be generally be observed by looking at the end of the web address. If it ends with rss, you have most likely got the correct address.</p>
+</note> 
+
+
+</page>
