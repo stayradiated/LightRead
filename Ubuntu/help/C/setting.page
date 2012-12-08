@@ -1,0 +1,22 @@
+<page xmlns="http://projectmallard.org/1.0/"
+		type="topic"
+		id="setting">
+
+<info>
+	<link type="guide" xref="index#setting-up-lightread"/>
+	<credit type="author">
+		<name>Nekhelesh Ramananthan</name>
+		<email>krnekhelesh@gmail.com</email>
+		<years>2012</years>
+	</credit>
+	<desc>Changing default settings</desc>
+</info>
+
+<title>Setting</title>
+<p><app>Lightread</app> provides many options to customise your reading options. A preview of the setting pane is shown below.</p>
+
+<figure>
+<media type="image" mime="image/png" src="figures/settings.png"/>  
+</figure>
+
+</page>

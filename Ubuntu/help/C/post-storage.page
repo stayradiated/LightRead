@@ -1,0 +1,24 @@
+<page xmlns="http://projectmallard.org/1.0/"
+		type="topic"
+		id="post-storage">
+
+<info>
+	<link type="guide" xref="index#setting-up-lightread"/>
+	<credit type="author">
+		<name>Nekhelesh Ramananthan</name>
+		<email>krnekhelesh@gmail.com</email>
+		<years>2012</years>
+	</credit>
+	<desc>Change how long posts are stored</desc>
+</info>
+
+<title>Post Storage</title>
+<p><app>Lightread</app> provides fine grained control over the storage of posts. The default settings ensure that the posts are not retained permanently to reduce the disk space usage. You can control how long and which posts to retain in the setting pane as shown below in the screenshot.</p>
+
+<figure>
+<media type="image" mime="image/png" src="figures/post-storage.png"/>  
+</figure>
+
+<p>You can decide how long you would like to keep posts depending on if they are starred, read or unread. By default all unread and starred posts are kept forever.</p>
+
+</page>

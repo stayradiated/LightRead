@@ -1,0 +1,20 @@
+<page xmlns="http://projectmallard.org/1.0/"
+		type="topic"
+		id="search-post">
+
+<info>
+	<link type="guide" xref="index#working-with-feeds"/>
+	<credit type="author">
+		<name>Nekhelesh Ramananthan</name>
+		<email>krnekhelesh@gmail.com</email>
+		<years>2012</years>
+	</credit>
+	<desc>Searching a particular post</desc>
+</info>
+
+<title>Search post</title>
+<p><app>Lightread</app> helps you manage your rss feeds in an organised manner. It also provides a quick way to search for a post. Searching for a post is done by either pressing <keyseq><key>/</key></keyseq> or the <media type="image" mime="image/png" src="figures/btn_search.png">search post icon</media> button located at the bottom.</p>
+
+<p>As you type, <app>Lightread</app> will start listing the posts which best fit your search terms.</p>
+
+</page>
