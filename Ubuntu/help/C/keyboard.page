@@ -1,0 +1,82 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      xmlns:ui="http://projectmallard.org/experimental/ui/"
+      type="topic" style="tip"
+      id="keyboard">
+
+<info>
+	<link type="guide" xref="index"/>
+	<credit type="author">
+		<name>Nekhelesh Ramananthan</name>
+		<email>krnekhelesh@gmail.com</email>
+		<years>2012</years>
+	</credit>
+</info>
+
+<title>Shortcut Keys</title>
+<p>Shortcut keys helps to perform common tasks quickly. The table below lists all the available shortcut keyboard for <app>Lightread</app>.</p>
+
+<table frame="top bottom" rules="rows" ui:expanded="yes">
+ <title>Navigation</title>
+ <thead>
+  <tr>
+	<td><p>Action</p></td> <td><p>Shortcut Key</p></td>
+  </tr>
+ </thead>
+
+ <tbody>
+ <tr> <td><p>Move around feeds,items and post</p></td> <td><p><keyseq><key>Arrow Keys</key></keyseq></p></td> </tr>
+ <tr> <td><p>Scan next/previous article</p></td> <td><p><keyseq><key>n/p</key></keyseq></p></td> </tr>
+ <tr> <td><p>Scan next/previous subscription</p></td> <td><p><keyseq><key>shift</key><key>n/p</key></keyseq></p></td> </tr>
+ <tr> <td><p>Select Article</p></td> <td><p><keyseq><key>Enter</key></keyseq></p></td> </tr>
+ </tbody>
+</table>
+
+<table frame="top bottom" rules="rows" ui:expanded="no">
+ <title>Application</title>
+ <thead>
+  <tr>
+	<td><p>Action</p></td> <td><p>Shortcut Key</p></td>
+  </tr>
+ </thead>
+
+ <tbody>
+ <tr> <td><p>Add New subscription/feed</p></td> <td><p><keyseq><key>Ctrl</key><key>N</key></keyseq></p></td> </tr>
+ <tr> <td><p>Sync</p></td> <td><p><keyseq><key>Ctrl</key><key>S</key></keyseq></p></td> </tr>
+ <tr> <td><p>Perform search</p></td> <td><p><keyseq><key>/</key></keyseq></p></td> </tr>
+ <tr> <td><p>Zoom</p></td> <td><p><keyseq><key>=</key></keyseq></p></td> </tr>
+ </tbody>
+</table>
+
+<table frame="top bottom" rules="rows" ui:expanded="no">
+ <title>Filters</title>
+ <thead>
+  <tr>
+	<td><p>Action</p></td> <td><p>Shortcut Key</p></td>
+  </tr>
+ </thead>
+
+ <tbody>
+ <tr> <td><p>View All Items</p></td> <td><p><keyseq><key>Ctrl</key><key>1</key></keyseq></p></td> </tr>
+ <tr> <td><p>View Unread</p></td> <td><p><keyseq><key>Ctrl</key><key>2</key></keyseq></p></td> </tr>
+ <tr> <td><p>View Starred</p></td> <td><p><keyseq><key>Ctrl</key><key>3</key></keyseq></p></td> </tr>
+ </tbody>
+</table>
+
+<table frame="top bottom" rules="rows" ui:expanded="no">
+ <title>Acting on items</title>
+ <thead>
+  <tr>
+	<td><p>Action</p></td> <td><p>Shortcut Key</p></td>
+  </tr>
+ </thead>
+
+ <tbody>
+ <tr> <td><p>Toggle read status</p></td> <td><p><keyseq><key>m</key></keyseq></p></td> </tr>
+ <tr> <td><p>View original</p></td> <td><p><keyseq><key>v</key></keyseq></p></td> </tr>
+ <tr> <td><p>Mark Starred</p></td> <td><p><keyseq><key>s</key></keyseq></p></td> </tr>
+ <tr> <td><p>Mark all read</p></td> <td><p><keyseq><key>Shift</key><key>=</key><key>a</key></keyseq></p></td> </tr>
+ </tbody>
+</table>
+
+
+</page>

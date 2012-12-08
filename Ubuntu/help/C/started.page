@@ -1,0 +1,26 @@
+<page xmlns="http://projectmallard.org/1.0/"
+		type="topic" style="task"
+		id="started">
+
+<info>
+	<link type="guide" xref="index"/>
+	<link type="seealso" xref="keyboard"/>
+	<credit type="author">
+		<name>Nekhelesh Ramananthan</name>
+		<email>krnekhelesh@gmail.com</email>
+		<years>2012</years>
+	</credit>
+</info>
+
+<title>Getting started with Lightread</title>
+<p><app>Lightread</app> is an offline RSS Google Reader. It is designed to be a one stop place for managing your entire collection of RSS feeds. <app>Lightread</app> helps you keep up with your favorite websites all from one place. Stay up to date!</p>
+
+<figure>
+<media type="image" mime="image/png" src="figures/Lightread.png" width="750" height="400"/>  
+</figure>
+
+<p>Since it is based on Google reader, it will automatically retrieve other blogs you subscribed to in Google reader.</p>
+
+<p>To learn more about other <app>Lightread</app> features explore the <link xref="index">other sections</link> of the <app>Lightread</app> help.</p>
+
+</page>

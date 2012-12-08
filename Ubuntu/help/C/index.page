@@ -1,48 +1,46 @@
 <page xmlns="http://projectmallard.org/1.0/"
-      type="guide"
+      type="guide" style="2column task"
       id="index">
 
 <info>
-  <!-- This shows in the title bar so does not show [icon] -->
+  <title type="link">Lightread</title>
   <title type="text">Lightread</title>
   <desc>The <app>Lightread</app> help.</desc>
+
   <credit type="author">
-    <name>Nekhelesh</name>
+    <name>Nekhelesh Ramananthan</name>
     <email>krnekhelesh@gmail.com</email>
     <years>2012</years>
   </credit>
+
   <license href="http://creativecommons.org/licenses/by-sa/3.0/">
-  <p>Creative Commons Attribution-Share Alike 3.0 Unported License</p>
+    <p>Creative Commons Attribution-Share Alike 3.0 Unported License</p>
   </license>
 </info>
 
 <title>
-<!-- This shows on the page in title font -->
-<!-- the icon only shows when installed -->
-<media type="image" mime="image/png" src="figures/icon.png">[icon]</media>
-<app>Lightread</app> Help
+  <media type="image" mime="image/png" src="figures/logo.png">[icon]</media>
+  Lightread
 </title>
 
-<p>Lightread is an offline RSS Google Reader. It is designed to be a one stop place for managing your entire collection of RSS feeds.</p>
+<p>Welcome to the <app>Lightread</app> help guide. If you are new to <app>Lightread</app>, it is recommended that you read the getting started guide here. It will get you up to speed in 5 minutes. The help topics are split into groups to help you identify and find the topics quickly.</p>
 
-<figure>
-  <title>Lightread</title>
-  <media type="image" mime="image/png" src="figures/Lightread.png" width="750" height="450"/>
-  <desc>Main Lightread interface</desc>
-</figure>
+<p>Enjoy using <app>Lightread</app>!</p>
 
-<!-- This is the visible index -->
-<section id="contents" style="2column">
-<!-- other pages needs to have a link to index#contents for this to work -->
-<title>Contents</title>
+<section id="setting-up-lightread" style="2column">
+  <title>Setting up <app>Lightread</app></title>
+</section>
+
+<section id="working-with-feeds" style="2column">
+  <title>Working with feeds</title>
 </section>
 
 <section id="faq" style="2column">
-<title>Frequently Asked Questions</title>
+  <title>Frequently asked questions</title>
 </section>
 
-<note style="important">
-<p>The help documentation is currently in development. Please report any errors that you find by reporting the bugs at launchpad <link href="https://launchpad.net/lightread">here</link>.</p>
-</note>
+<section id="get-involved" style="2column">
+  <title>Get Involved</title>
+</section>
 
 </page>

@@ -1,0 +1,20 @@
+<page xmlns="http://projectmallard.org/1.0/"
+		type="topic"
+		id="contribute">
+
+<info>
+	<link type="guide" xref="index#get-involved"/>
+	<credit type="author">
+		<name>Nekhelesh Ramananthan</name>
+		<email>krnekhelesh@gmail.com</email>
+		<years>2012</years>
+	</credit>
+	<desc>Contributing to <app>Lightread</app></desc>
+</info>
+
+<title>How can I contribute?</title>
+<p><app>Lightread</app> is an open source project. Any help to making it better is much appreciated. The most basic way of contributing to <app>Lightread</app> is by submitting bug reports. We want to ensure that <app>Lightread</app> performs its functions properly. It is better to have one feature that works perfectly than a multitude of features which do not work.</p>
+
+<p>If you are interested you could have a look at our <link href="https://github.com/stayradiated/LightRead">source code</link> to look at our upcoming features which are in development and help us build it. </p>
+
+</page>
