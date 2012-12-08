@@ -1,0 +1,37 @@
+<page xmlns="http://projectmallard.org/1.0/"
+		type="topic"
+		id="share-post">
+
+<info>
+	<link type="guide" xref="index#working-with-feeds"/>
+	<credit type="author">
+		<name>Nekhelesh Ramananthan</name>
+		<email>krnekhelesh@gmail.com</email>
+		<years>2012</years>
+	</credit>
+	<desc>Sharing a post with other services</desc>
+</info>
+
+<title>Share post</title>
+<p><app>Lightread</app> allows to share posts with other popular services listed below,</p>
+
+<terms>
+  <item>
+	<title><p>Instapaper</p></title>
+	<p>Instapaper is a simple tool to save web pages for later reading. It supports various platforms such as android, iphone, ipad, Kindle etc. You need to however create an account at their <link href="http://www.instapaper.com/">website</link>.</p>
+  </item>
+  
+  <item>
+	<title><p>Pocket</p></title>
+	<p>Pocket is yet another service similar to Instapaper. It was formely called Read It Later. You can find more information about pocket <link href="http://getpocket.com/">here</link>.</p>
+  </item>
+  
+  <item>
+	<title><p>Gwibber</p></title>
+	<p>Gwibber is Ubuntu's microblogging client. If you have set up Gwibber on your computer, you can then share links to posts to Gwibber. Using Gwibber you can then post the link to popular social networks such as Facebook, Twitter etc.</p>
+  </item>
+</terms>
+
+<p>Sharing posts can be done by pressing the <media type="image" mime="image/png" src="figures/btn_share.png">share post icon</media> button. If you are doing this for the first time, you will be asked to enter your login credentials to the above mentioned services.</p>
+
+</page>

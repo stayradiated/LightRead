@@ -1,0 +1,22 @@
+<page xmlns="http://projectmallard.org/1.0/"
+		type="topic"
+		id="update-intevral">
+
+<info>
+	<link type="guide" xref="index#setting-up-lightread"/>
+	<credit type="author">
+		<name>Nekhelesh Ramananthan</name>
+		<email>krnekhelesh@gmail.com</email>
+		<years>2012</years>
+	</credit>
+	<desc>Modify the update intevral</desc>
+</info>
+
+<title>Update Intevral</title>
+<p>It is possible to adjust the time intevral between two syncs. This can be done in the settings pane as shown below. Here you can change the time intevral from a few minutes up to a maximum of 1 hour. You can otherwise also to choose to do this manually to save internet bandwidth.</p>
+
+<figure>
+<media type="image" mime="image/png" src="figures/update-intevral.png"/>  
+</figure>
+
+</page>

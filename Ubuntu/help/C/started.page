@@ -19,8 +19,10 @@
 <media type="image" mime="image/png" src="figures/Lightread.png" width="750" height="400"/>  
 </figure>
 
-<p>Since it is based on Google reader, it will automatically retrieve other blogs you subscribed to in Google reader.</p>
+<p>Since it is based on Google reader, it will automatically retrieve other blogs you subscribed to in Google reader. It comes with various other features such as sharing posts to Instapaper,pocket, Gwibber and auto syncing. All this is done in an efficient and organised manner.</p>
 
 <p>To learn more about other <app>Lightread</app> features explore the <link xref="index">other sections</link> of the <app>Lightread</app> help.</p>
+
+<p>We hope you enjoy using this program just as much as we had fun developing it for the community!</p>
 
 </page>
