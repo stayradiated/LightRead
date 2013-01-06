@@ -171,13 +171,16 @@ class LightreadWindow(Window):
                 if title[0] == 'count':
                     try:
                         if int(title[1]) == 0:
-                            launcher.set_property("count_visible", False)
+                            if vars().has_key('launcher'):
+                                launcher.set_property("count_visible", False)
                             self.set_title("Lightread")
                         else:
-                            launcher.set_property("count_visible", True)
+                            if vars().has_key('launcher'):
+                                launcher.set_property("count_visible", True)
                             self.set_title(title[1] + " - Lightread")
 
-                        launcher.set_property("count", int(title[1]))
+                        if vars().has_key('launcher'):
+                            launcher.set_property("count", int(title[1]))
                     except UnboundLocalError:
                         pass
 
