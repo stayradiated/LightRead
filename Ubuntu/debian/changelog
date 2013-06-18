@@ -1,6 +1,11 @@
 lightread (1.2.2) precise; urgency=low
 
+  [ consindo ]
   * New release.
+
+  [ Dražen Lučanin ]
+  * Launchpad GIR as a suggested dependency
+    ( https://launchpad.net/ubuntu/raring/+source/launchpad-integration/0.1.56.2 ) 
 
  -- consindo <jono@caffeinatedco.de>  Fri, 05 Oct 2012 20:59:04 +1300
 

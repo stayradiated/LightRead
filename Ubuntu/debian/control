@@ -22,7 +22,7 @@ Depends: ${misc:Depends},
  gir1.2-soup-2.4,
  python-xdg,
  gir1.2-webkit-3.0,
- gir1.2-launchpad-integration-3.0,
  yelp
+Suggests: gir1.2-launchpad-integration-3.0
 Description: A lightweight news reader.
  UNKNOWN
