@@ -4,7 +4,7 @@ a:focus { outline: none; }
 
 ::-webkit-scrollbar { width: 5px; }
 
-::-webkit-scrollbar-thumb { background: #f07746; }
+::-webkit-scrollbar-thumb { background: #858585; }
 
 #articles::-webkit-scroller-thumb { border-left: 1px solid #e1e1df; }
 
@@ -126,7 +126,7 @@ input, textarea { font-family: "Ubuntu", "Helvetica", "Arial", sans-serif; }
 #articles li header { display: -webkit-box; }
 #articles li header .icon { padding: 5px 4px 0 2px; }
 #articles li header .feed { font-size: 12px; color: #777777; line-height: 25px; -webkit-box-flex: 1; display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
-#articles li header .time { display: block; line-height: 25px; font-size: 12px; margin-right: 2px; color: #f07746; }
+#articles li header .time { display: block; line-height: 25px; font-size: 12px; margin-right: 2px; color: #858585; }
 #articles li .title { font-size: 13px; display: block; margin-top: -2px; padding: 0 0 2px 22px; font-weight: bold; color: #3b3b3b; text-shadow: 0 0 1px rgba(0, 0, 0, 0.01); }
 #articles li .snippet { display: block; padding: 0 0 0 22px; line-height: 16px; color: #888888; height: 34px; overflow: hidden; }
 #articles .splitter { height: 20px; padding-left: 10px; font-size: 13px; font-weight: bold; color: #666666; line-height: 20px; background: -webkit-linear-gradient(#fefefe, #fafafa); text-shadow: 0 1px 0 white; border: 1px solid #e1e1df; border-left: 0; border-right: 0; }
